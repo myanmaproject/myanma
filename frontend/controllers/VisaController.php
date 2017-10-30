@@ -222,6 +222,7 @@ class VisaController extends Controller
 
             return $this->redirect(['view', 'id' => $model->idvisa]);
         } else {
+          
             return $this->render('update', [
                 'model' => $model,
             ]);

@@ -31,6 +31,8 @@
                 'options' => ['class' => 'sidebar-menu'],
                 'items' => [
                     ['label' => 'Menu', 'options' => ['class' => 'header']],
+                                         ['label' => 'Find People', 'icon' => 'file-code-o fa-cc-visa', 'url' => ['/find']],
+
                      ['label' => 'FamilyTree', 'icon' => 'file-code-o fa-cc-visa', 'url' => ['/familytree']],
                     ['label' => 'VISA', 'icon' => 'file-code-o fa-cc-visa', 'url' => ['/visa']],
                     ['label' => 'profile', 'icon' => 'file-code-o fa-fw fa-info', 'url' => ['/profile']],

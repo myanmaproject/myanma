@@ -15,8 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'idvisa' => $model->idvisa, 'familytree_idfamilytree' => $model->familytree_idfamilytree], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'idvisa' => $model->idvisa, 'familytree_idfamilytree' => $model->familytree_idfamilytree], [
+        <?= Html::a('Update', ['update', 'id' => $model->idvisa], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Delete', ['delete', 'id' => $model->idvisa], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
@@ -71,8 +71,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'created_by',
             'updated_at',
             'updated_by',
-            'purposeOfVisit',
             'familytree_idfamilytree',
+            'purposeOfVisit',
         ],
     ]) ?>
 
