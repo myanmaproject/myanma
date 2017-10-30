@@ -109,18 +109,72 @@ class VisaController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && ($modelbasicducuments->load(Yii::$app->request->post())) && $model->save()) {
 
-                $total = count($modelbasicducuments->detail);
-            for($i = 0;$i<$total;$i++){
-           $modelbasicducuments->visa_idvisa = $model->idvisa;
-           $modelbasicducuments->detail = $modelbasicducuments->detail[$i];
-           $modelbasicducuments->save();
-         
 
-          // echo $modelbasicducuments->detail[$i];
+            $basicList= $_POST['Visa']['basic'];
+
+                      if (is_array($basicList))
+                      {
+                          foreach ($basicList as $detail) {
+                                $Basicdocuments = new Basicdocuments();
+                                $Basicdocuments->visa_idvisa = $model->idvisa;
+                                $Basicdocuments->detail = $detail;
+                                if (!$Basicdocuments->save())print_r($Basicdocuments->errors);
+                            }
+                      }
+
+            $basicList= $_POST['Visa']['applicant'];
+
+                      if (is_array($basicList))
+                      {
+                          foreach ($basicList as $detail) {
+                                $Basicdocuments = new Basicdocuments();
+                                $Basicdocuments->visa_idvisa = $model->idvisa;
+                                $Basicdocuments->detail = $detail;
+                                if (!$Basicdocuments->save())print_r($Basicdocuments->errors);
+                            }
+                      }
+            $basicList= $_POST['Visa']['firsttime'];
+
+                      if (is_array($basicList))
+                      {
+                          foreach ($basicList as $detail) {
+                                $Basicdocuments = new Basicdocuments();
+                                $Basicdocuments->visa_idvisa = $model->idvisa;
+                                $Basicdocuments->detail = $detail;
+                                if (!$Basicdocuments->save())print_r($Basicdocuments->errors);
+                            }
+                      }
+
+
+            $basicList= $_POST['Visa']['touristvisa'];
+
+                      if (is_array($basicList))
+                      {
+                          foreach ($basicList as $detail) {
+                                $Basicdocuments = new Basicdocuments();
+                                $Basicdocuments->visa_idvisa = $model->idvisa;
+                                $Basicdocuments->detail = $detail;
+                                if (!$Basicdocuments->save())print_r($Basicdocuments->errors);
+                            }
+                      }
+
+            $basicList= $_POST['Visa']['transitvisa'];
+
+                      if (is_array($basicList))
+                      {
+                          foreach ($basicList as $detail) {
+                                $Basicdocuments = new Basicdocuments();
+                                $Basicdocuments->visa_idvisa = $model->idvisa;
+                                $Basicdocuments->detail = $detail;
+                                if (!$Basicdocuments->save())print_r($Basicdocuments->errors);
+                            }
+                      }
+
+
 
            
-       }
-exit();
+       
+
       
           
             return $this->redirect(['view', 'id' => $model->idvisa]);
@@ -143,6 +197,29 @@ exit();
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            //ลบผู้เข้าร่วมก่อนแก้ไข
+                    $myArraydetail = Basicdocuments::find()->where(['visa_idvisa' => $model->idvisa])->all();
+                    foreach( $myArraydetail as $key => $value){
+                      $delete = Basicdocuments::find()->where(['idbasicDocuments' => $value->idbasicDocuments])->one();
+                      $delete->delete();
+                    }
+
+
+                    $detailList= $_POST['Visa']['basic'];
+
+                       if (is_array($detailList))
+                      {
+                          foreach ($detailList as $detail) {
+                                $Basicdocuments = new Basicdocuments();
+                                $Basicdocuments->visa_idvisa = $model->idvisa;
+                                $Basicdocuments->detail = $detail;
+                                if (!$Basicdocuments->save())print_r($Basicdocuments->errors);
+                            }
+                      }
+
+
+
             return $this->redirect(['view', 'id' => $model->idvisa]);
         } else {
             return $this->render('update', [

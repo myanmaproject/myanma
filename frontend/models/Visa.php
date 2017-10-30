@@ -65,6 +65,14 @@ class Visa extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+
+    public $basic;
+    public $applicant;
+    public $firsttime;
+    public $touristvisa;
+    public $transitvisa;
+
+
     public static function tableName()
     {
         return 'visa';

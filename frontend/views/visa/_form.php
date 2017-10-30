@@ -11,6 +11,9 @@ use app\models\Visa;
 /* @var $this yii\web\View */
 /* @var $model app\models\Visa */
 /* @var $form yii\widgets\ActiveForm */
+// var_dump(Basicdocuments::find()->where(['visa_idvisa' => $model->idvisa])->asArray()->all());
+// exit();
+
 ?>
 
 <div class="visa-form">
@@ -21,7 +24,46 @@ use app\models\Visa;
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
-    <?= $form->field($modelbasicducuments, 'detail')->checkBoxList(['php'=>'PHP','jquery'=>'JQuery']) ?>
+    <?php
+        if(!$model->isNewRecord){
+          $Basicdocuments = Basicdocuments::find()->where(['visa_idvisa' => $model->idvisa])->all();
+            if ($Basicdocuments!=null) {
+                foreach ($Basicdocuments as $data) {
+                    $checkedFeatureArr[] = $data->detail;
+                }
+                $model->detail = $checkedFeatureArr;
+            }
+        }
+
+         $listBasic = ['passport of travel document of which validity is no less than 6 months'=>'passport of travel document of which validity is no less than 6 months',
+         'visa application form completely filled in'=>'visa application form completely filled in',
+         '2 recent colour photos (3.5 x 4.5 cm.)' => '2 recent colour photos (3.5 x 4.5 cm.)',
+         'invitation letter (if any)' => 'invitation letter (if any)'];
+
+         $listApplicant = ['appointment letter or certificate that applicant requires medical treatment in Thailand' => 'appointment letter or certificate that applicant requires medical treatment in Thailand'];
+
+         $listFirsttime = ['letter of employment (for employee) or company registration (for business owner)' => 'letter of employment (for employee) or company registration (for business owner)',
+         'invitation letter (if any)' => 'invitation letter (if any)',
+         'evidence of sufficient financial means to visit Thailand (20,000 Baht of 670 USD per person/40,000 Baht or 1,340 USD per family)'=>'evidence of sufficient financial means to visit Thailand (20,000 Baht of 670 USD per person/40,000 Baht or 1,340 USD per family)',
+         'confirmed round trip air ticket' => 'confirmed round trip air ticket'];
+
+         $listTouristvisa = ['letter of employment (for employee) of' => 'letter of employment (for employee) of',
+         'company registration (for business owner) or' => 'company registration (for business owner) or',
+         'guarantee/ invitation letter from company in Thailand (if any) or' => 'guarantee/ invitation letter from company in Thailand (if any) or',
+         'receipt or invoice from past procurement (if any)' => 'receipt or invoice from past procurement (if any)'];
+
+         $listTransitvisa = ['passport or travel document of which validity is no less than 6 months' => 'passport or travel document of which validity is no less than 6 months',
+         'visa application form completely filled in' => 'visa application form completely filled in',
+         '2 recent colour photo (3.5 x 4.5 cm.)' => '2 recent colour photo (3.5 x 4.5 cm.)',
+         'visa issued by the country of destination (except traveling to own country)'=>'visa issued by the country of destination (except traveling to own country)'];
+    ?>
+
+
+    <?= $form->field($model, 'basic')->checkBoxList($listBasic) ?>
+    <?= $form->field($model, 'applicant')->checkBoxList($listApplicant) ?>
+    <?= $form->field($model, 'firsttime')->checkBoxList($listFirsttime) ?>
+    <?= $form->field($model, 'touristvisa')->checkBoxList($listTouristvisa) ?>
+    <?= $form->field($model, 'transitvisa')->checkBoxList($listTransitvisa) ?>
 
 
  <?= $form->field($model, 'familytree_idfamilytree')->textInput() ?>
