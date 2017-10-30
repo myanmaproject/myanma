@@ -13,6 +13,10 @@ use yii\web\UploadedFile;
 use yii\filters\AccessControl;
 use yii\web\ForbiddenHttpException;
 use app\models\Basicdocuments;
+use app\models\Documentapplicant;
+use app\models\Documentfirsttime;
+use app\models\Documenttouristvisa;
+use app\models\Transitvisathailand;
 /**
  * VisaController implements the CRUD actions for Visa model.
  */
@@ -106,8 +110,15 @@ class VisaController extends Controller
     {
         $model = new Visa();
         $modelbasicducuments = new Basicdocuments();
+        $modeldocumentapplicant = new Documentapplicant();
+        $modeldocumentfirsttime = new Documentfirsttime();
+        $modeldocumenttouristvisa = new Documenttouristvisa();
+        $modeltransitvisathailand = new Transitvisathailand();
 
-        if ($model->load(Yii::$app->request->post()) && ($modelbasicducuments->load(Yii::$app->request->post())) && $model->save()) {
+        // var_dump($modelbasicducuments->load(Yii::$app->request->post()));
+        // exit();
+        if ($model->load(Yii::$app->request->post()) 
+       && $model->save()) {
 
 
             $basicList= $_POST['Visa']['basic'];
@@ -122,51 +133,51 @@ class VisaController extends Controller
                             }
                       }
 
-            $basicList= $_POST['Visa']['applicant'];
+            $applicantList= $_POST['Visa']['applicant'];
 
-                      if (is_array($basicList))
+                      if (is_array($applicantList))
                       {
-                          foreach ($basicList as $detail) {
-                                $Basicdocuments = new Basicdocuments();
-                                $Basicdocuments->visa_idvisa = $model->idvisa;
-                                $Basicdocuments->detail = $detail;
-                                if (!$Basicdocuments->save())print_r($Basicdocuments->errors);
+                          foreach ($applicantList as $detail) {
+                                $Documentapplicant = new Documentapplicant();
+                                $Documentapplicant->visa_idvisa = $model->idvisa;
+                                $Documentapplicant->detail = $detail;
+                                if (!$Documentapplicant->save())print_r($Documentapplicant->errors);
                             }
                       }
-            $basicList= $_POST['Visa']['firsttime'];
+            $firsttimeList= $_POST['Visa']['firsttime'];
 
-                      if (is_array($basicList))
+                      if (is_array($firsttimeList))
                       {
-                          foreach ($basicList as $detail) {
-                                $Basicdocuments = new Basicdocuments();
-                                $Basicdocuments->visa_idvisa = $model->idvisa;
-                                $Basicdocuments->detail = $detail;
-                                if (!$Basicdocuments->save())print_r($Basicdocuments->errors);
-                            }
-                      }
-
-
-            $basicList= $_POST['Visa']['touristvisa'];
-
-                      if (is_array($basicList))
-                      {
-                          foreach ($basicList as $detail) {
-                                $Basicdocuments = new Basicdocuments();
-                                $Basicdocuments->visa_idvisa = $model->idvisa;
-                                $Basicdocuments->detail = $detail;
-                                if (!$Basicdocuments->save())print_r($Basicdocuments->errors);
+                          foreach ($firsttimeList as $detail) {
+                                $Documentfirsttime = new Documentfirsttime();
+                                $Documentfirsttime->visa_idvisa = $model->idvisa;
+                                $Documentfirsttime->detail = $detail;
+                                if (!$Documentfirsttime->save())print_r($Documentfirsttime->errors);
                             }
                       }
 
-            $basicList= $_POST['Visa']['transitvisa'];
 
-                      if (is_array($basicList))
+            $touristvisaList= $_POST['Visa']['touristvisa'];
+
+                      if (is_array($touristvisaList))
                       {
-                          foreach ($basicList as $detail) {
-                                $Basicdocuments = new Basicdocuments();
-                                $Basicdocuments->visa_idvisa = $model->idvisa;
-                                $Basicdocuments->detail = $detail;
-                                if (!$Basicdocuments->save())print_r($Basicdocuments->errors);
+                          foreach ($touristvisaList as $detail) {
+                                $Documenttouristvisa = new Documenttouristvisa();
+                                $Documenttouristvisa->visa_idvisa = $model->idvisa;
+                                $Documenttouristvisa->detail = $detail;
+                                if (!$Documenttouristvisa->save())print_r($Documenttouristvisa->errors);
+                            }
+                      }
+
+            $transitvisaList= $_POST['Visa']['transitvisa'];
+
+                      if (is_array($transitvisaList))
+                      {
+                          foreach ($transitvisaList as $detail) {
+                                $Transitvisathailand = new Transitvisathailand();
+                                $Transitvisathailand->visa_idvisa = $model->idvisa;
+                                $Transitvisathailand->detail = $detail;
+                                if (!$Transitvisathailand->save())print_r($Transitvisathailand->errors);
                             }
                       }
 
@@ -181,7 +192,10 @@ class VisaController extends Controller
         } else {
             return $this->render('create', [
                 'model' => $model,
-                'modelbasicducuments' => $modelbasicducuments
+                'modelbasicducuments' => $modelbasicducuments,
+                
+
+
             ]);
         }
     }
@@ -198,23 +212,97 @@ class VisaController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
-            //ลบผู้เข้าร่วมก่อนแก้ไข
-                    $myArraydetail = Basicdocuments::find()->where(['visa_idvisa' => $model->idvisa])->all();
-                    foreach( $myArraydetail as $key => $value){
+            //ลบ
+                    $myArrayBasicdocuments = Basicdocuments::find()->where(['visa_idvisa' => $model->idvisa])->all();
+                    foreach( $myArrayBasicdocuments as $key => $value){
                       $delete = Basicdocuments::find()->where(['idbasicDocuments' => $value->idbasicDocuments])->one();
                       $delete->delete();
                     }
 
 
-                    $detailList= $_POST['Visa']['basic'];
+                    $basicList= $_POST['Visa']['basic'];
 
-                       if (is_array($detailList))
+                      if (is_array($basicList))
                       {
-                          foreach ($detailList as $detail) {
+                          foreach ($basicList as $detail) {
                                 $Basicdocuments = new Basicdocuments();
                                 $Basicdocuments->visa_idvisa = $model->idvisa;
                                 $Basicdocuments->detail = $detail;
                                 if (!$Basicdocuments->save())print_r($Basicdocuments->errors);
+                            }
+                      }
+
+
+                      //ลบ
+                    $myArrayDocumentapplicant = Documentapplicant::find()->where(['visa_idvisa' => $model->idvisa])->all();
+                    foreach( $myArrayDocumentapplicant as $key => $value){
+                      $delete = Documentapplicant::find()->where(['iddocumentApplicant' => $value->iddocumentApplicant])->one();
+                      $delete->delete();
+                    }
+
+            $applicantList= $_POST['Visa']['applicant'];
+
+                      if (is_array($applicantList))
+                      {
+                          foreach ($applicantList as $detail) {
+                                $Documentapplicant = new Documentapplicant();
+                                $Documentapplicant->visa_idvisa = $model->idvisa;
+                                $Documentapplicant->detail = $detail;
+                                if (!$Documentapplicant->save())print_r($Documentapplicant->errors);
+                            }
+                      }
+
+                      //ลบ
+                    $myArrayDocumentfirsttime = Documentfirsttime::find()->where(['visa_idvisa' => $model->idvisa])->all();
+                    foreach( $myArrayDocumentfirsttime as $key => $value){
+                      $delete = Documentfirsttime::find()->where(['iddocumentFirstTime' => $value->iddocumentFirstTime])->one();
+                      $delete->delete();
+                    }
+            $firsttimeList= $_POST['Visa']['firsttime'];
+
+                      if (is_array($firsttimeList))
+                      {
+                          foreach ($firsttimeList as $detail) {
+                                $Documentfirsttime = new Documentfirsttime();
+                                $Documentfirsttime->visa_idvisa = $model->idvisa;
+                                $Documentfirsttime->detail = $detail;
+                                if (!$Documentfirsttime->save())print_r($Documentfirsttime->errors);
+                            }
+                      }
+
+//ลบ
+                    $myArrayDocumenttouristvisa = Documenttouristvisa::find()->where(['visa_idvisa' => $model->idvisa])->all();
+                    foreach( $myArrayDocumenttouristvisa as $key => $value){
+                      $delete = Documenttouristvisa::find()->where(['iddocumentTouristVisa' => $value->iddocumentTouristVisa])->one();
+                      $delete->delete();
+                    }
+            $touristvisaList= $_POST['Visa']['touristvisa'];
+
+                      if (is_array($touristvisaList))
+                      {
+                          foreach ($touristvisaList as $detail) {
+                                $Documenttouristvisa = new Documenttouristvisa();
+                                $Documenttouristvisa->visa_idvisa = $model->idvisa;
+                                $Documenttouristvisa->detail = $detail;
+                                if (!$Documenttouristvisa->save())print_r($Documenttouristvisa->errors);
+                            }
+                      }
+
+//ลบ
+                    $myArrayTransitvisathailand = Transitvisathailand::find()->where(['visa_idvisa' => $model->idvisa])->all();
+                    foreach( $myArrayTransitvisathailand as $key => $value){
+                      $delete = Transitvisathailand::find()->where(['idtransitVisaThailand' => $value->idtransitVisaThailand])->one();
+                      $delete->delete();
+                    }
+            $transitvisaList= $_POST['Visa']['transitvisa'];
+
+                      if (is_array($transitvisaList))
+                      {
+                          foreach ($transitvisaList as $detail) {
+                                $Transitvisathailand = new Transitvisathailand();
+                                $Transitvisathailand->visa_idvisa = $model->idvisa;
+                                $Transitvisathailand->detail = $detail;
+                                if (!$Transitvisathailand->save())print_r($Transitvisathailand->errors);
                             }
                       }
 

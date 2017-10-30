@@ -7,6 +7,10 @@ use yii\helpers\ArrayHelper;
 use yii\widgets\MaskedInput;
 use app\models\Basicdocuments;
 use app\models\Visa;
+use app\models\Documentapplicant;
+use app\models\Documentfirsttime;
+use app\models\Documenttouristvisa;
+use app\models\Transitvisathailand;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Visa */
@@ -31,7 +35,39 @@ use app\models\Visa;
                 foreach ($Basicdocuments as $data) {
                     $checkedFeatureArr[] = $data->detail;
                 }
-                $model->detail = $checkedFeatureArr;
+                $model->basic = $checkedFeatureArr;
+            }
+
+            $Documentapplicant = Documentapplicant::find()->where(['visa_idvisa' => $model->idvisa])->all();
+            if ($Documentapplicant!=null) {
+                foreach ($Documentapplicant as $data) {
+                    $checkedFeatureArr[] = $data->detail;
+                }
+                $model->applicant = $checkedFeatureArr;
+            }
+
+            $Documentfirsttime = Documentfirsttime::find()->where(['visa_idvisa' => $model->idvisa])->all();
+            if ($Documentfirsttime!=null) {
+                foreach ($Documentfirsttime as $data) {
+                    $checkedFeatureArr[] = $data->detail;
+                }
+                $model->firsttime = $checkedFeatureArr;
+            }
+
+            $Documenttouristvisa = Documenttouristvisa::find()->where(['visa_idvisa' => $model->idvisa])->all();
+            if ($Documenttouristvisa!=null) {
+                foreach ($Documenttouristvisa as $data) {
+                    $checkedFeatureArr[] = $data->detail;
+                }
+                $model->touristvisa = $checkedFeatureArr;
+            }
+
+            $Transitvisathailand = Transitvisathailand::find()->where(['visa_idvisa' => $model->idvisa])->all();
+            if ($Transitvisathailand!=null) {
+                foreach ($Transitvisathailand as $data) {
+                    $checkedFeatureArr[] = $data->detail;
+                }
+                $model->transitvisa = $checkedFeatureArr;
             }
         }
 
