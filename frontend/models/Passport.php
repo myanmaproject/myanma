@@ -44,7 +44,15 @@ use Yii;
  */
 class Passport extends \yii\db\ActiveRecord
 {
-    public $test;
+    public $studied1;
+    public $studied2;
+    public $studied3;
+    public $criminalcivillaw1;
+    public $criminalcivillaw2;
+    public $whetheraboard1;
+    public $whetheraboard2;
+
+
     /**
      * @inheritdoc
      */
