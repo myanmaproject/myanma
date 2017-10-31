@@ -1,26 +1,34 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\TypeOfVisaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Type Of Visas';
-$this->params['breadcrumbs'][] = $this->title;
+
 ?>
-<div class="type-of-visa-index">
+<div class="box">
+ <div class="box-header with-border">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+  
 
-    <p>
-        <?= Html::a('Create Type Of Visa', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
     <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'panel'=>[
+                'before'=>' '
+            ],
+            'toolbar' => [
+                [
+                    'content'=>
+                        Html::a('Create Type of VISA', ['create'], ['class' => 'btn btn-default']) ,
+                ],
+              
+                '{toggleData}'
+            ],
+     
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 

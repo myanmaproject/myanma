@@ -11,7 +11,7 @@ use kartik\export\ExportMenu;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('app', 'Users');
-$this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="box">
     <div class="box-header with-border">
@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
              'toolbar' => [
             [
                 'content'=>
-                    Html::a('Create', ['create'], ['class' => 'btn btn-default']) ,
+                    Html::a('Create User', ['create'], ['class' => 'btn btn-default']) ,
             ],
             '{export}',
             '{toggleData}'

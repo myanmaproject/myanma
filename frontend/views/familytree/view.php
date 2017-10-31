@@ -7,12 +7,12 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Familytree */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Familytrees', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
-?>
-<div class="familytree-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+?>
+<div class="box">
+ <div class="box-header with-border">
+
+   
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->idfamilytree], ['class' => 'btn btn-primary']) ?>
@@ -43,4 +43,5 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
+</div>
 </div>

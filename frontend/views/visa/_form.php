@@ -20,8 +20,8 @@ use app\models\Transitvisathailand;
 
 ?>
 
-<div class="visa-form">
-
+<div class="box">
+ <div class="box-header with-border">
 
     <?php $form = ActiveForm::begin(); ?>
       <div class="form-group">
@@ -95,11 +95,6 @@ use app\models\Transitvisathailand;
     ?>
 
 
-    <?= $form->field($model, 'basic')->checkBoxList($listBasic) ?>
-    <?= $form->field($model, 'applicant')->checkBoxList($listApplicant) ?>
-    <?= $form->field($model, 'firsttime')->checkBoxList($listFirsttime) ?>
-    <?= $form->field($model, 'touristvisa')->checkBoxList($listTouristvisa) ?>
-    <?= $form->field($model, 'transitvisa')->checkBoxList($listTransitvisa) ?>
 
 
  <?= $form->field($model, 'familytree_idfamilytree')->textInput() ?>
@@ -190,6 +185,11 @@ use app\models\Transitvisathailand;
 
         <?= $form->field($model, 'purposeOfVisit')->dropDownList(['0' => 'Business', '1' => 'Tourism','2' => 'Transit','3' => 'Diplomatic Official'],['prompt'=>'Please select purpose of visit']) ?>
 
+    <?= $form->field($model, 'basic')->checkBoxList($listBasic) ?>
+    <?= $form->field($model, 'applicant')->checkBoxList($listApplicant) ?>
+    <?= $form->field($model, 'firsttime')->checkBoxList($listFirsttime) ?>
+    <?= $form->field($model, 'touristvisa')->checkBoxList($listTouristvisa) ?>
+    <?= $form->field($model, 'transitvisa')->checkBoxList($listTransitvisa) ?>
 
 
 
@@ -200,4 +200,5 @@ use app\models\Transitvisathailand;
 
     <?php ActiveForm::end(); ?>
 
+</div>
 </div>

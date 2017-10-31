@@ -1,31 +1,49 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\visaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Visas';
-$this->params['breadcrumbs'][] = $this->title;
+
 ?>
-<div class="visa-index">
+<div class="box">
+ <div class="box-header with-border">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?= Html::a('Create Visa', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+       <?= GridView::widget([
+            'dataProvider' => $dataProvider,
+            'panel'=>[
+                'before'=>' '
+            ],
+            'toolbar' => [
+                [
+                    'content'=>
+                        Html::a('Create Visa', ['create'], ['class' => 'btn btn-default']) ,
+                ],
+              
+                '{toggleData}'
+            ],
+    
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
             'idvisa',
-            'prefix',
+                        [
+                'attribute'=>'prefix',
+                'label' => Yii::t('app', 'prefix'),
+                'value'=>  function($data) {
+                    if($data->prefix == "0") {
+                        return "Mr";
+                    }else if($data->prefix == "1") {
+                        return "Mrs";
+                    }else if($data->prefix == "2") {
+                        return "Miss";
+                    }
+                }
+            ],
             'numberRequested',
             'typeOfVisaRequest',
             'firstName',
@@ -73,4 +91,5 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+</div>
 </div>

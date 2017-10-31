@@ -17,6 +17,7 @@ use app\models\Documentapplicant;
 use app\models\Documentfirsttime;
 use app\models\Documenttouristvisa;
 use app\models\Transitvisathailand;
+use app\models\Familytree;
 /**
  * VisaController implements the CRUD actions for Visa model.
  */
@@ -45,7 +46,7 @@ class VisaController extends Controller
               ],
             [
                 'allow'=>true,
-                'actions'=>['index','view','create','update','report'],
+                'actions'=>['index','view','create','update','report','viewfind'],
                 'roles'=>['Management']
               ],
             [
@@ -94,12 +95,40 @@ class VisaController extends Controller
      * @param integer $id
      * @return mixed
      */
+
+
+
+    // public function actionView($id)
+    // {
+    //     return $this->render('view', [
+    //         'model' => $this->findModel($id),
+    //     ]);
+    // }
+
+
+
     public function actionView($id)
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
+
+
+    public function actionViewfind($id)
+    {
+      $findvisa = Visa::find()->where(['familytree_idfamilytree'=>$id])->one();
+      if($findvisa == "" || $findvisa == null){
+         return $this->redirect(['visa/create']);
+      }else{
+        
+         return $this->render('view', [
+            'model' => $this->findModel($findvisa->idvisa)
+        ]);
+      }
+       
+    }
+
 
     /**
      * Creates a new Visa model.

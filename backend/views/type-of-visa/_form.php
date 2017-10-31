@@ -8,7 +8,8 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="type-of-visa-form">
+<div class="box">
+ <div class="box-header with-border">
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -20,4 +21,5 @@ use yii\widgets\ActiveForm;
 
     <?php ActiveForm::end(); ?>
 
+</div>
 </div>

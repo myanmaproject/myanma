@@ -2,29 +2,77 @@
 
 use yii\helpers\Html;
 use kartik\widgets\ActiveForm;
-
+use kartik\grid\GridView;
+use app\models\FamilytreeSearch;
+use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $model common\models\User */
 
 $this->title = 'Find People';
 
-$this->params['breadcrumbs'][] = $this->title;
-?>
+?>  
 <div class="box">
     <div class="box-header with-border">
+    <?php $form = ActiveForm::begin([
+        'action' => ['index'],
+        'method' => 'get',
+    ]); ?>
+    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
-        <?php $form = ActiveForm::begin(); ?>
-
-        <div class="col-md-6">
-
-            <?= $form->field($model, 'idfamilytree')->textInput(array('placeholder' => ''))->label('Name') ?>
-
-            <?= $form->field($model, 'nrc')->textInput(array('placeholder' => ''))->label('NRC') ?>
-
+      
 
 
         <?php ActiveForm::end(); ?>
 
-       
+        <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
 
-          
+            'idfamilytree',
+            'name',
+            'nrc',
+         
+[
+   'class' => 'kartik\grid\ActionColumn',
+   'template'    => '{view}',
+   'controller' => 'familytree',
+     'header' => 'Familytree',
+    'buttons' => [
+                        'view' => function ($url, $model) {
+                        return Html::a('<span class="glyphicon glyphicon-edit"></span>', $url, 
+                        [
+                            'title' => Yii::t('app', 'view'),
+                        ]);
+                    }
+                ],
+],
+
+
+
+[
+    'class' => 'yii\grid\ActionColumn',
+    'template' => '{leadView}',
+    'header' => 'VISA',
+    'buttons' => [
+       'leadView' => function ($url, $model) {
+           $url = Url::to(['visa/viewfind', 'id' => $model->idfamilytree]);
+          return Html::a('<span class="glyphicon glyphicon-edit"></span>', $url, ['title' => 'view']);
+       },
+       
+    ]
+]
+
+
+
+
+
+
+        ],
+    ]); ?>
+
+          </div>
+
+        </div>
+     
+      

@@ -7,12 +7,12 @@ use yii\widgets\DetailView;
 /* @var $model app\models\TypeOfVisa */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Type Of Visas', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="type-of-visa-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="box">
+    <div class="box-header with-border">
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->idtypeOfVisa], ['class' => 'btn btn-primary']) ?>
@@ -33,4 +33,5 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
+</div>
 </div>

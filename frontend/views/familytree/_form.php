@@ -9,7 +9,8 @@ use app\models\familytree;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="familytree-form">
+<div class="box">
+    <div class="box-header with-border">
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -56,4 +57,5 @@ use app\models\familytree;
 
     <?php ActiveForm::end(); ?>
 
+</div>
 </div>
