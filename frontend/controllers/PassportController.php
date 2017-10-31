@@ -193,6 +193,81 @@ if (!$Studied->save())print_r($Studied->errors);
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            $Studied = Studied::find()->where(['passport_idpassport' => $model->idpassport])->all();
+            $i = 0;
+            foreach ($Studied as $key => $value) {
+                $Studied = Studied::find()->where(['idstudied' => $value['idstudied']])->one();
+                if($i == 0){
+                    $studied = $_POST['Passport']['studied1'];
+                    $i++;
+                }else if ($i ==1) {
+                    $studied = $_POST['Passport']['studied2'];
+                    $i++;
+                }elseif ($i ==2) {
+                    $studied = $_POST['Passport']['studied2'];
+                    $i++;
+                }
+
+                $Studied->yearFrom = $studied['0'];
+                $Studied->yearTo = $studied['1'];
+                $Studied->standardFrom = $studied['2'];
+                $Studied->standardTo = $studied['3'];
+                $Studied->nameSchool = $studied['4'];
+                $Studied->townshipWardVillage = $studied['5'];
+           
+                $Studied->update();
+            }
+
+            $Criminalcivillaw = Criminalcivillaw::find()->where(['passport_idpassport' => $model->idpassport])->all();
+            $i = 0;
+            foreach ($Criminalcivillaw as $key => $value) {
+                $Criminalcivillaw = Criminalcivillaw::find()->where(['idcriminalCivillaw' => $value['idcriminalCivillaw']])->one();
+            //               var_dump($Criminalcivillaw);
+            // exit();
+                if($i == 0){
+                    $criminalcivillaw = $_POST['Passport']['criminalcivillaw1'];
+                    $i++;
+                }else if ($i ==1) {
+                    $criminalcivillaw = $_POST['Passport']['criminalcivillaw2'];
+                    $i++;
+                }
+
+                $Criminalcivillaw->act = $criminalcivillaw['0'];
+                $Criminalcivillaw->punishment = $criminalcivillaw['1'];
+                $Criminalcivillaw->court = $criminalcivillaw['2'];
+                $Criminalcivillaw->periodFrom = $criminalcivillaw['3'];
+                $Criminalcivillaw->periodTo = $criminalcivillaw['4'];
+                $Criminalcivillaw->prison = $criminalcivillaw['5'];
+           
+                $Criminalcivillaw->update();
+            }
+
+            $Whetheraboard = Whetheraboard::find()->where(['passport_idpassport' => $model->idpassport])->all();
+            $i = 0;
+            foreach ($Whetheraboard as $key => $value) {
+                $Whetheraboard = Whetheraboard::find()->where(['idwhetheraboard' => $value['idwhetheraboard']])->one();
+           
+                if($i == 0){
+                    $whetheraboard = $_POST['Passport']['whetheraboard1'];
+                    $i++;
+                }else if ($i ==1) {
+                    $whetheraboard = $_POST['Passport']['whetheraboard2'];
+                    $i++;
+                }
+
+                $Whetheraboard->yearFrom = $whetheraboard['0'];
+                $Whetheraboard->yearTo = $whetheraboard['1'];
+                $Whetheraboard->subjectTravelled = $whetheraboard['2'];
+                $Whetheraboard->country = $whetheraboard['3'];
+                $Whetheraboard->remark = $whetheraboard['4'];
+           
+                $Whetheraboard->update();
+            }
+            
+            
+
+
             return $this->redirect(['view', 'id' => $model->idpassport]);
         } else {
             return $this->render('update', [

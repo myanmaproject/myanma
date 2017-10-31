@@ -154,20 +154,19 @@ if(!$model->isNewRecord){
 
     <?= $form->field($model, 'departmentTransferredCurrent')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'detailOfSiblingsApplicant')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'detailOfSiblingsApplicant')->textArea(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'detailOfSpouseApplicant')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'detailOfSpouseApplicant')->textArea(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'detailOfChildrenApplicant')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'detailOfChildrenApplicant')->textArea(['maxlength' => true]) ?>
 
    
-    <?= $form->field($model, 'detailOfSiblingsFather')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'detailOfSiblingsFather')->textArea(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'detailOfSiblingsMother')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'detailOfSiblingsMother')->textArea(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'detailOfSiblingsSpouse')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'detailOfSiblingsSpouse')->textArea(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'passportNo')->textInput(['maxlength' => true]) ?>
 
     <?php
 if(!$model->isNewRecord){
@@ -230,7 +229,11 @@ if(!$model->isNewRecord){
   </tr>
 
 </table>
+
 </div>
+
+    <?= $form->field($model, 'passportNo')->textInput(['maxlength' => true]) ?>
+
     <?php
     echo '<label class="control-label">passportIssueDate</label>';
 echo DatePicker::widget([
