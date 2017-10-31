@@ -26,6 +26,16 @@ table, td, th {
     margin-bottom: 0px;
 }
 </style>
+
+<?php 
+
+
+if($_GET["familytree_idfamilytree"]!=null){
+
+  $model->familytree_idfamilytree = $_GET["familytree_idfamilytree"];
+}
+
+?>
 <div class="box">
  <div class="box-header with-border">
 

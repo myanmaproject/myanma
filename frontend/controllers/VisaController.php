@@ -119,7 +119,7 @@ class VisaController extends Controller
     {
       $findvisa = Visa::find()->where(['familytree_idfamilytree'=>$id])->one();
       if($findvisa == "" || $findvisa == null){
-         return $this->redirect(['visa/create']);
+         return $this->redirect(['visa/create','familytree_idfamilytree' => $id]);
       }else{
         
          return $this->render('view', [

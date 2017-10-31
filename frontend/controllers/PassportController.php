@@ -67,7 +67,7 @@ class PassportController extends Controller
     {
       $findpassport = Passport::find()->where(['familytree_idfamilytree'=>$id])->one();
       if($findpassport == "" || $findpassport == null){
-         return $this->redirect(['passport/create']);
+         return $this->redirect(['passport/create','familytree_idfamilytree' => $id]);
       }else{
         
          return $this->render('view', [

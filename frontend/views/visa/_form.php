@@ -96,7 +96,15 @@ use app\models\Transitvisathailand;
          'visa issued by the country of destination (except traveling to own country)'=>'visa issued by the country of destination (except traveling to own country)'];
     ?>
 
+<?php 
 
+
+if($_GET["familytree_idfamilytree"]!=null){
+
+  $model->familytree_idfamilytree = $_GET["familytree_idfamilytree"];
+}
+
+?>
 
  <?= $form->field($model, 'familytree_idfamilytree')->textInput() ?>
     <?= $form->field($model, 'prefix')->dropDownList(['0' => 'Mr.', '1' => 'Mrs.','2' => 'Miss.'],['prompt'=>'Please select prefix']) ?>
