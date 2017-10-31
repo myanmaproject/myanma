@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\PassportSearch */
@@ -10,19 +10,24 @@ use yii\grid\GridView;
 $this->title = 'Passports';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="passport-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?= Html::a('Create Passport', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+<div class="box">
+ <div class="box-header with-border">
+            <?= GridView::widget([
+            'dataProvider' => $dataProvider,
+            'panel'=>[
+                'before'=>' '
+            ],
+            'toolbar' => [
+                [
+                    'content'=>
+                        Html::a('Create Passports', ['create'], ['class' => 'btn btn-default']) ,
+                ],
+              
+                '{toggleData}'
+            ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
+
 
             'idpassport',
             'familytree_idfamilytree',
@@ -57,4 +62,5 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+</div>
 </div>

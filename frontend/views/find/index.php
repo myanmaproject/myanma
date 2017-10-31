@@ -62,7 +62,20 @@ $this->title = 'Find People';
        
     ]
 ]
+,
 
+[
+    'class' => 'yii\grid\ActionColumn',
+    'template' => '{leadView}',
+    'header' => 'Passport',
+    'buttons' => [
+       'leadView' => function ($url, $model) {
+           $url = Url::to(['passport/viewfind', 'id' => $model->idfamilytree]);
+          return Html::a('<span class="glyphicon glyphicon-edit"></span>', $url, ['title' => 'view']);
+       },
+       
+    ]
+]
 
 
 

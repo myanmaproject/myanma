@@ -11,7 +11,7 @@ use yii\filters\VerbFilter;
 use app\models\Studied;
 use app\models\Criminalcivillaw;
 use app\models\Whetheraboard;
-
+use app\models\Visa;
 /**
  * PassportController implements the CRUD actions for Passport model.
  */
@@ -58,6 +58,29 @@ class PassportController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
+
+
+
+
+
+    public function actionViewfind($id)
+    {
+      $findpassport = Passport::find()->where(['familytree_idfamilytree'=>$id])->one();
+      if($findpassport == "" || $findpassport == null){
+         return $this->redirect(['passport/create']);
+      }else{
+        
+         return $this->render('view', [
+            'model' => $this->findModel($findpassport->idpassport)
+        ]);
+      }
+       
+    }
+
+
+
+
+
 
     /**
      * Creates a new Passport model.

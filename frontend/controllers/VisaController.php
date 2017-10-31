@@ -150,6 +150,7 @@ class VisaController extends Controller
        && $model->save()) {
 
 
+
             $basicList= $_POST['Visa']['basic'];
 
                       if (is_array($basicList))
@@ -222,6 +223,7 @@ class VisaController extends Controller
             return $this->render('create', [
                 'model' => $model,
                 'modelbasicducuments' => $modelbasicducuments,
+              
                 
 
 

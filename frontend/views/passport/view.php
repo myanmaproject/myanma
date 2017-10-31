@@ -7,12 +7,12 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Passport */
 
 $this->title = $model->idpassport;
-$this->params['breadcrumbs'][] = ['label' => 'Passports', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
-?>
-<div class="passport-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+?>
+<div class="box">
+ <div class="box-header with-border">
+
+  
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->idpassport], ['class' => 'btn btn-primary']) ?>
@@ -60,4 +60,5 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
+</div>
 </div>

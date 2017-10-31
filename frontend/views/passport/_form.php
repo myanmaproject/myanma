@@ -26,7 +26,8 @@ table, td, th {
     margin-bottom: 0px;
 }
 </style>
-<div class="passport-form">
+<div class="box">
+ <div class="box-header with-border">
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -334,4 +335,5 @@ if(!$model->isNewRecord){
 
     <?php ActiveForm::end(); ?>
 
+</div>
 </div>

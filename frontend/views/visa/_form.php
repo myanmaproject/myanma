@@ -98,7 +98,6 @@ use app\models\Transitvisathailand;
 
 
 
-
  <?= $form->field($model, 'familytree_idfamilytree')->textInput() ?>
     <?= $form->field($model, 'prefix')->dropDownList(['0' => 'Mr.', '1' => 'Mrs.','2' => 'Miss.'],['prompt'=>'Please select prefix']) ?>
 

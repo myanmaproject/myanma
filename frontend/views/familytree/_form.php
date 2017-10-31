@@ -4,6 +4,8 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\select2\Select2;
 use app\models\familytree;
+use kartik\widgets\DatePicker;
+
 /* @var $this yii\web\View */
 /* @var $model app\models\Familytree */
 /* @var $form yii\widgets\ActiveForm */
@@ -16,8 +18,13 @@ use app\models\familytree;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'dateOfBirth')->textInput(['maxlength' => true]) ?>
-
+<!--     <?= $form->field($model, 'dateOfBirth')->textInput(['maxlength' => true]) ?>
+ --><?= $form->field($model, 'dateOfBirth')->widget(DatePicker::classname(), [
+    'options' => ['placeholder' => 'Enter birth date ...'],
+    'pluginOptions' => [
+        'autoclose'=>true
+    ]
+]); ?>
     <?= $form->field($model, 'placeOfBirth')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'raceNationality')->textInput(['maxlength' => true]) ?>
