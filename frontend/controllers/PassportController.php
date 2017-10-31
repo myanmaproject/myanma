@@ -77,7 +77,7 @@ class PassportController extends Controller
 
             $studied1= $_POST['Passport']['studied1'];
 
-            if(!in_array("",$studied1)){
+            // if(!in_array("",$studied1)){
                 $Studied = new Studied();
 
 $Studied->passport_idpassport = $model->idpassport;
@@ -88,11 +88,11 @@ $Studied->passport_idpassport = $model->idpassport;
                                             $Studied->nameSchool = $studied1['4'];
                                             $Studied->townshipWardVillage = $studied1['5'];
 if (!$Studied->save())print_r($Studied->errors);
-            }
+            // }
             
 
             $studied2= $_POST['Passport']['studied2'];                    
-            if(!in_array("",$studied2)){
+            // if(!in_array("",$studied2)){
                 $Studied = new Studied();
 $Studied->passport_idpassport = $model->idpassport;
                
@@ -104,10 +104,10 @@ $Studied->passport_idpassport = $model->idpassport;
                                             $Studied->townshipWardVillage = $studied2['5'];
                                                    if (!$Studied->save())print_r($Studied->errors);             
 
-               }
+               // }
 
                $studied3= $_POST['Passport']['studied3'];                    
-            if(!in_array("",$studied3)){
+            // if(!in_array("",$studied3)){
                 $Studied = new Studied();
 $Studied->passport_idpassport = $model->idpassport;
                
@@ -119,10 +119,10 @@ $Studied->passport_idpassport = $model->idpassport;
                                             $Studied->townshipWardVillage = $studied3['5'];
                                                                 
 if (!$Studied->save())print_r($Studied->errors);
-               }                       
+               // }                       
            
            $criminalcivillaw1= $_POST['Passport']['criminalcivillaw1'];                    
-            if(!in_array("",$criminalcivillaw1)){
+            // if(!in_array("",$criminalcivillaw1)){
                 $Criminalcivillaw = new Criminalcivillaw();
                 $Criminalcivillaw->passport_idpassport = $model->idpassport;               
                 $Criminalcivillaw->act = $criminalcivillaw1['0'];
@@ -133,10 +133,10 @@ if (!$Studied->save())print_r($Studied->errors);
                 $Criminalcivillaw->prison = $criminalcivillaw1['5'];
                                                                 
                 if (!$Criminalcivillaw->save())print_r($Criminalcivillaw->errors);
-            }    
+            // }    
 
             $criminalcivillaw2= $_POST['Passport']['criminalcivillaw2'];                    
-            if(!in_array("",$criminalcivillaw2)){
+            // if(!in_array("",$criminalcivillaw2)){
                 $Criminalcivillaw = new Criminalcivillaw();
                 $Criminalcivillaw->passport_idpassport = $model->idpassport;               
                 $Criminalcivillaw->act = $criminalcivillaw2['0'];
@@ -147,10 +147,10 @@ if (!$Studied->save())print_r($Studied->errors);
                 $Criminalcivillaw->prison = $criminalcivillaw2['5'];
                                                                 
                 if (!$Criminalcivillaw->save())print_r($Criminalcivillaw->errors);
-            }      
+            // }      
 
             $whetheraboard1= $_POST['Passport']['whetheraboard1'];                    
-            if(!in_array("",$whetheraboard1)){
+            // if(!in_array("",$whetheraboard1)){
                 $Whetheraboard = new Whetheraboard();
                 $Whetheraboard->passport_idpassport = $model->idpassport;               
                 $Whetheraboard->yearFrom = $whetheraboard1['0'];
@@ -160,10 +160,10 @@ if (!$Studied->save())print_r($Studied->errors);
                 $Whetheraboard->remark = $whetheraboard1['4'];
                                                                 
                 if (!$Whetheraboard->save())print_r($Whetheraboard->errors);
-            }        
+            // }        
 
             $whetheraboard2= $_POST['Passport']['whetheraboard2'];                    
-            if(!in_array("",$whetheraboard2)){
+            // if(!in_array("",$whetheraboard2)){
                 $Whetheraboard = new Whetheraboard();
                 $Whetheraboard->passport_idpassport = $model->idpassport;               
                 $Whetheraboard->yearFrom = $whetheraboard2['0'];
@@ -173,7 +173,7 @@ if (!$Studied->save())print_r($Studied->errors);
                 $Whetheraboard->remark = $whetheraboard2['4'];
                                                                 
                 if (!$Whetheraboard->save())print_r($Whetheraboard->errors);
-            }  
+            // }  
             return $this->redirect(['view', 'id' => $model->idpassport]);
         } else {
             return $this->render('create', [
