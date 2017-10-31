@@ -36,6 +36,8 @@ use app\models\Transitvisathailand;
                     $checkedFeatureArr[] = $data->detail;
                 }
                 $model->basic = $checkedFeatureArr;
+
+              
             }
 
             $Documentapplicant = Documentapplicant::find()->where(['visa_idvisa' => $model->idvisa])->all();
