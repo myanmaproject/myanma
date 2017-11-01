@@ -3,7 +3,13 @@
 use yii\helpers\Html;
 use frontend\models\Typeofvisa;
 use app\models\Visa;
+use app\models\Familytree;
 
+
+
+ $findvisa = Visa::find()->where(['idvisa'=>$id])->one();
+
+ $findfamily = Familytree::find()->where(['idfamilytree'=>$findvisa->familytree_idfamilytree])->one();
 
 ?>
 <div class="row">
@@ -13,7 +19,7 @@ use app\models\Visa;
         <p align="center">Ministry of Forecign Affairs of Thailand</p></div>
     <div class=""><p><font size="1"><b>Please Indicate Type of Visa Requested</b></font></p>
 
-       <?php $findvisa = Visa::find()->where(['idvisa'=>$id])->one(); ?>  
+      
       <?php $num = $findvisa->typeOfVisaRequest; ?>  
 
       <?php $type = Typeofvisa::find()->all(); 
@@ -26,7 +32,7 @@ use app\models\Visa;
       <?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center']) ?><?= $type[$i]->name; ?>  <br/>
         <?php }} ?>
 <br/>
-      <p><b>Number of Entries Requested _________________</b></font></p>
+      <p><b>Number of Entries Requested : <?php echo $findvisa->numberRequested; ?></b></font></p>
 </div>
 
 <div class="row">
@@ -36,20 +42,20 @@ use app\models\Visa;
       <?php if($prefix == "Mr."){ ?>
       <?= Html::img('@frontend/web/images/checked.png',['alt'=>'d','width'=>'20','height'=>'20','align'=>'center'])  ?>
       <?php }else{ ?>     
-      <?= Html::img('@frontend/web/images/unchecked.png',['alt'=>'d','width'=>'20','height'=>'20','align'=>'center'])  ?><?php } ?> Mr. 
+      <?= Html::img('@frontend/web/images/unchecked.png',['alt'=>'d','width'=>'20','height'=>'20','align'=>'center'])  ?><?php } ?><b> Mr. </b>
 
 
       <?php if($prefix == "Mrs."){ ?>
       <?= Html::img('@frontend/web/images/checked.png',['alt'=>'d','width'=>'20','height'=>'20','align'=>'center'])  ?>
       <?php }else{ ?>     
-      <?= Html::img('@frontend/web/images/unchecked.png',['alt'=>'d','width'=>'20','height'=>'20','align'=>'center'])  ?><?php } ?> Mrs.
+      <?= Html::img('@frontend/web/images/unchecked.png',['alt'=>'d','width'=>'20','height'=>'20','align'=>'center'])  ?><?php } ?><b> Mrs.</b>
 
       <?php if($prefix == "Miss."){ ?>
       <?= Html::img('@frontend/web/images/checked.png',['alt'=>'d','width'=>'20','height'=>'20','align'=>'center'])  ?>
       <?php }else{ ?>     
-      <?= Html::img('@frontend/web/images/unchecked.png',['alt'=>'d','width'=>'20','height'=>'20','align'=>'center'])  ?><?php } ?> Miss. <font size="4" style="border-bottom:1px solid #000;" ><?php echo $findvisa->firstName; ?>
+      <?= Html::img('@frontend/web/images/unchecked.png',['alt'=>'d','width'=>'20','height'=>'20','align'=>'center'])  ?><?php } ?><b> Miss.</b> <?php echo $findvisa->firstName; ?>
       <?php echo $findvisa->middleName; ?>
-      <?php echo $findvisa->familyName; ?></font>
+      <?php echo $findvisa->familyName; ?>
     </div>
 
 </div>
@@ -61,98 +67,98 @@ use app\models\Visa;
 </div> -->
 
 <div class="row">
-    <div class="col-xs-5"><p align="left">Former Name (if any) <font size="4" style="border-bottom:1px solid #000;" ><?php echo "-"; ?></font></p></div>
+    <div class="col-xs-5"><p align="left"><b>Former Name (if any)</b> ________________________________</p></div>
     <div class="col-xs-5"><p>Countries for which travel document is valid</p></div>  
 </div>
 
 <div class="row">
-    <div class="col-xs-5"><p align="left">Nationality _________________________________________________________</p></div>
+    <div class="col-xs-5"><p align="left"><b>Nationality</b> ______________________________________________________</p></div>
     <div class="col-xs-6"><p>__________________________________________________________________________________</p></div>  
 </div>
 
 <div class="row">
-    <div class="col-xs-5"><p align="left">Nationality at Birth ________________________________________________</p></div>
+    <div class="col-xs-5"><p align="left"><b>Nationality at Birth</b> <?php echo $findvisa->nationalityBirth; ?></p></div>
     <div class="col-xs-6"><p>Proposed Address in Thailand ___________________________________________________</p></div>  
 </div>
 
 <div class="row">
-    <div class="col-xs-5"><p align="left">Birth Place ______________________Marial Status _____________________</p></div>
+    <div class="col-xs-5"><p align="left"><b>Birth Place</b> <?php echo $findfamily->placeOfBirth; ?> <b>Marial Status</b> <?php echo $findvisa->maritalStatus; ?></p></div>
     <div class="col-xs-6"><p>__________________________________________________________________________________</p></div>  
 </div>
 
 <div class="row">
-    <div class="col-xs-5"><p align="left">Date of Birth ___________________________________</p></div>
+    <div class="col-xs-5"><p align="left"><b>Date of Birth</b> <?php echo $findfamily->dateOfBirth; ?></p></div>
+    <div class="col-xs-6"><p>__________________________________________________________________________________</p></div>  
+</div>
+<?php $father = Familytree::find()->where(['idfamilytree'=>$findfamily->father])->one(); ?>
+<div class="row">
+    <div class="col-xs-5"><p align="left"><b>Father's name</b> <?php echo $father->name; ?></p></div>
+    <div class="col-xs-6"><p><b>Name and Address of Local Guarantor</b></p></div>  
+</div>
+
+<div class="row">
+    <div class="col-xs-5"><p align="left"><b>Type of Travel Document</b> <?php echo $findvisa->TypeTravelDocument; ?></p></div>
     <div class="col-xs-6"><p>__________________________________________________________________________________</p></div>  
 </div>
 
 <div class="row">
-    <div class="col-xs-5"><p align="left">Father's name _________________________________</p></div>
-    <div class="col-xs-6"><p>Name and Address of Local Guarantor</p></div>  
-</div>
-
-<div class="row">
-    <div class="col-xs-5"><p align="left">Type of Travel Document ______________________</p></div>
-    <div class="col-xs-6"><p>__________________________________________________________________________________</p></div>  
-</div>
-
-<div class="row">
-    <div class="col-xs-5"><p align="left">No. ____________________Issued at _______________</p></div>
+    <div class="col-xs-5"><p align="left"><b>No.</b> <?php echo $findvisa->noPerson; ?> <b>Issued at</b> <?php echo $findvisa->issuedAt; ?></p></div>
     <div class="col-xs-6"><p>_________________________________________________________</p></div>  
 </div>
 
 <div class="row">
-    <div class="col-xs-5"><p align="left">Date of Issue ___________Expiry Date ___________</p></div>
+    <div class="col-xs-5"><p align="left"><b>Date of Issue</b> <?php echo $findvisa->dateIssue; ?> <b>Expiry Date</b> <?php echo $findvisa->expiryDate; ?> </p></div>
     <div class="col-xs-6"><p>Tel/Fax _________________________________________________</p></div>  
 </div>
 
 <div class="row">
-    <div class="col-xs-5"><p align="left">Occupation (specify present position and name of employer)</p></div>
-    <div class="col-xs-6"><p>Name and Address of Guarantor in Thailand</p></div>  
+    <div class="col-xs-5"><p align="left"><b>Occupation (specify present position and name of employer)</b></p></div>
+    <div class="col-xs-6"><p><b>Name and Address of Guarantor in Thailand</b></p></div>  
 </div>
 
 <div class="row">
-    <div class="col-xs-5"><p align="left">________________________________________________</p></div>
+    <div class="col-xs-5"><p align="left"> <?php echo $findfamily->occupation; ?> </p></div>
     <div class="col-xs-6"><p>_________________________________________________________</p></div>  
 </div>
 
 <div class="row">
-    <div class="col-xs-5"><p align="left">________________________________________________</p></div>
+    <div class="col-xs-5"> <p align="left">-</p> </div>
     <div class="col-xs-6"><p>_________________________________________________________</p></div>  
 </div>
 
 <div class="row">
-    <div class="col-xs-5"><p align="left">Current Address ________________________________</p></div>
+    <div class="col-xs-5"><p align="left"><b>Current Address</b> <?php echo $findvisa->currentAddress; ?> </p></div>
     <div class="col-xs-6"><p>Tel/Fax _________________________________________________</p></div>  
 </div>
 
 <div class="row">
-    <div class="col-xs-5"><p align="left">________________________________________________</p></div>
+    <div class="col-xs-5"><p align="left">-</p></div>
     <div class="col-xs-6"><p>I hereby declare that i will not request any refund from my paid visa fee even even if my application has been declined.</p></div>
 </div>
 
 <div class="row">
-    <div class="col-xs-5"><p align="left">Tel _____________________E-mail ________________</p></div>
+    <div class="col-xs-5"><p align="left"><b>Tel</b> <?php echo $findvisa->telPerson; ?> <b>E-mail</b> <?php echo $findvisa->email; ?> </p></div>
     <div class="col-xs-6"><p>Signature ______________________Date __________________</p></div>
 </div>
 
 <div class="row">
-    <div class="col-xs-5 "><p align="left">Permanent Address (if different from above)__________________________________________</p></div>
+    <div class="col-xs-5 "><p align="left"><b>Permanent Address (if different from above)</b><br> <?php echo $findvisa->permanentAddress  ; ?> </p></div>
     <div class="col-xs-6"><p>Note: Royal Thai Embassy reserves the right to accept only new bank notes (Large Head) in very good condition.</p></div>
 </div>
 
 <div class="row">
   <div class="col-xs-5">
-    <p align="left">________________________________________________</p>
-    <p align="left">________________________________________________</p>
-    <p align="left">Tel. ____________________________________________</p>
-    <p align="left">Names, dates and places of birth of minor children (if accompanying)</p>
-        <p align="left">________________________________________________</p>
-    <p align="left">________________________________________________</p>
-<p align="left">Date of Arrival in Thailand _________________________</p>
-<p align="left">Traveling by ___________________________________________</p>
-<p align="left" style="text-indent: 3em;">Flight No. or Vessel's name _________________________________</p>
-<p align="left">Duration of Proposed Stay ________________________________________</p>
-<p align="left">Duration of Previous Visit to Thailand ___________________________</p>
+    <p align="left">-</p>
+    <p align="left">-</p>
+    <p align="left"><b>Tel.</b> <?php echo $findvisa->telPermanent; ?> </p>
+    <p align="left"><b>Names, dates and places of birth of minor children (if accompanying)</b></p>
+        <p align="left"> <?php echo $findvisa->minorChildren; ?> </p>
+    <p align="left">-</p>
+<p align="left"><b>Date of Arrival in Thailand</b> _________________________</p>
+<p align="left"><b>Traveling by</b> ___________________________________________</p>
+<p align="left" style="text-indent: 3em;"><b>Flight No. or Vessel's name</b> _________________________________</p>
+<p align="left"><b>Duration of Proposed Stay</b> ________________________________________</p>
+<p align="left"><b>Duration of Previous Visit to Thailand</b> ___________________________</p>
 <table class="table">
         <tr>
             <td> <font size="1">Purpose of visit:</font></td>

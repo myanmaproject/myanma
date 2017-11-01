@@ -11,6 +11,7 @@ use app\models\Documentapplicant;
 use app\models\Documentfirsttime;
 use app\models\Documenttouristvisa;
 use app\models\Transitvisathailand;
+use kartik\widgets\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Visa */
@@ -134,11 +135,29 @@ if(isset ($_GET["familytree_idfamilytree"])){
 
     <?= $form->field($model, 'noPerson')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'issuedAt')->textInput(['maxlength' => true]) ?>
+<!--     <?= $form->field($model, 'issuedAt')->textInput(['maxlength' => true]) ?>
+ --><?= $form->field($model, 'issuedAt')->widget(DatePicker::classname(), [
+   
+    'pluginOptions' => [
+        'autoclose'=>true
+    ]
+]); ?>
+       
 
-           <?= $form->field($model, 'dateIssue')->widget(MaskedInput::className(), [ 'mask' => '9999/99/99', ]) ?>
-           <?= $form->field($model, 'expiryDate')->widget(MaskedInput::className(), [ 'mask' => '9999/99/99', ]) ?>
+<?= $form->field($model, 'dateIssue')->widget(DatePicker::classname(), [
+   
+    'pluginOptions' => [
+        'autoclose'=>true
+    ]
+]); ?>
 
+
+<?= $form->field($model, 'expiryDate')->widget(DatePicker::classname(), [
+   
+    'pluginOptions' => [
+        'autoclose'=>true
+    ]
+]); ?>
 
     <?= $form->field($model, 'currentAddress')->textInput(['maxlength' => true]) ?>
 
@@ -152,7 +171,15 @@ if(isset ($_GET["familytree_idfamilytree"])){
 
     <?= $form->field($model, 'minorChildren')->textInput(['maxlength' => true]) ?>
 
-           <?= $form->field($model, 'dateOfArrival')->widget(MaskedInput::className(), [ 'mask' => '9999/99/99', ]) ?>
+  
+
+
+           <?= $form->field($model, 'dateOfArrival')->widget(DatePicker::classname(), [
+   
+    'pluginOptions' => [
+        'autoclose'=>true
+    ]
+]); ?>
 
     <?= $form->field($model, 'traveling')->textInput(['maxlength' => true]) ?>
 
@@ -160,8 +187,15 @@ if(isset ($_GET["familytree_idfamilytree"])){
 
     <?= $form->field($model, 'durationOfProposedStay')->textInput(['maxlength' => true]) ?>
 
-           <?= $form->field($model, 'dateOfPrevious')->widget(MaskedInput::className(), [ 'mask' => '9999/99/99', ]) ?>
 
+
+
+           <?= $form->field($model, 'dateOfPrevious')->widget(DatePicker::classname(), [
+   
+    'pluginOptions' => [
+        'autoclose'=>true
+    ]
+]); ?>
     <?= $form->field($model, 'countriesForTravel')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'proposedAddressThai')->textInput(['maxlength' => true]) ?>
@@ -180,7 +214,13 @@ if(isset ($_GET["familytree_idfamilytree"])){
 
     <?= $form->field($model, 'numberOfEntriesOfficial')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'dateOfIssueOfficial')->textInput() ?>
+   
+               <?= $form->field($model, 'dateOfIssueOfficial')->widget(DatePicker::classname(), [
+   
+    'pluginOptions' => [
+        'autoclose'=>true
+    ]
+]); ?>
 
     <?= $form->field($model, 'feeOfficial')->textInput(['maxlength' => true]) ?>
 

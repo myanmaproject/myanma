@@ -3,7 +3,8 @@
 namespace app\models;
 
 use Yii;
-
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
 /**
  * This is the model class for table "visa".
  *
@@ -72,6 +73,14 @@ class Visa extends \yii\db\ActiveRecord
     public $touristvisa;
     public $transitvisa;
 
+
+
+ public function behaviors(){
+      return [
+        BlameableBehavior::className(),
+        TimestampBehavior::className()
+      ];
+    }
 
     public static function tableName()
     {
