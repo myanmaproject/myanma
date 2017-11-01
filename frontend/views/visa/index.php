@@ -31,19 +31,7 @@ $this->title = 'Visas';
             ['class' => 'yii\grid\SerialColumn'],
 
             'idvisa',
-                        [
-                'attribute'=>'prefix',
-                'label' => Yii::t('app', 'prefix'),
-                'value'=>  function($data) {
-                    if($data->prefix == "0") {
-                        return "Mr";
-                    }else if($data->prefix == "1") {
-                        return "Mrs";
-                    }else if($data->prefix == "2") {
-                        return "Miss";
-                    }
-                }
-            ],
+'prefix',
             'numberRequested',
             'typeOfVisaRequest',
             'firstName',

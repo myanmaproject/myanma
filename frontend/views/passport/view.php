@@ -23,6 +23,8 @@ $this->title = $model->idpassport;
                 'method' => 'post',
             ],
         ]) ?>
+                 <?= Html::a('Report', ['report', 'id' => $model->idpassport], ['class' => 'btn btn-primary']) ?>
+
     </p>
 
     <?= DetailView::widget([

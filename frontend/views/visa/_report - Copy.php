@@ -2,9 +2,7 @@
 
 use yii\helpers\Html;
 use frontend\models\Typeofvisa;
-use app\models\Visa;
-
-
+echo $id;
 ?>
 <div class="row">
     <div class="col-xs-2"><?= Html::img('@frontend/web/images/ex.png',['alt'=>'d','width'=>'120','height'=>'120','align'=>'center'])  ?></div>
@@ -12,56 +10,30 @@ use app\models\Visa;
         <br><p align="center">APPLICATION FOR VISA</p>
         <p align="center">Ministry of Forecign Affairs of Thailand</p></div>
     <div class=""><p><font size="1"><b>Please Indicate Type of Visa Requested</b></font></p>
-
-       <?php $findvisa = Visa::find()->where(['idvisa'=>$id])->one(); ?>  
-      <?php $num = $findvisa->typeOfVisaRequest; ?>  
-
       <?php $type = Typeofvisa::find()->all(); 
             $alltype = count($type); 
-            for($i = 0; $i < $alltype; $i++){ ?>
-     
-          <?php  if($i+1 == $num ){ ?>
-  <?= Html::img('@frontend/web/images/checked.png',['width'=>'20','height'=>'20','align'=>'center']) ?><?= $type[$i]->name; ?>  <br/>
-     <?php     }else{  ?>
+            for($i = 0; $i < $alltype; $i++){ 
+              ?>
       <?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center']) ?><?= $type[$i]->name; ?>  <br/>
-        <?php }} ?>
+        <?php } ?>
 <br/>
       <p><b>Number of Entries Requested _________________</b></font></p>
 </div>
 
 <div class="row">
-
-    <div class="col-xs-12">
-      <?php $prefix = $findvisa->prefix; ?>
-      <?php if($prefix == "Mr."){ ?>
-      <?= Html::img('@frontend/web/images/checked.png',['alt'=>'d','width'=>'20','height'=>'20','align'=>'center'])  ?>
-      <?php }else{ ?>     
-      <?= Html::img('@frontend/web/images/unchecked.png',['alt'=>'d','width'=>'20','height'=>'20','align'=>'center'])  ?><?php } ?> Mr. 
-
-
-      <?php if($prefix == "Mrs."){ ?>
-      <?= Html::img('@frontend/web/images/checked.png',['alt'=>'d','width'=>'20','height'=>'20','align'=>'center'])  ?>
-      <?php }else{ ?>     
-      <?= Html::img('@frontend/web/images/unchecked.png',['alt'=>'d','width'=>'20','height'=>'20','align'=>'center'])  ?><?php } ?> Mrs.
-
-      <?php if($prefix == "Miss."){ ?>
-      <?= Html::img('@frontend/web/images/checked.png',['alt'=>'d','width'=>'20','height'=>'20','align'=>'center'])  ?>
-      <?php }else{ ?>     
-      <?= Html::img('@frontend/web/images/unchecked.png',['alt'=>'d','width'=>'20','height'=>'20','align'=>'center'])  ?><?php } ?> Miss. <font size="4" style="border-bottom:1px solid #000;" ><?php echo $findvisa->firstName; ?>
-      <?php echo $findvisa->middleName; ?>
-      <?php echo $findvisa->familyName; ?></font>
-    </div>
-
+    <div class="col-xs-12"><?= Html::img('@frontend/web/images/unchecked.png',['alt'=>'d','width'=>'20','height'=>'20','align'=>'center'])  ?> Mr. 
+      <?= Html::img('@frontend/web/images/unchecked.png',['alt'=>'d','width'=>'20','height'=>'20','align'=>'center'])  ?> Mrs.
+      <?= Html::img('@frontend/web/images/unchecked.png',['alt'=>'d','width'=>'20','height'=>'20','align'=>'center'])  ?> Miss ______________________________________________________________________________________</div>
 </div>
-<!-- <div class="row">
+<div class="row">
     <div class="col-xs-4"><p align="right">First Name</p></div>
      <div class="col-xs-2"><p>Middle Name</p></div>
       <div class="col-xs-2"><p>Family Name</p></div>
        <div class="col-xs-2"><p>(in BLOCK letters)</p></div>
-</div> -->
+</div>
 
 <div class="row">
-    <div class="col-xs-5"><p align="left">Former Name (if any) <font size="4" style="border-bottom:1px solid #000;" ><?php echo "-"; ?></font></p></div>
+    <div class="col-xs-5"><p align="left">First Name _________________________________________________________</p></div>
     <div class="col-xs-5"><p>Countries for which travel document is valid</p></div>  
 </div>
 
