@@ -11,8 +11,11 @@ use yii\filters\VerbFilter;
 use app\models\Studied;
 use app\models\Criminalcivillaw;
 use app\models\Whetheraboard;
+use app\models\Familytree;
 use app\models\Visa;
 use kartik\mpdf\Pdf;
+use yii\data\ActiveDataProvider;
+
 
 /**
  * PassportController implements the CRUD actions for Passport model.
@@ -337,8 +340,21 @@ if (!$Studied->save())print_r($Studied->errors);
 
      public function actionReport($id) {
     // get your HTML raw content without any layouts or scripts
+    $passport = Passport::find()->where(['idpassport' => $id])->one();
+    $Familytree = Familytree::find()->where(['idfamilytree' => $passport->familytree_idfamilytree])->one();
+    $Studied = Studied::find()->where(['passport_idpassport' => $id])->all();
+    $Criminalcivillaw = Criminalcivillaw::find()->where(['passport_idpassport' => $id])->all();
+    $Whetheraboard = Whetheraboard::find()->where(['passport_idpassport' => $id])->all();
+
+    
+
     $content = $this->renderPartial('_report',[
-        'id' => $id
+        'id' => $id,
+        'passport' => $passport,
+        'familytree' => $Familytree,
+        'Studied' => $Studied,
+        'Criminalcivillaw' => $Criminalcivillaw,
+        'Whetheraboard' => $Whetheraboard
       ]);
  
    // echo $id;

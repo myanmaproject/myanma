@@ -252,7 +252,7 @@ echo DatePicker::widget([
     'type' => DatePicker::TYPE_COMPONENT_APPEND,
     'pluginOptions' => [
         'orientation' => 'top right',
-        'format' => 'mm/dd/yyyy',
+        'format' => 'yyyy-mm-dd',
         'autoclose' => true,
     ]
 ]); 
@@ -267,7 +267,7 @@ echo DatePicker::widget([
     'type' => DatePicker::TYPE_COMPONENT_APPEND,
     'pluginOptions' => [
         'orientation' => 'top right',
-        'format' => 'mm/dd/yyyy',
+        'format' => 'yyyy-mm-dd',
         'autoclose' => true,
     ]
 ]); 
