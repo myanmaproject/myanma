@@ -28,6 +28,7 @@
 <div><b>15. Subject to be travelled</b> ...<?php echo $passport->subjectTravelled;?><dottab /></div>
 <div><b>16. Country to be appiled</b> ...<?php echo $passport->countryApplied;?><dottab /></div>
 <div><b>17. Studied at School/Standard</b></div>
+
 <div style="padding-bottom:20px; padding-left:20px; padding-top:10px; ">
 <table border="1" width="100%">
   <tr>
@@ -40,33 +41,25 @@
     <th align="center" width="15%">to</th>
     <th align="center" width="15%">from</th>
     <th align="center" width="15%">to</th>
-    <th align="center">Name</th>
-    <th align="center">Township/Ward/Village</th>
+    <th align="center" width="15%">Name</th>
+    <th align="center" width="25%">Township/Ward/Village</th>
   </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+
+<?php 
+    foreach ($studied as $key => $value) {
+?>
+<tr>
+    <td><?php echo $value['yearFrom']; ?></td>
+    <td><?php echo $value['yearTo'];?></td>
+    <td><?php echo $value['standardFrom'];?></td>
+    <td><?php echo $value['standardTo'];?></td>
+    <td><?php echo $value['nameSchool'];?></td>
+    <td><?php echo $value['townshipWardVillage'];?></td>
   </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
+
+<?php      
+    }
+  ?>
 </table>
 </div>
 
@@ -107,28 +100,28 @@
 <div style="padding-bottom:20px; padding-left:20px; padding-top:10px; ">
 <table border="1" width="100%">
   <tr>
-    <th align="center">Act</th>
-    <th align="center">Punishment</th>
-    <th align="center">Court</th>
-    <th colspan="2" align="center">Period</th>
-    <th align="center">Prison</th>
+    <th align="center" width="20%">Act</th>
+    <th align="center" width="20%">Punishment</th>
+    <th align="center" width="17%">Court</th>
+    <th colspan="2" align="center" >Period</th>
+    <th align="center" width="20%">Prison</th>
   </tr>
-  <tr>
-    <td align="center">&nbsp;</td>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"></td>
+  
+  <?php 
+    foreach ($criminalcivillaw as $key => $value) {
+?>
+<tr>
+    <td><?php echo $value['act']; ?></td>
+    <td><?php echo $value['punishment'];?></td>
+    <td><?php echo $value['court'];?></td>
+    <td width="15%"><?php echo $value['periodFrom'];?></td>
+    <td width="15%"><?php echo $value['periodTo'];?></td>
+    <td><?php echo $value['prison'];?></td>
   </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
+
+<?php      
+    }
+  ?>
 
 </table>
 </div>
@@ -141,30 +134,30 @@
 <div style="padding-bottom:20px; padding-left:20px; padding-top:10px; ">
 <table border="1" width="100%">
   <tr>
-    <th colspan="2" align="center">Year</th>
-    <th rowspan="2" align="center">Subject to be travelled</th>
-    <th rowspan="2" align="center">Country</th>
-    <th rowspan="2" align="center">Remark</th>
+    <th colspan="2" align="center" >Year</th>
+    <th rowspan="2" align="center" width="30%">Subject to be travelled</th>
+    <th rowspan="2" align="center" width="20%">Country</th>
+    <th rowspan="2" align="center" width="20%">Remark</th>
   </tr>
     <tr>
-    <th align="center" width="10%">from</th>
-    <th align="center" width="10%">to</th>
-    
+    <th align="center" width="15%">from</th>
+    <th align="center" width="15%">to</th>
   </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+
+  <?php 
+    foreach ($whetheraboard as $key => $value) {
+?>
+<tr>
+    <td><?php echo $value['yearFrom']; ?></td>
+    <td><?php echo $value['yearTo'];?></td>
+    <td><?php echo $value['subjectTravelled'];?></td>
+    <td><?php echo $value['country'];?></td>
+    <td><?php echo $value['remark'];?></td>
   </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
+
+<?php      
+    }
+  ?>
  
 </table>
 </div>

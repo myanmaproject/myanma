@@ -352,9 +352,9 @@ if (!$Studied->save())print_r($Studied->errors);
         'id' => $id,
         'passport' => $passport,
         'familytree' => $Familytree,
-        'Studied' => $Studied,
-        'Criminalcivillaw' => $Criminalcivillaw,
-        'Whetheraboard' => $Whetheraboard
+        'studied' => $Studied,
+        'criminalcivillaw' => $Criminalcivillaw,
+        'whetheraboard' => $Whetheraboard
       ]);
  
    // echo $id;
