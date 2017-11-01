@@ -23,6 +23,7 @@ $this->title = $model->idvisa;
                 'method' => 'post',
             ],
         ]) ?>
+         <?= Html::a('Report', ['report', 'id' => $model->idvisa], ['class' => 'btn btn-primary']) ?>
     </p>
 
     <?= DetailView::widget([

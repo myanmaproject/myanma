@@ -382,27 +382,7 @@ class VisaController extends Controller
 
 
 
-    public function actionGen($id)
-    {
-      $pdf_content = $this->renderPartial('view',[
-        'model' => $this->findModel($id),]);
-      $mpdf = new \mPDF();
-      $mpdf->writeHTML($pdf_content);
-      $mpdf->Output();
-      exit();
-    }
-
-
-
-
-
-
-
-
-
-
-    
-
+  
 
     public function actionReport($id) {
     // get your HTML raw content without any layouts or scripts

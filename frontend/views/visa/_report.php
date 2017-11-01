@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use app\models\Typeofvisa;
+use frontend\models\Typeofvisa;
 ?>
 <div class="row">
     <div class="col-xs-2"><?= Html::img('@frontend/web/images/ex.png',['alt'=>'d','width'=>'120','height'=>'120','align'=>'center'])  ?></div>
