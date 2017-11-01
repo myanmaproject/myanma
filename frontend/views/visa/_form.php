@@ -98,12 +98,12 @@ use app\models\Transitvisathailand;
 
 <?php 
 
+if(isset ($_GET["familytree_idfamilytree"])){
+  if($_GET["familytree_idfamilytree"]!=null){
 
-if($_GET["familytree_idfamilytree"]!=null){
-
-  $model->familytree_idfamilytree = $_GET["familytree_idfamilytree"];
+    $model->familytree_idfamilytree = $_GET["familytree_idfamilytree"];
+  }
 }
-
 ?>
 
  <?= $form->field($model, 'familytree_idfamilytree')->textInput() ?>

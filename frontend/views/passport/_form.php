@@ -29,12 +29,12 @@ table, td, th {
 
 <?php 
 
+if(isset ($_GET["familytree_idfamilytree"])){
+    if($_GET["familytree_idfamilytree"]!=null){
 
-if($_GET["familytree_idfamilytree"]!=null){
-
-  $model->familytree_idfamilytree = $_GET["familytree_idfamilytree"];
+      $model->familytree_idfamilytree = $_GET["familytree_idfamilytree"];
+    }
 }
-
 ?>
 <div class="box">
  <div class="box-header with-border">
