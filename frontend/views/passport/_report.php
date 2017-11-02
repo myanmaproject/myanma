@@ -5,7 +5,7 @@
 <h6 style="font-size:20px; text-align: center; font-weight:bold; padding-bottom:20px;">Personal Record Form to keep</h6> 
 
 
-<div><b>Record Serial No.</b> _____________________</div>
+<div><b>Record Serial No.</b> .............................</div>
 
 
 <div><b>1. Name (Myanmar/English)</b> ...<?php echo $familytree->name;?><dottab /></div>
@@ -15,7 +15,7 @@
 <div><b>4. Mother's Name</b> ...<?php echo $familytree->mother;?>......................<b>(Race/Religion)</b>...<?php echo $familytree->region;?><dottab/></div>
 <div style="padding-left:20px;"><b>Occupation/Address</b>...<?php echo $familytree->occupation."/".$familytree->address;?> <dottab /></div>
 <div><b>5. Identification Mark</b> ...<?php echo $passport->identificationMark;?><dottab /></div>
-<div><b>6. Date of Birth</b> ...<?php echo $familytree->dateOfBirth;?><dottab /></div>
+<div><b>6. Date of Birth</b> ...<?php echo date("d/m/Y", strtotime($familytree->dateOfBirth));?><dottab /></div>
 <div><b>7. Place of Birth</b> ...<?php echo $familytree->placeOfBirth;?><dottab /></div>
 <div><b>8. Male/Female</b> ...<?php if($passport->sex==1){echo "Male";}else if($passport->sex==2){echo "Female";}?><dottab /></div>
 <div><b>9. Present Occupation/Address</b> ...<?php echo $passport->presentOccupation." / ".$passport->presentOccupationAddress;?><dottab /></div>
@@ -126,8 +126,8 @@
 </table>
 </div>
 <div><b>26. To fill-up if applied the Passport formerly</b></div>
-<div style="padding-left:27px;"><b>PassPort No./Issue Date</b> ...<?php echo $passport->passportNo.".../...".$passport->passportIssueDate;?> <dottab/></div>
-<div style="padding-left:27px;"><b>Place/Date if delivered the Passport</b> ...<?php echo $passport->placeDeliveredPassport.".../...".$passport->dateDeliveredPassport;?><dottab/></div>
+<div style="padding-left:27px;"><b>PassPort No./Issue Date</b> ...<?php echo $passport->passportNo.".../...".date("d/m/Y", strtotime($passport->passportIssueDate));?> <dottab/></div>
+<div style="padding-left:27px;"><b>Place/Date if delivered the Passport</b> ...<?php echo $passport->placeDeliveredPassport.".../...".date("d/m/Y", strtotime($passport->dateDeliveredPassport));?><dottab/></div>
 <div style="padding-left:27px;"><b>Shall mention the Department/Airport which are delivered/</b></div>
 <div style="padding-left:27px;"><b>if kept in hand, shall submit with attachment</b></div>
 <div><b>27. whether went to aboard or not</b></div>
