@@ -4,12 +4,22 @@ use yii\helpers\Html;
 use frontend\models\Typeofvisa;
 use app\models\Visa;
 use app\models\Familytree;
-
+use app\models\Basicdocuments;
+use app\models\Documenttouristvisa;
+use app\models\DocumentFirsttime;
+use app\models\Documentapplicant;
+use app\models\Transitvisathailand;
 
 
  $findvisa = Visa::find()->where(['idvisa'=>$id])->one();
 
- $findfamily = Familytree::find()->where(['idfamilytree'=>$findvisa->familytree_idfamilytree])->one();
+$findfamily = Familytree::find()->where(['idfamilytree'=>$findvisa->familytree_idfamilytree])->one();
+$basicdocument = Basicdocuments::find()->where(['visa_idvisa'=>$findvisa])->all();
+$documenttouristvisa = Documenttouristvisa::find()->where(['visa_idvisa'=>$findvisa])->all();
+$documentfirsttime = DocumentFirsttime::find()->where(['visa_idvisa'=>$findvisa])->all();
+$documentapplicant = Documentapplicant::find()->where(['visa_idvisa'=>$findvisa])->all();
+$transitvisathailand = Transitvisathailand::find()->where(['visa_idvisa'=>$findvisa])->all();
+
 
 ?>
 <div class="row">
@@ -68,17 +78,17 @@ use app\models\Familytree;
 
 <div class="row">
     <div class="col-xs-5"><p align="left"><b>Former Name (if any)</b> ________________________________</p></div>
-    <div class="col-xs-5"><p>Countries for which travel document is valid</p></div>  
+    <div class="col-xs-5"><p><b>Countries for which travel document is valid</b></p></div>  
 </div>
 
 <div class="row">
     <div class="col-xs-5"><p align="left"><b>Nationality</b> ______________________________________________________</p></div>
-    <div class="col-xs-6"><p>__________________________________________________________________________________</p></div>  
+    <div class="col-xs-6"><p><?php echo $findvisa->countriesForTravel; ?></p></div>  
 </div>
 
 <div class="row">
     <div class="col-xs-5"><p align="left"><b>Nationality at Birth</b> <?php echo $findvisa->nationalityBirth; ?></p></div>
-    <div class="col-xs-6"><p>Proposed Address in Thailand ___________________________________________________</p></div>  
+    <div class="col-xs-6"><p><b>Proposed Address in Thailand</b> <?php echo $findvisa->proposedAddressThai; ?> </p></div>  
 </div>
 
 <div class="row">
@@ -98,7 +108,7 @@ use app\models\Familytree;
 
 <div class="row">
     <div class="col-xs-5"><p align="left"><b>Type of Travel Document</b> <?php echo $findvisa->TypeTravelDocument; ?></p></div>
-    <div class="col-xs-6"><p>__________________________________________________________________________________</p></div>  
+    <div class="col-xs-6"><p> <?php echo $findvisa->nameAddressLocal; ?> </p></div>  
 </div>
 
 <div class="row">
@@ -108,7 +118,7 @@ use app\models\Familytree;
 
 <div class="row">
     <div class="col-xs-5"><p align="left"><b>Date of Issue</b> <?php echo $findvisa->dateIssue; ?> <b>Expiry Date</b> <?php echo $findvisa->expiryDate; ?> </p></div>
-    <div class="col-xs-6"><p>Tel/Fax _________________________________________________</p></div>  
+    <div class="col-xs-6"><p><b>Tel/Fax</b> <?php echo $findvisa->telThai; ?> </p></div>  
 </div>
 
 <div class="row">
@@ -154,20 +164,53 @@ use app\models\Familytree;
     <p align="left"><b>Names, dates and places of birth of minor children (if accompanying)</b></p>
         <p align="left"> <?php echo $findvisa->minorChildren; ?> </p>
     <p align="left">-</p>
-<p align="left"><b>Date of Arrival in Thailand</b> _________________________</p>
-<p align="left"><b>Traveling by</b> ___________________________________________</p>
-<p align="left" style="text-indent: 3em;"><b>Flight No. or Vessel's name</b> _________________________________</p>
-<p align="left"><b>Duration of Proposed Stay</b> ________________________________________</p>
-<p align="left"><b>Duration of Previous Visit to Thailand</b> ___________________________</p>
+<p align="left"><b>Date of Arrival in Thailand</b> <?php echo $findvisa->dateOfArrival; ?> </p>
+<p align="left"><b>Traveling by</b> <?php echo $findvisa->traveling; ?> </p> 
+<p align="left" style="text-indent: 3em;"><b>Flight No. or Vessel's name</b> <?php echo $findvisa->flightNo; ?> </p>
+<p align="left"><b>Duration of Proposed Stay</b> <?php echo $findvisa->durationOfProposedStay; ?> </p>
+<p align="left"><b>Duration of Previous Visit to Thailand</b> <?php echo $findvisa->dateOfPrevious; ?> </p>
 <table class="table">
+
+
+
+      <?php if($prefix == "Mr."){ ?>
+      <?= Html::img('@frontend/web/images/checked.png',['alt'=>'d','width'=>'20','height'=>'20','align'=>'center'])  ?>
+      <?php }else{ ?>     
+      <?= Html::img('@frontend/web/images/unchecked.png',['alt'=>'d','width'=>'20','height'=>'20','align'=>'center'])  ?><?php } ?><b> Mr. </b>
+
+
+        <?php $purpose = $findvisa->purposeOfVisit; ?>
+
         <tr>
-            <td> <font size="1">Purpose of visit:</font></td>
-            <td>  <?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?><font size="1"> Double</font></td>
-            <td>  <?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?><font size="1"> Multiple</font></td>
+            <td> <font size="1"><b>Purpose of visit:</b></font></td>
+              <td>  
+            <?php if( $purpose == "Tourism" ){ ?>
+             <?= Html::img('@frontend/web/images/checked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?><font size="1"> Tourism</font> <?php }else{ ?>
+            <?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?><font size="1"> Tourism</font> <?php } ?>
+              </td>
+            <td> 
+               <?php if( $purpose == "Transit" ){ ?>
+             <?= Html::img('@frontend/web/images/checked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?><font size="1"> Transit</font><?php }else{ ?>
+                    <?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?><font size="1"> Transit</font><?php } ?>
+           </td>
         </tr>
         <tr>
-            <td> <?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?><font size="1"> Business</font></td>
-            <td>  <?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?><font size="1"> Diplomatic/Official</font></td>
+         
+            <td> 
+               <?php if( $purpose == "Business" ){ ?>
+              <?= Html::img('@frontend/web/images/checked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?><font size="1"> Business</font><?php }else{ ?>
+<?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?><font size="1"> Business</font><?php } ?>
+           </td>
+
+
+            </td>
+            <td>  
+<?php if( $purpose == "Diplomatic Official" ){ ?>
+              <?= Html::img('@frontend/web/images/checked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?><font size="1"> Diplomatic/Official</font><?php }else{ ?>
+              <?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?><font size="1"> Diplomatic/Official</font><?php } ?>
+
+
+            </td>
         </tr>
                 <tr>
             <td colspan="3"> <?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?><font size="1"> Other (please specify) ______________</font></td>
@@ -189,13 +232,13 @@ use app\models\Familytree;
   </td></tr> <table class="table">
         <tr>
             <td>  <?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?><font size="1"> Diplomatic Visa</font></td>
-            <td>  <?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?><font size="1"> Diplomatic Visa</font></td>
-            <td>  <?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?><font size="1"> Diplomatic Visa</font></td>
+            <td>  <?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?><font size="1"> Official Visa</font></td>
+            <td>  <?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?><font size="1"> Courtesy Visa</font></td>
         </tr>
                 <tr>
-            <td>  <?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?><font size="1"> Diplomatic Visa</font></td>
-            <td>  <?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?><font size="1"> Diplomatic Visa</font></td>
-            <td>  <?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?><font size="1"> Diplomatic Visa</font></td>
+            <td>  <?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?><font size="1"> Non-Immigrant Visa</font></td>
+            <td>  <?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?><font size="1"> Tourist Visa</font></td>
+            <td>  <?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?><font size="1"> Transit Visa</font></td>
         </tr>
     </table>
     <p align="left">Category of Visa _______________________</p>
@@ -222,6 +265,8 @@ use app\models\Familytree;
 </div>
 
 
+
+
 <div class="row">
     <div class="col-xs-5"><p align="center" style="border-bottom:1px solid #000;"><b>Tourist Visa: for tourism purpose</b></p></div>
     <div class="col-xs-5"><p>-</p></div>  
@@ -229,10 +274,61 @@ use app\models\Familytree;
 
 <div class="row">
     <div class="col-xs-5"><font size="1" style="border-bottom:1px solid #000;"><b>Basic Documents required:</b></font>
-      <p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> passport or travel document of which validity is no less than 6 months</p>
-      <p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> visa application form completely filled in</p>
-      <p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> 2 recent colour photos ( 3.5 x 4.5 cm.)</p>
-      <p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> invation letter (if any)</p>
+<?php $check = "0";?>
+
+<?php for($i = 0;$i<count($basicdocument);$i++){ ?>
+<?php  $basic = $basicdocument[$i]->detail; ?>
+<?php if($basic == "passport of travel document of which validity is no less than 6 months"){ ?>
+      <p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/checked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> passport or travel document of which validity is no less than 6 months</p>
+      <?php $check = "1";?>
+      <?php break; ?>
+<?php } } ?>
+<?php if($check == "0"){ ?>
+<p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> passport or travel document of which validity is no less than 6 months</p>
+<?php } ?>
+
+<?php $check = "0";?>
+<?php for($i = 0;$i<count($basicdocument);$i++){ ?>
+<?php  $basic = $basicdocument[$i]->detail; ?>
+<?php if($basic == "visa application form completely filled in"){ ?>
+      <p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/checked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> visa application form completely filled in</p>
+      <?php $check = "1";?>
+      <?php break; ?>
+<?php } } ?>
+<?php if($check == "0"){ ?>
+<p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> visa application form completely filled in</p>
+<?php } ?>
+
+
+
+<?php $check = "0";?>
+<?php for($i = 0;$i<count($basicdocument);$i++){ ?>
+<?php  $basic = $basicdocument[$i]->detail; ?>
+<?php if($basic == "2 recent colour photos (3.5 x 4.5 cm.)"){ ?>
+      <p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/checked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> 2 recent colour photos (3.5 x 4.5 cm.)</p>
+      <?php $check = "1";?>
+      <?php break; ?>
+<?php } } ?>
+<?php if($check == "0"){ ?>
+<p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> 2 recent colour photos (3.5 x 4.5 cm.)</p>
+<?php } ?>
+
+
+<?php $check = "0";?>
+<?php for($i = 0;$i<count($basicdocument);$i++){ ?>
+<?php  $basic = $basicdocument[$i]->detail; ?>
+<?php if($basic == "invitation letter (if any)"){ ?>
+      <p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/checked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> invitation letter (if any)</p>
+      <?php $check = "1";?>
+      <?php break; ?>
+<?php } } ?>
+<?php if($check == "0"){ ?>
+<p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> invitation letter (if any)</p>
+<?php } ?>
+
+
+
+
 </div>
     <div class="col-xs-5"><p>-</p></div>  
 </div>
@@ -240,7 +336,19 @@ use app\models\Familytree;
 
 <div class="row">
     <div class="col-xs-5"><font size="1" style="border-bottom:1px solid #000;"><b>Additional documents for Tourist Visa (Medical tretment)</b></font>
-      <p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> appointment letter or certificate that applicant requires medical tretment in ThailandS</p>
+<?php $check = "0";?>
+<?php for($i = 0;$i<count($documentapplicant);$i++){ ?>
+<?php  $basic = $documentapplicant[$i]->detail; ?>
+<?php if($basic == "appointment letter or certificate that applicant requires medical treatment in Thailand"){ ?>
+      <p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/checked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> appointment letter or certificate that applicant requires medical treatment in Thailand</p>
+      <?php $check = "1";?>
+      <?php break; ?>
+<?php } } ?>
+<?php if($check == "0"){ ?>
+<p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> appointment letter or certificate that applicant requires medical treatment in Thailand</p>
+<?php } ?>
+
+   
 </div>
     <div class="col-xs-5"><p>-</p></div>  
 </div>

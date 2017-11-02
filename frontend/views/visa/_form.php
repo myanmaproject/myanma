@@ -232,7 +232,7 @@ if(isset ($_GET["familytree_idfamilytree"])){
 
 
 
-        <?= $form->field($model, 'purposeOfVisit')->dropDownList(['0' => 'Business', '1' => 'Tourism','2' => 'Transit','3' => 'Diplomatic Official'],['prompt'=>'Please select purpose of visit']) ?>
+        <?= $form->field($model, 'purposeOfVisit')->dropDownList(['Business' => 'Business', 'Tourism' => 'Tourism','Transit' => 'Transit','Diplomatic Official' => 'Diplomatic Official'],['prompt'=>'Please select purpose of visit']) ?>
 
     <?= $form->field($model, 'basic')->checkBoxList($listBasic) ?>
     <?= $form->field($model, 'applicant')->checkBoxList($listApplicant) ?>
