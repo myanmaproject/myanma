@@ -86,7 +86,7 @@ use kartik\widgets\DatePicker;
          'evidence of sufficient financial means to visit Thailand (20,000 Baht of 670 USD per person/40,000 Baht or 1,340 USD per family)'=>'evidence of sufficient financial means to visit Thailand (20,000 Baht of 670 USD per person/40,000 Baht or 1,340 USD per family)',
          'confirmed round trip air ticket' => 'confirmed round trip air ticket'];
 
-         $listTouristvisa = ['letter of employment (for employee) of' => 'letter of employment (for employee) of',
+         $listTouristvisa = ['letter of employment (for employee) or' => 'letter of employment (for employee) or',
          'company registration (for business owner) or' => 'company registration (for business owner) or',
          'guarantee/ invitation letter from company in Thailand (if any) or' => 'guarantee/ invitation letter from company in Thailand (if any) or',
          'receipt or invoice from past procurement (if any)' => 'receipt or invoice from past procurement (if any)'];

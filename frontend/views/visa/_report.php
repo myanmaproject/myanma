@@ -357,10 +357,68 @@ $transitvisathailand = Transitvisathailand::find()->where(['visa_idvisa'=>$findv
 
 <div class="row">
     <div class="col-xs-5"><font size="1" style="border-bottom:1px solid #000;"><b>Additional documents for first-time applicant/ holder of new passport</b></font>
-      <p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> letter of employment (for employee) or company registration (for business owner)</p>
+
+
+
+<?php $check = "0";?>
+<?php for($i = 0;$i<count($documentfirsttime);$i++){ ?>
+<?php  $basic = $documentfirsttime[$i]->detail; ?>
+<?php if($basic == "letter of employment (for employee) or company registration (for business owner)"){ ?>
+      <p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/checked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> letter of employment (for employee) or company registration (for business owner)</p>
+      <?php $check = "1";?>
+      <?php break; ?>
+<?php } } ?>
+<?php if($check == "0"){ ?>
+<p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> letter of employment (for employee) or company registration (for business owner)</p>
+<?php } ?>
+
+
+
+<?php $check = "0";?>
+<?php for($i = 0;$i<count($documentfirsttime);$i++){ ?>
+<?php  $basic = $documentfirsttime[$i]->detail; ?>
+<?php if($basic == "invitation letter (if any)"){ ?>
+      <p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/checked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> invitation letter (if any)</p>
+      <?php $check = "1";?>
+      <?php break; ?>
+<?php } } ?>
+<?php if($check == "0"){ ?>
+<p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> invitation letter (if any)</p>
+<?php } ?>
+
+
+<?php $check = "0";?>
+<?php for($i = 0;$i<count($documentfirsttime);$i++){ ?>
+<?php  $basic = $documentfirsttime[$i]->detail; ?>
+<?php if($basic == "evidence of sufficient financial means to visit Thailand (20,000 Baht of 670 USD per person/40,000 Baht or 1,340 USD per family)"){ ?>
+      <p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/checked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> evidence of sufficient financial means to visit Thailand (20,000 Baht of 670 USD per person/40,000 Baht or 1,340 USD per family)</p>
+      <?php $check = "1";?>
+      <?php break; ?>
+<?php } } ?>
+<?php if($check == "0"){ ?>
+<p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> evidence of sufficient financial means to visit Thailand (20,000 Baht of 670 USD per person/40,000 Baht or 1,340 USD per family)</p>
+<?php } ?>
+
+
+<?php $check = "0";?>
+<?php for($i = 0;$i<count($documentfirsttime);$i++){ ?>
+<?php  $basic = $documentfirsttime[$i]->detail; ?>
+<?php if($basic == "confirmed round trip air ticket"){ ?>
+      <p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/checked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> confirmed round trip air ticket</p>
+      <?php $check = "1";?>
+      <?php break; ?>
+<?php } } ?>
+<?php if($check == "0"){ ?>
+<p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> confirmed round trip air ticket</p>
+<?php } ?>
+
+<!--       <p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> letter of employment (for employee) or company registration (for business owner)</p>
       <p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> invitation letter (if any)</p>
       <p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> evidence of sufficient financial means to visit Thailand <font size="1" style="border-bottom:1px solid #000;"><b>(20,000 Baht or 670 USD per person/ 40,000 Baht or 1,340 USD perfamily)</b></font></p>
-      <p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> confirmed round trip air ticket</p>
+      <p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> confirmed round trip air ticket</p> -->
+
+
+
 </div>
     <div class="col-xs-5"><p>-</p></div>  
 </div>
@@ -369,10 +427,64 @@ $transitvisathailand = Transitvisathailand::find()->where(['visa_idvisa'=>$findv
 
 <div class="row">
     <div class="col-xs-5"><font size="1" style="border-bottom:1px solid #000;"><b>Additional documents for applicant who has had extension of stay or many entries to Thailand</b></font>
-      <p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> letter of employment (for employee) or </p>
+
+
+<?php $check = "0";?>
+<?php for($i = 0;$i<count($documenttouristvisa);$i++){ ?>
+<?php  $basic = $documenttouristvisa[$i]->detail; ?>
+<?php if($basic == "letter of employment (for employee) or"){ ?>
+      <p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/checked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> letter of employment (for employee) or</p>
+      <?php $check = "1";?>
+      <?php break; ?>
+<?php } } ?>
+<?php if($check == "0"){ ?>
+<p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> letter of employment (for employee) or</p>
+<?php } ?>
+
+
+
+<?php $check = "0";?>
+<?php for($i = 0;$i<count($documenttouristvisa);$i++){ ?>
+<?php  $basic = $documenttouristvisa[$i]->detail; ?>
+<?php if($basic == "company registration (for business owner) or"){ ?>
+      <p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/checked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> company registration (for business owner) or</p>
+      <?php $check = "1";?>
+      <?php break; ?>
+<?php } } ?>
+<?php if($check == "0"){ ?>
+<p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> company registration (for business owner) or</p>
+<?php } ?>
+
+
+<?php $check = "0";?>
+<?php for($i = 0;$i<count($documenttouristvisa);$i++){ ?>
+<?php  $basic = $documenttouristvisa[$i]->detail; ?>
+<?php if($basic == "guarantee/ invitation letter from company in Thailand (if any) or"){ ?>
+      <p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/checked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> guarantee/ invitation letter from company in Thailand (if any) or</p>
+      <?php $check = "1";?>
+      <?php break; ?>
+<?php } } ?>
+<?php if($check == "0"){ ?>
+<p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> guarantee/ invitation letter from company in Thailand (if any) or</p>
+<?php } ?>
+
+
+<?php $check = "0";?>
+<?php for($i = 0;$i<count($documenttouristvisa);$i++){ ?>
+<?php  $basic = $documenttouristvisa[$i]->detail; ?>
+<?php if($basic == "receipt or invoice from past procurement (if any)"){ ?>
+      <p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/checked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> receipt or invoice from past procurement (if any)</p>
+      <?php $check = "1";?>
+      <?php break; ?>
+<?php } } ?>
+<?php if($check == "0"){ ?>
+<p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> receipt or invoice from past procurement (if any)</p>
+<?php } ?>
+
+      <!-- <p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> letter of employment (for employee) or </p>
       <p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> company registration (for business owner) or</p>
       <p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> guarantee/ invitation letter from company in Thailand (if any) or</p>
-      <p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> receipt or invoice from past procurement (if any)</p>
+      <p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> receipt or invoice from past procurement (if any)</p> -->
 </div>
     <div class="col-xs-5"><p>-</p></div>  
 </div>
@@ -401,10 +513,65 @@ $transitvisathailand = Transitvisathailand::find()->where(['visa_idvisa'=>$findv
       <p align="left"><b>Transit Visa: for travel through Thailand in order to proceed to the country of destination</b></p>
       <p align="center">____________________________________________________________________</p>
 <font size="1" style="border-bottom:1px solid #000;">Documents required:</font>
- <p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> passport or travel document of which validity is no less than 6 months </p>
+
+<?php $check = "0";?>
+<?php for($i = 0;$i<count($transitvisathailand);$i++){ ?>
+<?php  $basic = $transitvisathailand[$i]->detail; ?>
+<?php if($basic == "passport or travel document of which validity is no less than 6 months"){ ?>
+      <p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/checked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> passport or travel document of which validity is no less than 6 months</p>
+      <?php $check = "1";?>
+      <?php break; ?>
+<?php } } ?>
+<?php if($check == "0"){ ?>
+<p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> passport or travel document of which validity is no less than 6 months</p>
+<?php } ?>
+
+
+
+<?php $check = "0";?>
+<?php for($i = 0;$i<count($transitvisathailand);$i++){ ?>
+<?php  $basic = $transitvisathailand[$i]->detail; ?>
+<?php if($basic == "visa application form completely filled in"){ ?>
+      <p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/checked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> visa application form completely filled in</p>
+      <?php $check = "1";?>
+      <?php break; ?>
+<?php } } ?>
+<?php if($check == "0"){ ?>
+<p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> visa application form completely filled in</p>
+<?php } ?>
+
+
+
+<?php $check = "0";?>
+<?php for($i = 0;$i<count($transitvisathailand);$i++){ ?>
+<?php  $basic = $transitvisathailand[$i]->detail; ?>
+<?php if($basic == "2 recent colour photo (3.5 x 4.5 cm.)"){ ?>
+      <p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/checked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> 2 recent colour photo (3.5 x 4.5 cm.)</p>
+      <?php $check = "1";?>
+      <?php break; ?>
+<?php } } ?>
+<?php if($check == "0"){ ?>
+<p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> 2 recent colour photo (3.5 x 4.5 cm.)</p>
+<?php } ?>
+
+
+
+<?php $check = "0";?>
+<?php for($i = 0;$i<count($transitvisathailand);$i++){ ?>
+<?php  $basic = $transitvisathailand[$i]->detail; ?>
+<?php if($basic == "visa issued by the country of destination (except traveling to own country)"){ ?>
+      <p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/checked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> visa issued by the country of destination (except traveling to own country)</p>
+      <?php $check = "1";?>
+      <?php break; ?>
+<?php } } ?>
+<?php if($check == "0"){ ?>
+<p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> visa issued by the country of destination (except traveling to own country)</p>
+<?php } ?>
+<!--  <p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> passport or travel document of which validity is no less than 6 months </p>
   <p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> visa application form completely filled in </p>
    <p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> 2 recent colour photos (3.5 x 4.5 cm.) </p>
-    <p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> visa issued by the country of destination (except traveling to own country) </p>
+    <p align="left" style="text-indent: 3em;"><?= Html::img('@frontend/web/images/unchecked.png',['width'=>'20','height'=>'20','align'=>'center'])  ?> visa issued by the country of destination (except traveling to own country) </p> -->
+
 
   <table class="table" border="1"><tr><td><p align="left" style="text-indent: 3em;"> Consular officer reserves the right to request additional documents or interview as necessary</p>  
     </td></tr></table>
