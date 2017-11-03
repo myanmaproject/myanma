@@ -361,6 +361,7 @@ if (!$Studied->save())print_r($Studied->errors);
    // exit();
     // setup kartik\mpdf\Pdf component
     $pdf = new Pdf([
+        'filename'=> 'passport',
         // set to use core fonts only
         'mode' => Pdf::MODE_UTF8, 
         // A4 paper format
@@ -371,6 +372,8 @@ if (!$Studied->save())print_r($Studied->errors);
         'destination' => Pdf::DEST_BROWSER, 
         // your html content input
         'content' => $content,  
+        'options' => ['title' => 'passport'],
+        
         // format content from your own css file if needed or use the
         // enhanced bootstrap css built by Krajee for mPDF formatting 
         'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.css',

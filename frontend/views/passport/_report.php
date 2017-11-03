@@ -11,20 +11,20 @@
 <div><b>1. Name (Myanmar/English)</b> ...<?php echo $familytree->name;?><dottab /></div>
 <div><b>2. Other Name (Myanmar/English)</b> ...<?php echo $passport->otherName;?><dottab /></div>
 <div><b>3. Father's Name</b> ...<?php echo $familytree->father;?>......................<b>(Race/Religion)</b>...<?php echo $familytree->region;?><dottab/></div>
-<div style="padding-left:20px;"><b>Occupation/Address</b> ...<?php echo $familytree->occupation."/".$familytree->address;?> <dottab /></div>
+<div style="padding-left:20px;"><b>Occupation/Address</b> ...<?php echo $familytree->occupation.".../...".$familytree->address;?> <dottab /></div>
 <div><b>4. Mother's Name</b> ...<?php echo $familytree->mother;?>......................<b>(Race/Religion)</b>...<?php echo $familytree->region;?><dottab/></div>
-<div style="padding-left:20px;"><b>Occupation/Address</b>...<?php echo $familytree->occupation."/".$familytree->address;?> <dottab /></div>
+<div style="padding-left:20px;"><b>Occupation/Address</b>...<?php echo $familytree->occupation.".../...".$familytree->address;?> <dottab /></div>
 <div><b>5. Identification Mark</b> ...<?php echo $passport->identificationMark;?><dottab /></div>
 <div><b>6. Date of Birth</b> ...<?php echo date("d/m/Y", strtotime($familytree->dateOfBirth));?><dottab /></div>
 <div><b>7. Place of Birth</b> ...<?php echo $familytree->placeOfBirth;?><dottab /></div>
 <div><b>8. Male/Female</b> ...<?php if($passport->sex==1){echo "Male";}else if($passport->sex==2){echo "Female";}?><dottab /></div>
-<div><b>9. Present Occupation/Address</b> ...<?php echo $passport->presentOccupation." / ".$passport->presentOccupationAddress;?><dottab /></div>
+<div><b>9. Present Occupation/Address</b> ...<?php echo $passport->presentOccupation.".../...".$passport->presentOccupationAddress;?><dottab /></div>
 <div><b>10. Education Qualification</b> ...<?php echo $passport->educationalQual;?><dottab /></div>
 <div><b>11. Citizenship Scrutiny Card No.</b> ...<?php echo $passport->citizenshipSecCardNo;?><dottab /></div>
-<div><b>12. Height/Eye Colour/Hair Colour</b> ...<?php echo $passport->height." / ".$passport->eye." / ".$passport->hair?><dottab /></div>
+<div><b>12. Height/Eye Colour/Hair Colour</b> ...<?php echo $passport->height.".../...".$passport->eye.".../...".$passport->hair?><dottab /></div>
 <div><b>13. Race/Religion</b> ...<?php echo $familytree->raceNationality. " / " .$familytree->region;?><dottab /></div>
 <div><b>14. Spouse's Name</b> ...<?php echo $passport->spouseName;?><dottab /></div>
-<div style="padding-left:20px;"><b>Present Occupation/Address</b> ...<?php echo $passport->spouseOccupation." / ".$passport->spouseOccupationAddress;?><dottab /></div>
+<div style="padding-left:20px;"><b>Present Occupation/Address</b> ...<?php echo $passport->spouseOccupation.".../...".$passport->spouseOccupationAddress;?><dottab /></div>
 <div><b>15. Subject to be travelled</b> ...<?php echo $passport->subjectTravelled;?><dottab /></div>
 <div><b>16. Country to be appiled</b> ...<?php echo $passport->countryApplied;?><dottab /></div>
 <div><b>17. Studied at School/Standard</b></div>

@@ -23,6 +23,7 @@ $this->title = $model->name;
                 'method' => 'post',
             ],
         ]) ?>
+        <?= Html::a('Report', ['report', 'id' => $model->idfamilytree], ['class' => 'btn btn-primary']) ?>
     </p>
 
     <?= DetailView::widget([
