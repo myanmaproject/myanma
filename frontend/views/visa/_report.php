@@ -23,7 +23,7 @@ $transitvisathailand = Transitvisathailand::find()->where(['visa_idvisa'=>$findv
 
 ?>
 <div class="row">
-    <div class="col-xs-2"><?= Html::img('@frontend/web/images/ex.png',['alt'=>'d','width'=>'120','height'=>'120','align'=>'center'])  ?></div>
+    <div class="col-xs-2"><?= Html::img('@frontend/web/visa/'.$findvisa->picture,['alt'=>'d','width'=>'120','height'=>'120','align'=>'center'])  ?></div>
     <div class="col-xs-5" align="center"><?= Html::img('@frontend/web/images/Thai_government.png',['width'=>'120','height'=>'120','align'=>'center'])  ?>
         <br><p align="center">APPLICATION FOR VISA</p>
         <p align="center">Ministry of Forecign Affairs of Thailand</p></div>
@@ -82,7 +82,7 @@ $transitvisathailand = Transitvisathailand::find()->where(['visa_idvisa'=>$findv
 </div>
 
 <div class="row">
-    <div class="col-xs-5"><p align="left"><b>Nationality</b> ______________________________________________________</p></div>
+    <div class="col-xs-5"><p align="left"><b>Nationality</b> <?php echo $findfamily->raceNationality; ?></p></div>
     <div class="col-xs-6"><p><?php echo $findvisa->countriesForTravel; ?></p></div>  
 </div>
 
@@ -128,17 +128,17 @@ $transitvisathailand = Transitvisathailand::find()->where(['visa_idvisa'=>$findv
 
 <div class="row">
     <div class="col-xs-5"><p align="left"> <?php echo $findfamily->occupation; ?> </p></div>
-    <div class="col-xs-6"><p>_________________________________________________________</p></div>  
+    <div class="col-xs-6"><p> <?php echo $findvisa->nameaddressGuarantor; ?> </p></div>  
 </div>
 
 <div class="row">
     <div class="col-xs-5"> <p align="left">-</p> </div>
-    <div class="col-xs-6"><p>_________________________________________________________</p></div>  
+    <div class="col-xs-6"><p>______________________________________________________</p></div>  
 </div>
 
 <div class="row">
     <div class="col-xs-5"><p align="left"><b>Current Address</b> <?php echo $findvisa->currentAddress; ?> </p></div>
-    <div class="col-xs-6"><p>Tel/Fax _________________________________________________</p></div>  
+    <div class="col-xs-6"><p>Tel/Fax <?php echo $findvisa->telGuarantor; ?> </p></div>  
 </div>
 
 <div class="row">

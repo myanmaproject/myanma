@@ -120,6 +120,7 @@ if(isset ($_GET["familytree_idfamilytree"])){
         ]
     )->label('Type of Visa'); ?>
 
+    <?= $form->field($model, 'visa_img')->fileInput() ?>
 
     <?= $form->field($model, 'firstName')->textInput(['maxlength' => true]) ?>
 
@@ -231,7 +232,8 @@ if(isset ($_GET["familytree_idfamilytree"])){
     <?= $form->field($model, 'picture')->textInput(['maxlength' => true]) ?>
 
 
-
+<?= $form->field($model, 'nameaddressGuarantor')->textInput(['maxlength' => true]) ?>
+<?= $form->field($model, 'telGuarantor')->textInput(['maxlength' => true]) ?>
         <?= $form->field($model, 'purposeOfVisit')->dropDownList(['Business' => 'Business', 'Tourism' => 'Tourism','Transit' => 'Transit','Diplomatic Official' => 'Diplomatic Official'],['prompt'=>'Please select purpose of visit']) ?>
 
     <?= $form->field($model, 'basic')->checkBoxList($listBasic) ?>

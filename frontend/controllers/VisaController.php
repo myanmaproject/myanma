@@ -150,6 +150,12 @@ class VisaController extends Controller
        && $model->save()) {
 
 
+            $file = UploadedFile::getInstance($model,'visa_img');
+            if(isset($file->size) && $file->size!=0){
+                $model->picture = $model->idvisa.'.'.$file->extension;
+                $file->saveAs('visa/'.$model->idvisa.'.'.$file->extension);
+            }
+$model->save();
 
             $basicList= $_POST['Visa']['basic'];
 
@@ -242,6 +248,13 @@ class VisaController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+           
+            $file = UploadedFile::getInstance($model,'visa_img');
+            if(isset($file->size) && $file->size!==0){
+                  $model->picture = $model->idvisa.'.'.$file->extension;
+                $file->saveAs('visa/'.$model->idvisa.'.'.$file->extension);
+            }
+            $model->save();
 
             //ลบ
                     $myArrayBasicdocuments = Basicdocuments::find()->where(['visa_idvisa' => $model->idvisa])->all();

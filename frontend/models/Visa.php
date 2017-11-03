@@ -73,7 +73,7 @@ class Visa extends \yii\db\ActiveRecord
     public $touristvisa;
     public $transitvisa;
 
-
+ public $visa_img;
 
  public function behaviors(){
       return [
@@ -95,9 +95,11 @@ class Visa extends \yii\db\ActiveRecord
         return [
             [['numberRequested', 'created_at', 'created_by', 'updated_at', 'updated_by', 'familytree_idfamilytree'], 'integer'],
             [['familytree_idfamilytree'], 'required'],
-            [['prefix', 'middleName', 'familyName', 'typeOfVisaOfficial', 'categoryOfEntries', 'purposeOfVisit'], 'string', 'max' => 45],
-            [['typeOfVisaRequest', 'firstName', 'nationalityBirth', 'maritalStatus', 'TypeTravelDocument', 'noPerson', 'issuedAt', 'dateIssue', 'expiryDate', 'currentAddress', 'telPerson', 'email', 'permanentAddress', 'telPermanent', 'minorChildren', 'dateOfArrival', 'traveling', 'flightNo', 'durationOfProposedStay', 'dateOfPrevious', 'countriesForTravel', 'proposedAddressThai', 'nameAddressLocal', 'telThai', 'applicationNoOfficial', 'visaNoOfficial', 'numberOfEntriesOfficial', 'dateOfIssueOfficial', 'feeOfficial', 'expOfficial', 'documentsOfficial', 'picture'], 'string', 'max' => 255],
+            [['prefix', 'middleName', 'familyName', 'typeOfVisaOfficial', 'categoryOfEntries', 'purposeOfVisit','telGuarantor'], 'string', 'max' => 45],
+            [['typeOfVisaRequest', 'firstName', 'nationalityBirth', 'maritalStatus', 'TypeTravelDocument', 'noPerson', 'issuedAt', 'dateIssue', 'expiryDate', 'currentAddress', 'telPerson', 'email', 'permanentAddress', 'telPermanent', 'minorChildren', 'dateOfArrival', 'traveling', 'flightNo', 'durationOfProposedStay', 'dateOfPrevious', 'countriesForTravel', 'proposedAddressThai', 'nameAddressLocal', 'telThai', 'applicationNoOfficial', 'visaNoOfficial', 'numberOfEntriesOfficial', 'dateOfIssueOfficial', 'feeOfficial', 'expOfficial', 'documentsOfficial', 'picture','nameaddressGuarantor'], 'string', 'max' => 255],
             [['familytree_idfamilytree'], 'exist', 'skipOnError' => true, 'targetClass' => Familytree::className(), 'targetAttribute' => ['familytree_idfamilytree' => 'idfamilytree']],
+                        [['visa_img'],'file','skipOnEmpty' => true, 'on' => 'update','extensions'=> 'jpg,png,gif']
+
         ];
     }
 
@@ -152,6 +154,9 @@ class Visa extends \yii\db\ActiveRecord
             'updated_by' => 'Updated By',
             'familytree_idfamilytree' => 'Familytree Idfamilytree',
             'purposeOfVisit' => 'Purpose Of Visit',
+             'nameaddressGuarantor' => 'Nameaddress Guarantor', 
+           'telGuarantor' => 'Tel Guarantor',
+             'visa_img' => 'img' 
         ];
     }
 

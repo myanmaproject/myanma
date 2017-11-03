@@ -29,6 +29,11 @@ $this->title = $model->idvisa;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
+                       [
+                'attribute'=>'picture',
+                'value'=>('visa/' . $model->picture),
+                'format' => ['image',['width'=>'230','height'=>'200']],
+            ],
             'idvisa',
             'prefix',
             'numberRequested',
