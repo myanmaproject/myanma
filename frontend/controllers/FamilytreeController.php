@@ -130,22 +130,53 @@ class FamilytreeController extends Controller
     
     $Familytree = Familytree::find()->where(['idfamilytree' => $id])->one();
 
+    $father = "";
+    $mother = "";
+    $grandFather_father ="";
+    $grandMother_father ="";
+    $grandFather_mother ="";
+    $grandMother_mother ="";
 
     if ($Familytree->father!=null) {
         $father = Familytree::find()->where(['idfamilytree' => $Familytree->father])->one();
+        if ($father->father != null) {
+            $grandFather_father = Familytree::find()->where(['idfamilytree' => $father->father])->one();
+        }
+        if ($father->mother != null) {
+            $grandMother_father = Familytree::find()->where(['idfamilytree' => $father->mother])->one();
+        }
+            
     }
 
     if ($Familytree->mother!=null) {
         $mother = Familytree::find()->where(['idfamilytree' => $Familytree->mother])->one();
+
+        if ($mother->mother != null) {
+            $grandFather_mother = Familytree::find()->where(['idfamilytree' => $mother->father])->one();
+        }
+        if ($mother->mother != null) {
+            $grandMother_mother = Familytree::find()->where(['idfamilytree' => $mother->mother])->one();
+        }
+
+            
+        
     }
-    var_dump($Familytree);
-    exit();
+
+    // var_dump();
+    // exit();
 
     
 
     $content = $this->renderPartial('_report',[
         'id' => $id,
-        
+        'familytree' => $Familytree,
+        'father' => $father,
+        'mother' => $mother,
+        'grandFather_father' => $grandFather_father,
+        'grandMother_father' => $grandMother_father,
+        'grandFather_mother' => $grandFather_mother,
+        'grandMother_mother' => $grandMother_mother,
+ 
       ]);
  
    // echo $id;
