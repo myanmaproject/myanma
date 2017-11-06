@@ -10,7 +10,7 @@ $this->title = 'Update Visa: ' . $model->idvisa;
 ?>
 <div class="visa-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+  
 
     <?= $this->render('_form', [
         'model' => $model,

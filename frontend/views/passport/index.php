@@ -8,7 +8,6 @@ use kartik\grid\GridView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Passports';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="box">
  <div class="box-header with-border">
