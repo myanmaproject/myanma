@@ -106,8 +106,9 @@ if(isset ($_GET["familytree_idfamilytree"])){
   }
 }
 ?>
-
+<div style="display: none">
  <?= $form->field($model, 'familytree_idfamilytree')->textInput() ?>
+ </div>
     <?= $form->field($model, 'prefix')->dropDownList(['Mr.' => 'Mr.', 'Mrs.' => 'Mrs.','Miss.' => 'Miss.'],['prompt'=>'Please select prefix']) ?>
 
     <?= $form->field($model, 'numberRequested')->textInput() ?>

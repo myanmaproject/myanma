@@ -40,9 +40,9 @@ if(isset ($_GET["familytree_idfamilytree"])){
  <div class="box-header with-border">
 
     <?php $form = ActiveForm::begin(); ?>
-
+<div style="display: none">
     <?= $form->field($model, 'familytree_idfamilytree')->textInput() ?>
-
+</div>
     <?= $form->field($model, 'otherName')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'identificationMark')->textInput(['maxlength' => true]) ?>
