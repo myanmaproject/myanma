@@ -56,5 +56,6 @@ return [
         ],
         */
     ],
+     'defaultRoute' => 'find/index',
     'params' => $params,
 ];
