@@ -249,7 +249,7 @@ if(!$model->isNewRecord){
     echo '<label class="control-label">passportIssueDate</label>';
 echo DatePicker::widget([
     'name' => 'passportIssueDate',
-    'type' => DatePicker::TYPE_COMPONENT_APPEND,
+    'type' => DatePicker::TYPE_COMPONENT_PREPEND,
     'pluginOptions' => [
         'orientation' => 'top right',
         'format' => 'yyyy-mm-dd',
@@ -264,7 +264,7 @@ echo DatePicker::widget([
     echo '<label class="control-label">dateDeliveredPassport</label>';
 echo DatePicker::widget([
     'name' => 'dateDeliveredPassport',
-    'type' => DatePicker::TYPE_COMPONENT_APPEND,
+    'type' => DatePicker::TYPE_COMPONENT_PREPEND,
     'pluginOptions' => [
         'orientation' => 'top right',
         'format' => 'yyyy-mm-dd',

@@ -86,7 +86,7 @@ class Passport extends \yii\db\ActiveRecord
             'familytree_idfamilytree' => 'Familytree Idfamilytree',
             'otherName' => 'Other Name',
             'identificationMark' => 'Identification Mark',
-            'sex' => 'Sex',
+            'sex' => 'Genger',
             'presentOccupation' => 'Present Occupation',
             'presentOccupationAddress' => 'Present Occupation Address',
             'educationalQual' => 'Educational Qual',
