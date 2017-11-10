@@ -59,6 +59,8 @@ $this->title = $model->idpassport;
             'passportIssueDate',
             'placeDeliveredPassport',
             'dateDeliveredPassport',
+            'created_at:dateTime',
+            'updated_at:dateTime',
         ],
     ]) ?>
 

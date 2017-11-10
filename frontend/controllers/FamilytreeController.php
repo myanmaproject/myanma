@@ -9,7 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use kartik\mpdf\Pdf;
-
+use yii\filters\AccessControl;
 
 /**
  * FamilytreeController implements the CRUD actions for Familytree model.
@@ -19,17 +19,66 @@ class FamilytreeController extends Controller
     /**
      * @inheritdoc
      */
+    // public function behaviors()
+    // {
+    //     return [
+    //         'verbs' => [
+    //             'class' => VerbFilter::className(),
+    //             'actions' => [
+    //                 'delete' => ['POST'],
+    //             ],
+    //         ],
+    //     ];
+    // }
+
+
     public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
+     {
+      return [
+          'verbs' => [
+              'class' => VerbFilter::className(),
+              'actions' => [
+                  'delete' => ['post'],
+              ],
+          ],
+          'access'=>[
+            'class'=>AccessControl::className(),
+            'rules'=>[
+              [
+                'allow'=>true,
+                'actions'=>['index','view','create'],
+                'roles'=>['Employee']
+              ],
+            [
+                'allow'=>true,
+                'actions'=>['index','view','create','update','report','viewfind'],
+                'roles'=>['Management']
+              ],
+            [
+                'allow'=>true,
+                'actions'=>['index','view','create','update'],
+                'roles'=>['Manageuser']
+              ],
+              // [
+              //   'allow'=>true,
+              //   'actions'=>['update'],
+              //   'roles'=>['Employee'],
+              //   'matchCallback'=>function($rule,$action){
+              //     $model = $this->findModel(Yii::$app->request->get('id'));
+              //     if (\Yii::$app->user->can('UpdateVisa',['model'=>$model])) {
+              //              return true;
+              //     }
+              //   }
+              // ],
+              [
+                'allow'=>true,
+                'actions'=>['delete'],
+                'roles'=>['Admin']
+              ]
+            ]
+          ]
+      ];
+  }
 
     /**
      * Lists all Familytree models.

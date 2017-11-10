@@ -3,7 +3,8 @@
 namespace app\models;
 
 use Yii;
-
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
 /**
  * This is the model class for table "passport".
  *
@@ -55,7 +56,12 @@ class Passport extends \yii\db\ActiveRecord
 
     /**
      * @inheritdoc
-     */
+     */     public function behaviors(){
+      return [
+        BlameableBehavior::className(),
+        TimestampBehavior::className()
+      ];
+    }
     public static function tableName()
     {
         return 'passport';
@@ -68,7 +74,7 @@ class Passport extends \yii\db\ActiveRecord
     {
         return [
             [['familytree_idfamilytree'], 'required'],
-            [['familytree_idfamilytree'], 'integer'],
+            [['familytree_idfamilytree','created_at', 'created_by', 'updated_at', 'updated_by'], 'integer'],
             [['passportIssueDate', 'dateDeliveredPassport'], 'safe'],
             [['otherName', 'identificationMark'], 'string', 'max' => 255],
             [['sex', 'presentOccupation', 'presentOccupationAddress', 'educationalQual', 'citizenshipSecCardNo', 'height', 'eye', 'hair', 'spouseName', 'spouseOccupation', 'spouseOccupationAddress', 'subjectTravelled', 'countryApplied', 'departmentTransferred', 'departmentTransferredCurrent', 'detailOfSiblingsApplicant', 'detailOfSpouseApplicant', 'detailOfChildrenApplicant', 'detailOfSiblingsFather', 'detailOfSiblingsMother', 'detailOfSiblingsSpouse', 'passportNo', 'placeDeliveredPassport'], 'string', 'max' => 45],
@@ -111,6 +117,10 @@ class Passport extends \yii\db\ActiveRecord
             'passportIssueDate' => 'Passport Issue Date',
             'placeDeliveredPassport' => 'Place Delivered Passport',
             'dateDeliveredPassport' => 'Date Delivered Passport',
+                 'created_at' => 'Created At',
+            'created_by' => 'Created By',
+            'updated_at' => 'Updated At',
+            'updated_by' => 'Updated By',
         ];
     }
 

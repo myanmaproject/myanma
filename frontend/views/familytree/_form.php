@@ -16,6 +16,13 @@ use kartik\widgets\DatePicker;
 
     <?php $form = ActiveForm::begin(); ?>
 
+
+
+
+
+    <?= $form->field($model, 'familytree')->textInput(['maxlength' => true]) ?>
+
+
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
 <!--     <?= $form->field($model, 'dateOfBirth')->textInput(['maxlength' => true]) ?>

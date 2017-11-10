@@ -41,6 +41,8 @@ $this->title = $model->name;
             'address',
             'father',
             'mother',
+            'created_at:dateTime',
+            'updated_at:dateTime',
         ],
     ]) ?>
 

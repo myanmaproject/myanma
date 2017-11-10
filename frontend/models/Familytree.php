@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "familytree".
@@ -28,6 +30,12 @@ class Familytree extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+     public function behaviors(){
+      return [
+        BlameableBehavior::className(),
+        TimestampBehavior::className()
+      ];
+    }
     public static function tableName()
     {
         return 'familytree';
@@ -39,7 +47,9 @@ class Familytree extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+              [['created_at', 'created_by', 'updated_at', 'updated_by'], 'integer'],
             [['name', 'dateOfBirth', 'placeOfBirth', 'raceNationality', 'nrc', 'region', 'occupation', 'aliveOrDeath', 'address', 'father', 'mother'], 'string', 'max' => 45],
+               [['familytree'], 'string', 'max' => 255],
         ];
     }
 
@@ -50,6 +60,7 @@ class Familytree extends \yii\db\ActiveRecord
     {
         return [
             'idfamilytree' => 'Idfamilytree',
+             'familytree' => 'Familytree', 
             'name' => 'Name',
             'dateOfBirth' => 'Date Of Birth',
             'placeOfBirth' => 'Place Of Birth',
@@ -61,6 +72,10 @@ class Familytree extends \yii\db\ActiveRecord
             'address' => 'Address',
             'father' => 'Father',
             'mother' => 'Mother',
+               'created_at' => 'Created At',
+            'created_by' => 'Created By',
+            'updated_at' => 'Updated At',
+            'updated_by' => 'Updated By',
         ];
     }
 
@@ -79,4 +94,13 @@ class Familytree extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Visa::className(), ['familytree_idfamilytree' => 'idfamilytree']);
     }
+
+
+
+   
+
+
+       
+
+
 }
