@@ -70,32 +70,26 @@
 
 <div><b>19. Name, Relationship, Occupation, Address of Siblings of Applicant</b>
 <div>...<?php echo $passport->detailOfSiblingsApplicant;?><dottab/></div>
-<div>&nbsp;<dottab /></div>
-<div>&nbsp;<dottab /></div>
+
 
 <div><b>20. Name, Occupation, Address of Spouse of Applicant</b>
 <div>...<?php echo $passport->detailOfSpouseApplicant;?><dottab/></div>
-<div>&nbsp;<dottab /></div>
-<div>&nbsp;<dottab /></div>
+
 <div><b>21. Name, Occupation, Address of Children of Applicant</b>
 <div>...<?php echo $passport->detailOfChildrenApplicant;?><dottab/></div>
-<div>&nbsp;<dottab /></div>
-<div>&nbsp;<dottab /></div>
+
 
 <div><b>22. Name, Occupation, Address of Siblings of Applicant's Father</b>
 <div>...<?php echo $passport->detailOfSiblingsFather;?><dottab/></div>
-<div>&nbsp;<dottab /></div>
-<div>&nbsp;<dottab /></div>
+
 <pagebreak />
 <div><b>23. Name, Occupation, Address of Siblings of Applicant's Mother</b>
 <div>...<?php echo $passport->detailOfSiblingsMother;?><dottab/></div>
-<div>&nbsp;<dottab /></div>
-<div>&nbsp;<dottab /></div>
+
 <div><b>24. Name, Occupation, Address of Siblings of Applicant's Spouse</b>
 <div>...<?php echo $passport->detailOfSiblingsSpouse;?><dottab/></div>
 
-<div>&nbsp;<dottab /></div>
-<div>&nbsp;<dottab /></div>
+
 <div><b>25. To fill-up the person who were committed the sentence under the Criminal/Civil Law</b>
 <div style="padding-bottom:20px; padding-left:20px; padding-top:10px; ">
 <table border="1" width="100%">

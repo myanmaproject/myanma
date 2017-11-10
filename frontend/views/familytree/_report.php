@@ -40,7 +40,7 @@ if ($familytree->father!=null) {
     }
 ?>
 
-<h6 style="font-size:20px; text-align: center; font-weight:bold; padding-bottom:20px;">.................'S Family Tree</h6> 
+<h6 style="font-size:20px; text-align: center; font-weight:bold; padding-bottom:20px;"><?php echo $familytree->familytree;?>'S Family Tree</h6> 
 <table width="100%">
   <tr >
     <th colspan="2" align="center">Grand-father</th>
