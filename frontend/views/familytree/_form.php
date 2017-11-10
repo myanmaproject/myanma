@@ -42,7 +42,9 @@ use kartik\widgets\DatePicker;
 
     <?= $form->field($model, 'occupation')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'aliveOrDeath')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'aliveOrDeath')->dropDownList(['Alive' => 'Alive'
+            , 'Death' => 'Death']
+            ); ?>
 
     <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
 
