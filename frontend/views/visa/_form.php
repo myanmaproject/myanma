@@ -237,11 +237,11 @@ if(isset ($_GET["familytree_idfamilytree"])){
 <?= $form->field($model, 'telGuarantor')->textInput(['maxlength' => true]) ?>
         <?= $form->field($model, 'purposeOfVisit')->dropDownList(['Business' => 'Business', 'Tourism' => 'Tourism','Transit' => 'Transit','Diplomatic Official' => 'Diplomatic Official'],['prompt'=>'Please select purpose of visit']) ?>
 
-    <?= $form->field($model, 'basic')->checkBoxList($listBasic) ?>
-    <?= $form->field($model, 'applicant')->checkBoxList($listApplicant) ?>
-    <?= $form->field($model, 'firsttime')->checkBoxList($listFirsttime) ?>
-    <?= $form->field($model, 'touristvisa')->checkBoxList($listTouristvisa) ?>
-    <?= $form->field($model, 'transitvisa')->checkBoxList($listTransitvisa) ?>
+    <?= $form->field($model, 'basic')->checkBoxList($listBasic, ['separator'=>'<br/>']) ?>
+    <?= $form->field($model, 'applicant')->checkBoxList($listApplicant, ['separator'=>'<br/>']) ?>
+    <?= $form->field($model, 'firsttime')->checkBoxList($listFirsttime, ['separator'=>'<br/>']) ?>
+    <?= $form->field($model, 'touristvisa')->checkBoxList($listTouristvisa, ['separator'=>'<br/>']) ?>
+    <?= $form->field($model, 'transitvisa')->checkBoxList($listTransitvisa, ['separator'=>'<br/>']) ?>
 
 
 
