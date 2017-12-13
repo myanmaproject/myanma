@@ -40,6 +40,7 @@ if(isset ($_GET["familytree_idfamilytree"])){
  <div class="box-header with-border">
 
     <?php $form = ActiveForm::begin(); ?>
+    <div class="col-md-6">
 <div style="display: none">
     <?= $form->field($model, 'familytree_idfamilytree')->textInput() ?>
 </div>
@@ -76,6 +77,7 @@ if(isset ($_GET["familytree_idfamilytree"])){
     <?= $form->field($model, 'subjectTravelled')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'countryApplied')->textInput(['maxlength' => true]) ?>
+</div>
 <?php
 if(!$model->isNewRecord){
           $Studied = Studied::find()->where(['passport_idpassport' => $model->idpassport])->all();
@@ -160,7 +162,7 @@ if(!$model->isNewRecord){
   </tr>
 </table>
 </div>
-
+ <div class="col-md-6">
     <?= $form->field($model, 'departmentTransferred')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'departmentTransferredCurrent')->textInput(['maxlength' => true]) ?>
@@ -177,7 +179,7 @@ if(!$model->isNewRecord){
     <?= $form->field($model, 'detailOfSiblingsMother')->textArea(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'detailOfSiblingsSpouse')->textArea(['maxlength' => true]) ?>
-
+</div>
 
     <?php
 if(!$model->isNewRecord){
@@ -242,38 +244,27 @@ if(!$model->isNewRecord){
 </table>
 
 </div>
-
+ <div class="col-md-6">
     <?= $form->field($model, 'passportNo')->textInput(['maxlength' => true]) ?>
 
-    <?php
-    echo '<label class="control-label">passportIssueDate</label>';
-echo DatePicker::widget([
-    'name' => 'passportIssueDate',
-    'type' => DatePicker::TYPE_COMPONENT_PREPEND,
-    'pluginOptions' => [
-        'orientation' => 'top right',
-        'format' => 'yyyy-mm-dd',
-        'autoclose' => true,
-    ]
-]); 
-    ?>
 
+    <?= $form->field($model, 'passportIssueDate')->widget(DatePicker::classname(), [
+    'pluginOptions' => [
+        'autoclose'=>true,
+        'format' => 'yyyy-mm-dd',
+    ]
+]); ?>
     <?= $form->field($model, 'placeDeliveredPassport')->textInput(['maxlength' => true]) ?>
 
-    <?php
-    echo '<label class="control-label">dateDeliveredPassport</label>';
-echo DatePicker::widget([
-    'name' => 'dateDeliveredPassport',
-    'type' => DatePicker::TYPE_COMPONENT_PREPEND,
+
+    <?= $form->field($model, 'dateDeliveredPassport')->widget(DatePicker::classname(), [
     'pluginOptions' => [
-        'orientation' => 'top right',
+        'autoclose'=>true,
         'format' => 'yyyy-mm-dd',
-        'autoclose' => true,
     ]
-]); 
-    ?>
+]); ?>
 
-
+</div>
     <?php
 if(!$model->isNewRecord){
           $Whetheraboard = Whetheraboard::find()->where(['passport_idpassport' => $model->idpassport])->all();
@@ -337,7 +328,8 @@ if(!$model->isNewRecord){
 </table>
 </div>
 
-
+<div class="clearfix"></div>
+            <hr>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

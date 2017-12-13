@@ -25,6 +25,7 @@ use kartik\widgets\DatePicker;
  <div class="box-header with-border">
 
     <?php $form = ActiveForm::begin(); ?>
+     <div class="col-md-6">
       <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
@@ -235,7 +236,8 @@ if(isset ($_GET["familytree_idfamilytree"])){
 
 <?= $form->field($model, 'nameaddressGuarantor')->textInput(['maxlength' => true]) ?>
 <?= $form->field($model, 'telGuarantor')->textInput(['maxlength' => true]) ?>
-        <?= $form->field($model, 'purposeOfVisit')->dropDownList(['Business' => 'Business', 'Tourism' => 'Tourism','Transit' => 'Transit','Diplomatic Official' => 'Diplomatic Official'],['prompt'=>'Please select purpose of visit']) ?>
+
+<?= $form->field($model, 'purposeOfVisit')->dropDownList(['Business' => 'Business', 'Tourism' => 'Tourism','Transit' => 'Transit','Diplomatic Official' => 'Diplomatic Official'],['prompt'=>'Please select purpose of visit']) ?>
 
     <?= $form->field($model, 'basic')->checkBoxList($listBasic, ['separator'=>'<br/>']) ?>
     <?= $form->field($model, 'applicant')->checkBoxList($listApplicant, ['separator'=>'<br/>']) ?>
@@ -243,8 +245,10 @@ if(isset ($_GET["familytree_idfamilytree"])){
     <?= $form->field($model, 'touristvisa')->checkBoxList($listTouristvisa, ['separator'=>'<br/>']) ?>
     <?= $form->field($model, 'transitvisa')->checkBoxList($listTransitvisa, ['separator'=>'<br/>']) ?>
 
+</div>
 
-
+ <div class="clearfix"></div>
+            <hr>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
