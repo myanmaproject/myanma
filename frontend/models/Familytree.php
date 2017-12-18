@@ -26,7 +26,14 @@ use yii\behaviors\TimestampBehavior;
  * @property Visa[] $visas
  */
 class Familytree extends \yii\db\ActiveRecord
-{
+{   
+    public $stateOfBirth;
+    public $districtOfBirth;
+    public $townshipOfBirth;
+    public $stateAddress;
+    public $districtAddress;
+    public $townshipAddress;
+
     /**
      * @inheritdoc
      */
