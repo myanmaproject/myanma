@@ -19,7 +19,6 @@ use kartik\widgets\DatePicker;
 
  <div class="col-md-6">
 
-
     <?= $form->field($model, 'familytree')->textInput(['maxlength' => true]) ?>
 
 
@@ -37,16 +36,7 @@ use kartik\widgets\DatePicker;
 
     <?= $form->field($model, 'raceNationality')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'nrc')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'region')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'occupation')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'aliveOrDeath')->dropDownList(['Alive' => 'Alive'
-            , 'Death' => 'Death']
-            ); ?>
-
+    
     <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
 
                 <?= $form->field($model, 'father')->widget(Select2::className(),[
@@ -67,6 +57,18 @@ use kartik\widgets\DatePicker;
                     'allowClear' => true
                 ],
             ]); ?>
+</div>
+ <div class="col-md-6">
+    <?= $form->field($model, 'nrc')->label('N.R.C. No.')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'region')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'occupation')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'aliveOrDeath')->dropDownList(['Alive' => 'Alive'
+            , 'Death' => 'Death']
+            ); ?>
+
  <div class="clearfix"></div>
             <hr>
     <div class="form-group">
