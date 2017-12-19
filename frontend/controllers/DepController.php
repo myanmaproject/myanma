@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use yii\web\Controller;
+use app\models\state;
 use app\models\district;
 use app\models\township;
 
@@ -15,39 +16,60 @@ class DepController extends Controller {
      * @inheritdoc
      */
     public function actionDistrict($id) {
-       
-       $countStete = district::find()
-                ->where(['stateId' => $id])
+        $stateId= null;
+        if($id!=null){
+            $state = state::find()
+                ->where(['stateNameEN' => $id])
+                ->one();
+        
+        $stateId = $state->stateId;
+
+        }
+       $countDistrict = district::find()
+                ->where(['stateId' => $stateId])
                 ->andWhere(['status'=>'1'])
                 ->count();
 
-        $stete = district::find()
-                ->where(['stateId' => $id])
+
+        $District = district::find()
+                ->where(['stateId' => $stateId])
                 ->andWhere(['status'=>'1'])
                 ->all();
 
         
 
-        if ($countStete > 0) {
+        if ($countDistrict > 0) {
             echo "<option value>Select District</option>";
 
-            foreach ($stete as $post) {
-                echo "<option value='" . $post['districtId'] . "'>" . $post['districtNameEN'] . "</option>";
+            foreach ($District as $post) {
+                echo "<option value='" . $post['districtNameEN'] . "'>" . $post['districtNameEN'] . "</option>";
             }
         } else {
-            echo "<option value>-Select District-</option>";
+            echo "<option value>Select District</option>";
         }
     }
 
     public function actionTownship($id) {
+
+        $districtId= null;
+        if($id!=null){
+            $district = district::find()
+                ->where(['districtNameEN' => $id])
+                ->one();
+        
+        $districtId = $district->districtId;
+
+        }
+
+        
        
        $countTownship = township::find()
-                ->where(['districtId' => $id])
+                ->where(['districtId' => $districtId])
                 ->andWhere(['status'=>'1'])
                 ->count();
 
         $township = township::find()
-                ->where(['districtId' => $id])
+                ->where(['districtId' => $districtId])
                 ->andWhere(['status'=>'1'])
                 ->all();
 
@@ -57,10 +79,10 @@ class DepController extends Controller {
             echo "<option value>Select Township</option>";
 
             foreach ($township as $post) {
-                echo "<option value='" . $post['townshipId'] . "'>" . $post['townshipNameEN'] . "</option>";
+                echo "<option value='" . $post['townshipNameEN'] . "'>" . $post['townshipNameEN'] . "</option>";
             }
         } else {
-            echo "<option value>-Select Township-</option>";
+            echo "<option value>Select Township</option>";
         }
     }
 
