@@ -8,7 +8,8 @@ use kartik\widgets\DatePicker;
 use app\models\state;
 use app\models\district;
 use app\models\township;
-
+use yii\jui\AutoComplete;   
+use yii\web\JsExpression;
 /* @var $this yii\web\View */
 /* @var $model app\models\Familytree */
 /* @var $form yii\widgets\ActiveForm */
@@ -19,11 +20,31 @@ use app\models\township;
 
     <?php $form = ActiveForm::begin(); ?>
 
+<!-- <?=$form->field($model, 'idfamilytree');?>
+ -->
+
+
 
  <div class="col-md-6">
 
-    <?= $form->field($model, 'familytree')->textInput(['maxlength' => true]) ?>
-
+   <!--  <?= $form->field($model, 'familytree')->textInput(['maxlength' => true]) ?> -->
+<?= $form->field($model, 'familytree')->widget(AutoComplete::className(), [
+                'options' => [
+                    'class' => 'form-control'
+                ],
+                'clientOptions' => [
+                    'appendTo'=>'#form-id',
+                    'source' => familytree::find()
+                        ->select(['familytree as idfamilytree', 'familytree as value', 'familytree as label'])
+                        ->groupBy('familytree')
+                        ->orderBy(['familytree' => SORT_ASC])
+                        ->asArray()->all(),
+                    //'change' => 'function(){$(this).init_charge();}',
+                    'select' => new JsExpression("function( event, ui ) {
+                $(this).val(ui.item.label);
+            }")
+                ],
+            ]) ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
