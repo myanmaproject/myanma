@@ -44,9 +44,9 @@ if(isset ($_GET["familytree_idfamilytree"])){
 <div style="display: none">
     <?= $form->field($model, 'familytree_idfamilytree')->textInput() ?>
 </div>
-    <?= $form->field($model, 'otherName')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'otherName')->label('Other Name (Myanmar/English)')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'identificationMark')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'identificationMark')->label('Identification Mark')->textInput(['maxlength' => true]) ?>
 
 
     <?= $form->field($model, 'sex')->radioList([
@@ -54,30 +54,31 @@ if(isset ($_GET["familytree_idfamilytree"])){
     '2' => 'Female',
 ]); ?>
 
-    <?= $form->field($model, 'presentOccupation')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'presentOccupation')->label('Present Occupation')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'presentOccupationAddress')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'presentOccupationAddress')->label('Present Address')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'educationalQual')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'educationalQual')->label('Educational Qualification')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'citizenshipSecCardNo')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'citizenshipSecCardNo')->label('Citizenship Scrutiny Card No.')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'height')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'height')->label('Height')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'eye')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'eye')->label('Eye Colour')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'hair')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'hair')->label('Hair Colour')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'spouseName')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'spouseName')->label("Spouse's Name")->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'spouseOccupation')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'spouseOccupation')->label('Spouse Occupation')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'spouseOccupationAddress')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'spouseOccupationAddress')->label('Spouse Occupation Address')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'subjectTravelled')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'subjectTravelled')->label('Subject to be travelled')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'countryApplied')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'countryApplied')->label('Country to be applied')->textInput(['maxlength' => true]) ?>
 </div>
+
 <?php
 if(!$model->isNewRecord){
           $Studied = Studied::find()->where(['passport_idpassport' => $model->idpassport])->all();
@@ -121,8 +122,11 @@ if(!$model->isNewRecord){
             }
 }
 ?>
+
     <div style="padding-bottom:20px; padding-top:10px; ">
+
 <table border="1" width="100%" >
+    <tr><th colspan="6" align="left">Studied at School/Standard</th></tr>
   <tr>
     <th colspan="2" align="center">Year</th>
     <th colspan="2" align="center">Standard</th>
@@ -163,22 +167,22 @@ if(!$model->isNewRecord){
 </table>
 </div>
  <div class="col-md-6">
-    <?= $form->field($model, 'departmentTransferred')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'departmentTransferred')->label('Department transferred and served')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'departmentTransferredCurrent')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'departmentTransferredCurrent')->label('Department transferred and served Current Designation')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'detailOfSiblingsApplicant')->textArea(['maxlength' => true]) ?>
+    <?= $form->field($model, 'detailOfSiblingsApplicant')->label('Name, Relationship, Occupation, Address of Siblings of Applicant')->textArea(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'detailOfSpouseApplicant')->textArea(['maxlength' => true]) ?>
+    <?= $form->field($model, 'detailOfSpouseApplicant')->label('Name, Occupation, Address of Spouse of Applicant')->textArea(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'detailOfChildrenApplicant')->textArea(['maxlength' => true]) ?>
+    <?= $form->field($model, 'detailOfChildrenApplicant')->label('Name, Occupation, Address of Children of Applicant')->textArea(['maxlength' => true]) ?>
 
    
-    <?= $form->field($model, 'detailOfSiblingsFather')->textArea(['maxlength' => true]) ?>
+    <?= $form->field($model, 'detailOfSiblingsFather')->label("Name, Occupation, Address of Siblings of Appplicant's Father")->textArea(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'detailOfSiblingsMother')->textArea(['maxlength' => true]) ?>
+    <?= $form->field($model, 'detailOfSiblingsMother')->label("Name, Occupation, Address of Siblings of Appplicant's Mother")->textArea(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'detailOfSiblingsSpouse')->textArea(['maxlength' => true]) ?>
+    <?= $form->field($model, 'detailOfSiblingsSpouse')->label("Name, Occupation, Address of Siblings of Appplicant's Spouse")->textArea(['maxlength' => true]) ?>
 </div>
 
     <?php
@@ -217,6 +221,7 @@ if(!$model->isNewRecord){
 ?>
  <div style="padding-bottom:20px;  padding-top:10px; ">
 <table border="1" width="100%">
+     <tr><th colspan="6" align="left">To fill-up the person who were committed the sentence under the Criminal/Civil Law</th></tr>
   <tr>
     <th align="center">Act</th>
     <th align="center">Punishment</th>
@@ -244,9 +249,9 @@ if(!$model->isNewRecord){
 </table>
 
 </div>
- <div class="col-md-6">
+ <div class="col-md-6">   
+    <p><b>To fill-up applied the Passport formerly</b></p>
     <?= $form->field($model, 'passportNo')->textInput(['maxlength' => true]) ?>
-
 
     <?= $form->field($model, 'passportIssueDate')->widget(DatePicker::classname(), [
     'pluginOptions' => [
@@ -297,8 +302,12 @@ if(!$model->isNewRecord){
             }
 }
 ?>
+
+ 
+
 <div style="padding-bottom:20px; padding-top:10px; ">
 <table width="100%" >
+     <tr><th colspan="6" align="left">Whether went to aboard or not</th></tr>
   <tr>
     <th colspan="2" align="center">Year</th>
     <th rowspan="2" align="center">Subject to be travelled</th>

@@ -27,7 +27,7 @@ $this->title = 'Familytrees';
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'idfamilytree',
+            'familytree',
             'name',
             'dateOfBirth',
             'placeOfBirth',

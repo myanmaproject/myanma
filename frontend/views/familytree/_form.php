@@ -8,7 +8,8 @@ use kartik\widgets\DatePicker;
 use app\models\state;
 use app\models\district;
 use app\models\township;
-
+use yii\jui\AutoComplete;   
+use yii\web\JsExpression;
 /* @var $this yii\web\View */
 /* @var $model app\models\Familytree */
 /* @var $form yii\widgets\ActiveForm */
@@ -19,12 +20,31 @@ use app\models\township;
 
     <?php $form = ActiveForm::begin(); ?>
 
+<!-- <?=$form->field($model, 'idfamilytree');?>
+ -->
+
+
 
  <div class="col-md-6">
 
-
-    <?= $form->field($model, 'familytree')->textInput(['maxlength' => true]) ?>
-
+   <!--  <?= $form->field($model, 'familytree')->textInput(['maxlength' => true]) ?> -->
+<?= $form->field($model, 'familytree')->widget(AutoComplete::className(), [
+                'options' => [
+                    'class' => 'form-control'
+                ],
+                'clientOptions' => [
+                    'appendTo'=>'#form-id',
+                    'source' => familytree::find()
+                        ->select(['familytree as idfamilytree', 'familytree as value', 'familytree as label'])
+                        ->groupBy('familytree')
+                        ->orderBy(['familytree' => SORT_ASC])
+                        ->asArray()->all(),
+                    //'change' => 'function(){$(this).init_charge();}',
+                    'select' => new JsExpression("function( event, ui ) {
+                $(this).val(ui.item.label);
+            }")
+                ],
+            ]) ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
@@ -107,6 +127,10 @@ echo $form->field($model, 'townshipOfBirth', ['template' => '<div class=\"\">{in
 
     <?= $form->field($model, 'raceNationality')->textInput(['maxlength' => true]) ?>
 
+<<<<<<< HEAD
+    
+    <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
+=======
     <?= $form->field($model, 'nrc')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'region')->textInput(['maxlength' => true]) ?>
@@ -174,6 +198,7 @@ echo $form->field($model, 'townshipAddress', ['template' => '<div class=\"\">{in
             'disabled' => 'disabled',
         ]);
 ?>
+>>>>>>> 6ce0b1c2315dd31acce7f0b86078063b93bbef0d
 
 
 </div>
@@ -196,6 +221,18 @@ echo $form->field($model, 'townshipAddress', ['template' => '<div class=\"\">{in
                     'allowClear' => true
                 ],
             ]); ?>
+</div>
+ <div class="col-md-6">
+    <?= $form->field($model, 'nrc')->label('N.R.C. No.')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'region')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'occupation')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'aliveOrDeath')->dropDownList(['Alive' => 'Alive'
+            , 'Death' => 'Death']
+            ); ?>
+
  <div class="clearfix"></div>
             <hr>
     <div class="form-group">
