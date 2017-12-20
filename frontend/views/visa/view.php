@@ -34,7 +34,7 @@ $this->title = $model->idvisa;
                 'value'=>('visa/' . $model->picture),
                 'format' => ['image',['width'=>'230','height'=>'200']],
             ],
-            'idvisa',
+            // 'idvisa',
             'prefix',
             'numberRequested',
             'typeOfVisaRequest',
