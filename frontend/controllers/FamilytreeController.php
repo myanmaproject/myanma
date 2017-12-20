@@ -10,6 +10,8 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use kartik\mpdf\Pdf;
 use yii\filters\AccessControl;
+use app\models\Placeofbirth;
+use app\models\Addressfamilytree;
 
 /**
  * FamilytreeController implements the CRUD actions for Familytree model.
@@ -117,9 +119,30 @@ class FamilytreeController extends Controller
         $model = new Familytree();
 
         if ($model->load(Yii::$app->request->post()) ) {
-          var_dump($model->placeOfBirth);
-          var_dump($_POST['Familytree']['stateOfBirth']);
-          exit;
+
+          $Placeofbirth = new Placeofbirth();
+          $Addressfamilytree = new Addressfamilytree();
+          
+          if($model->save()){
+          $Placeofbirth->state = $_POST['Familytree']['stateOfBirth'];
+          $Placeofbirth->district = $_POST['Familytree']['districtOfBirth'];
+          $Placeofbirth->township = $_POST['Familytree']['townshipOfBirth'];
+          $Placeofbirth->familytree_idfamilytree = $model->idfamilytree; 
+
+
+          $Addressfamilytree->state = $_POST['Familytree']['stateAddress'];
+          $Addressfamilytree->district = $_POST['Familytree']['districtAddress'];
+          $Addressfamilytree->township = $_POST['Familytree']['townshipAddress'];
+          $Addressfamilytree->familytree_idfamilytree = $model->idfamilytree;
+          $Placeofbirth->save();
+          $Addressfamilytree->save();
+          // var_dump($model->idfamilytree);
+          // var_dump($_POST['Familytree']['stateOfBirth']);
+          // exit;
+          }
+
+          
+          
           $model->save();
             return $this->redirect(['view', 'id' => $model->idfamilytree]);
         } else {
@@ -139,7 +162,34 @@ class FamilytreeController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) ) {
+          
+          $Placeofbirth = Placeofbirth::find()->where(['familytree_idfamilytree' => $model->idfamilytree])->one();
+          $Addressfamilytree = Addressfamilytree::find()->where(['familytree_idfamilytree' => $model->idfamilytree])->one();
+          
+
+          
+          if($model->save()){
+          $Placeofbirth->state = $_POST['Familytree']['stateOfBirth'];
+          $Placeofbirth->district = $_POST['Familytree']['districtOfBirth'];
+          $Placeofbirth->township = $_POST['Familytree']['townshipOfBirth'];
+          $Placeofbirth->familytree_idfamilytree = $model->idfamilytree; 
+
+
+          $Addressfamilytree->state = $_POST['Familytree']['stateAddress'];
+          $Addressfamilytree->district = $_POST['Familytree']['districtAddress'];
+          $Addressfamilytree->township = $_POST['Familytree']['townshipAddress'];
+          $Addressfamilytree->familytree_idfamilytree = $model->idfamilytree;
+          $Placeofbirth->update();
+          $Addressfamilytree->update();
+          // var_dump($model->idfamilytree);
+          // var_dump($_POST['Familytree']['stateOfBirth']);
+          // exit;
+          }
+
+          
+          
+          $model->save();
             return $this->redirect(['view', 'id' => $model->idfamilytree]);
         } else {
             return $this->render('update', [

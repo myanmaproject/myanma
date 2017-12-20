@@ -16,23 +16,23 @@ class DepController extends Controller {
      * @inheritdoc
      */
     public function actionDistrict($id) {
-        $stateId= null;
-        if($id!=null){
-            $state = state::find()
-                ->where(['stateNameEN' => $id])
-                ->one();
+        // $stateId= null;
+        // if($id!=null){
+        //     $state = state::find()
+        //         ->where(['stateNameEN' => $id])
+        //         ->one();
         
-        $stateId = $state->stateId;
+        // $stateId = $state->stateId;
 
-        }
+        // }
        $countDistrict = district::find()
-                ->where(['stateId' => $stateId])
+                ->where(['stateId' => $id])
                 ->andWhere(['status'=>'1'])
                 ->count();
 
 
         $District = district::find()
-                ->where(['stateId' => $stateId])
+                ->where(['stateId' => $id])
                 ->andWhere(['status'=>'1'])
                 ->all();
 
@@ -42,7 +42,7 @@ class DepController extends Controller {
             echo "<option value>Select District</option>";
 
             foreach ($District as $post) {
-                echo "<option value='" . $post['districtNameEN'] . "'>" . $post['districtNameEN'] . "</option>";
+                echo "<option value='" . $post['districtId'] . "'>" . $post['districtNameEN'] . "</option>";
             }
         } else {
             echo "<option value>Select District</option>";
@@ -51,25 +51,25 @@ class DepController extends Controller {
 
     public function actionTownship($id) {
 
-        $districtId= null;
-        if($id!=null){
-            $district = district::find()
-                ->where(['districtNameEN' => $id])
-                ->one();
+        // $districtId= null;
+        // if($id!=null){
+        //     $district = district::find()
+        //         ->where(['districtNameEN' => $id])
+        //         ->one();
         
-        $districtId = $district->districtId;
+        // $districtId = $district->districtId;
 
-        }
+        // }
 
         
        
        $countTownship = township::find()
-                ->where(['districtId' => $districtId])
+                ->where(['districtId' => $id])
                 ->andWhere(['status'=>'1'])
                 ->count();
 
         $township = township::find()
-                ->where(['districtId' => $districtId])
+                ->where(['districtId' => $id])
                 ->andWhere(['status'=>'1'])
                 ->all();
 
@@ -79,7 +79,7 @@ class DepController extends Controller {
             echo "<option value>Select Township</option>";
 
             foreach ($township as $post) {
-                echo "<option value='" . $post['townshipNameEN'] . "'>" . $post['townshipNameEN'] . "</option>";
+                echo "<option value='" . $post['townshipId'] . "'>" . $post['townshipNameEN'] . "</option>";
             }
         } else {
             echo "<option value>Select Township</option>";

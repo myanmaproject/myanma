@@ -1,4 +1,5 @@
 <?php
+use yii\web\View;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
@@ -8,6 +9,8 @@ use kartik\widgets\DatePicker;
 use app\models\state;
 use app\models\district;
 use app\models\township;
+use app\models\Placeofbirth;
+use app\models\Addressfamilytree;
 use yii\jui\AutoComplete;   
 use yii\web\JsExpression;
 /* @var $this yii\web\View */
@@ -64,9 +67,28 @@ use yii\web\JsExpression;
     <?= $form->field($model, 'placeOfBirth')->textInput(['maxlength' => true,'placeholder' => "Address"])->label(false) ?>
 
 
+
 <?php
+
+if(!$model->isNewRecord){
+    $Placeofbirth = Placeofbirth::find()->where(['familytree_idfamilytree' => $model->idfamilytree])->one();
+
+   
+    $model->stateOfBirth = $Placeofbirth->state;
+    $model->districtOfBirth = $Placeofbirth->district;
+    $model->townshipOfBirth = $Placeofbirth->township;
+
+    $script = <<< JS
+$(document).ready(function(){
+    $("select#familytree-districtofbirth").prop("disabled", false); 
+    $("select#familytree-townshipofbirth").prop("disabled", false);
+}); 
+JS;
+$this->registerJs($script, View::POS_END);
+}
+
 echo $form->field($model, 'stateOfBirth', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
-        ->dropDownList(ArrayHelper::map(State::find()->all(), 'stateNameEN', 'stateNameEN')
+        ->dropDownList(ArrayHelper::map(State::find()->all(), 'stateId', 'stateNameEN')
                 , [
             'prompt' => 'Select State',
             'onChange' => '
@@ -83,8 +105,7 @@ echo $form->field($model, 'stateOfBirth', ['template' => '<div class=\"\">{input
                                         $("select#familytree-townshipofbirth").prop("disabled", true); 
                                         $("select#familytree-townshipofbirth").val("");
                                         $("select#familytree-districtofbirth").prop("disabled", false); 
-                                        $("select#familytree-townshipofbirth").prop("disabled", true); 
-                                        $("select#familytree-townshipofbirth").val(""); 
+                                        
                                     }
                                     
                         });',
@@ -93,7 +114,7 @@ echo $form->field($model, 'stateOfBirth', ['template' => '<div class=\"\">{input
 
 <?php
 echo $form->field($model, 'districtOfBirth', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
-        ->dropDownList(ArrayHelper::map(District::find()->all(), 'districtNameEN', 'districtNameEN')
+        ->dropDownList(ArrayHelper::map(District::find()->all(), 'districtId', 'districtNameEN')
                 , [
             'prompt' => 'Select District',
             'disabled' => 'disabled',
@@ -116,7 +137,7 @@ echo $form->field($model, 'districtOfBirth', ['template' => '<div class=\"\">{in
 
 <?php
 echo $form->field($model, 'townshipOfBirth', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
-        ->dropDownList(ArrayHelper::map(Township::find()->all(), 'townshipNameEN', 'townshipNameEN')
+        ->dropDownList(ArrayHelper::map(Township::find()->all(), 'townshipId', 'townshipNameEN')
                 , [
             'prompt' => 'Select Township',
             'disabled' => 'disabled',
@@ -134,8 +155,25 @@ echo $form->field($model, 'townshipOfBirth', ['template' => '<div class=\"\">{in
   <div class="panel-body">
     <?= $form->field($model, 'address')->textInput(['maxlength' => true])->label(false) ?>
 <?php
+if(!$model->isNewRecord){
+    $Addressfamilytree = Addressfamilytree::find()->where(['familytree_idfamilytree' => $model->idfamilytree])->one();
+
+   
+    $model->stateAddress = $Addressfamilytree->state;
+    $model->districtAddress = $Addressfamilytree->district;
+    $model->townshipAddress = $Addressfamilytree->township;
+
+    $script = <<< JS
+$(document).ready(function(){
+    $("select#familytree-districtaddress").prop("disabled", false); 
+    $("select#familytree-townshipaddress").prop("disabled", false);
+}); 
+JS;
+$this->registerJs($script, View::POS_END);
+
+}
 echo $form->field($model, 'stateAddress', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
-        ->dropDownList(ArrayHelper::map(State::find()->all(), 'stateNameEN', 'stateNameEN')
+        ->dropDownList(ArrayHelper::map(State::find()->all(), 'stateId', 'stateNameEN')
                 , [
             'prompt' => 'Select State',
             'onChange' => '
@@ -160,7 +198,7 @@ echo $form->field($model, 'stateAddress', ['template' => '<div class=\"\">{input
 
 <?php
 echo $form->field($model, 'districtAddress', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
-        ->dropDownList(ArrayHelper::map(District::find()->all(), 'districtNameEN', 'districtNameEN')
+        ->dropDownList(ArrayHelper::map(District::find()->all(), 'districtId', 'districtNameEN')
                 , [
             'prompt' => 'Select District',
             'disabled' => 'disabled',
@@ -183,7 +221,7 @@ echo $form->field($model, 'districtAddress', ['template' => '<div class=\"\">{in
 
 <?php
 echo $form->field($model, 'townshipAddress', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
-        ->dropDownList(ArrayHelper::map(Township::find()->all(), 'townshipNameEN', 'townshipNameEN')
+        ->dropDownList(ArrayHelper::map(Township::find()->all(), 'townshipId', 'townshipNameEN')
                 , [
             'prompt' => 'Select Township',
             'disabled' => 'disabled',
