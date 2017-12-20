@@ -26,9 +26,7 @@ use kartik\widgets\DatePicker;
 
     <?php $form = ActiveForm::begin(); ?>
      <div class="col-md-6">
-      <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-    </div>
+
 
     <?php
         if(!$model->isNewRecord){
@@ -124,12 +122,12 @@ if(isset ($_GET["familytree_idfamilytree"])){
 
     <?= $form->field($model, 'visa_img')->fileInput() ?>
 
-    <?= $form->field($model, 'firstName')->textInput(['maxlength' => true]) ?>
+  <!--   <?= $form->field($model, 'firstName')->textInput(['maxlength' => true]) ?> -->
 
     <?= $form->field($model, 'middleName')->textInput(['maxlength' => true]) ?>
-
+<!-- 
     <?= $form->field($model, 'familyName')->textInput(['maxlength' => true]) ?>
-
+ -->
     <?= $form->field($model, 'nationalityBirth')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'maritalStatus')->textInput(['maxlength' => true]) ?>
@@ -206,33 +204,34 @@ if(isset ($_GET["familytree_idfamilytree"])){
     <?= $form->field($model, 'nameAddressLocal')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'telThai')->textInput(['maxlength' => true]) ?>
+</div>
+ <div class="col-md-6">
+   <!--  <?= $form->field($model, 'applicationNoOfficial')->textInput(['maxlength' => true]) ?> -->
 
-    <?= $form->field($model, 'applicationNoOfficial')->textInput(['maxlength' => true]) ?>
+   <!--  <?= $form->field($model, 'visaNoOfficial')->textInput(['maxlength' => true]) ?>
+ -->
+  <!--   <?= $form->field($model, 'typeOfVisaOfficial')->textInput(['maxlength' => true]) ?> -->
 
-    <?= $form->field($model, 'visaNoOfficial')->textInput(['maxlength' => true]) ?>
+    <!-- <?= $form->field($model, 'categoryOfEntries')->textInput(['maxlength' => true]) ?> -->
 
-    <?= $form->field($model, 'typeOfVisaOfficial')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'categoryOfEntries')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'numberOfEntriesOfficial')->textInput(['maxlength' => true]) ?>
+    <!-- <?= $form->field($model, 'numberOfEntriesOfficial')->textInput(['maxlength' => true]) ?> -->
 
    
-               <?= $form->field($model, 'dateOfIssueOfficial')->widget(DatePicker::classname(), [
+              <!--  <?= $form->field($model, 'dateOfIssueOfficial')->widget(DatePicker::classname(), [
    
     'pluginOptions' => [
         'autoclose'=>true
     ]
-]); ?>
+]); ?> -->
 
-    <?= $form->field($model, 'feeOfficial')->textInput(['maxlength' => true]) ?>
+ <!--    <?= $form->field($model, 'feeOfficial')->textInput(['maxlength' => true]) ?> -->
 
-    <?= $form->field($model, 'expOfficial')->textInput(['maxlength' => true]) ?>
+<!--     <?= $form->field($model, 'expOfficial')->textInput(['maxlength' => true]) ?> -->
 
-    <?= $form->field($model, 'documentsOfficial')->textInput(['maxlength' => true]) ?>
+   <!--  <?= $form->field($model, 'documentsOfficial')->textInput(['maxlength' => true]) ?> -->
 
-    <?= $form->field($model, 'picture')->textInput(['maxlength' => true]) ?>
-
+<!--     <?= $form->field($model, 'picture')->textInput(['maxlength' => true]) ?>
+ -->
 
 <?= $form->field($model, 'nameaddressGuarantor')->textInput(['maxlength' => true]) ?>
 <?= $form->field($model, 'telGuarantor')->textInput(['maxlength' => true]) ?>

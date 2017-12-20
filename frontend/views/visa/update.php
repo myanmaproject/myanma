@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\visa */
 
-$this->title = 'Update Visa: ' . $model->idvisa;
+$this->title = 'Update Visa: ' . $model->firstName;
 
 ?>
 <div class="visa-update">

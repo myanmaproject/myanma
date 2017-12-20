@@ -30,8 +30,8 @@ $this->title = $model->idpassport;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'idpassport',
-            'familytree_idfamilytree',
+            // 'idpassport',
+            // 'familytree_idfamilytree',
             'otherName',
             'identificationMark',
             'sex',

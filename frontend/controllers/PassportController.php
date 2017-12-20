@@ -273,6 +273,7 @@ if (!$Studied->save())print_r($Studied->errors);
             $Studied = Studied::find()->where(['passport_idpassport' => $model->idpassport])->all();
             $i = 0;
             foreach ($Studied as $key => $value) {
+               
                 $Studied = Studied::find()->where(['idstudied' => $value['idstudied']])->one();
                 if($i == 0){
                     $studied = $_POST['Passport']['studied1'];
@@ -285,6 +286,8 @@ if (!$Studied->save())print_r($Studied->errors);
                     $i++;
                 }
 
+
+ 
                 $Studied->yearFrom = $studied['0'];
                 $Studied->yearTo = $studied['1'];
                 $Studied->standardFrom = $studied['2'];
