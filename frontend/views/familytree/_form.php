@@ -214,7 +214,7 @@ echo $form->field($model, 'townshipAddress', ['template' => '<div class=\"\">{in
 
 
                 <?= $form->field($model, 'mother')->widget(Select2::className(),[
-                'data' => \yii\helpers\ArrayHelper::map(familytree::find()->all(),'idfamilytree','name'),
+                'data' => \yii\helpers\ArrayHelper::map(familytree::find()->all(),'idfamilytree','name','familytree'),
                 'language' => 'th',
                 'options' => ['placeholder' => 'mother name'],
                 'pluginOptions' => [

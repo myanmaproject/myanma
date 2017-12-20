@@ -29,7 +29,7 @@ $this->title = $model->name;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'idfamilytree',
+            // 'idfamilytree',
             'name',
             'dateOfBirth',
             'placeOfBirth',
