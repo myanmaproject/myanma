@@ -80,6 +80,8 @@ echo $form->field($model, 'stateOfBirth', ['template' => '<div class=\"\">{input
                                         $("select#familytree-townshipofbirth").prop("disabled", true); 
                                         $("select#familytree-townshipofbirth").val(""); 
                                     }else{
+                                        $("select#familytree-townshipofbirth").prop("disabled", true); 
+                                        $("select#familytree-townshipofbirth").val("");
                                         $("select#familytree-districtofbirth").prop("disabled", false); 
                                         $("select#familytree-townshipofbirth").prop("disabled", true); 
                                         $("select#familytree-townshipofbirth").val(""); 
@@ -127,19 +129,6 @@ echo $form->field($model, 'townshipOfBirth', ['template' => '<div class=\"\">{in
 
     <?= $form->field($model, 'raceNationality')->textInput(['maxlength' => true]) ?>
 
-<<<<<<< HEAD
-    
-    <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
-=======
-    <?= $form->field($model, 'nrc')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'region')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'occupation')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'aliveOrDeath')->dropDownList(['Alive' => 'Alive'
-            , 'Death' => 'Death']
-            ); ?>
 <div class="panel panel-default">
   <div class="panel-heading">Address</div>
   <div class="panel-body">
@@ -160,6 +149,8 @@ echo $form->field($model, 'stateAddress', ['template' => '<div class=\"\">{input
                                         $("select#familytree-townshipaddress").prop("disabled", true); 
                                         $("select#familytree-townshipaddress").val(""); 
                                     }else{
+                                        $("select#familytree-townshipaddress").prop("disabled", true); 
+                                        $("select#familytree-townshipaddress").val(""); 
                                         $("select#familytree-districtaddress").prop("disabled", false); 
                                     }
                                     
@@ -198,7 +189,7 @@ echo $form->field($model, 'townshipAddress', ['template' => '<div class=\"\">{in
             'disabled' => 'disabled',
         ]);
 ?>
->>>>>>> 6ce0b1c2315dd31acce7f0b86078063b93bbef0d
+
 
 
 </div>
