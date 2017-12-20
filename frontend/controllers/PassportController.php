@@ -281,7 +281,7 @@ if (!$Studied->save())print_r($Studied->errors);
                     $studied = $_POST['Passport']['studied2'];
                     $i++;
                 }elseif ($i ==2) {
-                    $studied = $_POST['Passport']['studied2'];
+                    $studied = $_POST['Passport']['studied3'];
                     $i++;
                 }
 
