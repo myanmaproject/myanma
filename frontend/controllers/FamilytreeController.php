@@ -116,7 +116,11 @@ class FamilytreeController extends Controller
     {
         $model = new Familytree();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) ) {
+          var_dump($model->placeOfBirth);
+          var_dump($_POST['Familytree']['stateOfBirth']);
+          exit;
+          $model->save();
             return $this->redirect(['view', 'id' => $model->idfamilytree]);
         } else {
             return $this->render('create', [

@@ -66,7 +66,7 @@ use yii\web\JsExpression;
 
 <?php
 echo $form->field($model, 'stateOfBirth', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
-        ->dropDownList(ArrayHelper::map(State::find()->all(), 'stateId', 'stateNameEN')
+        ->dropDownList(ArrayHelper::map(State::find()->all(), 'stateNameEN', 'stateNameEN')
                 , [
             'prompt' => 'Select State',
             'onChange' => '
@@ -74,7 +74,7 @@ echo $form->field($model, 'stateOfBirth', ['template' => '<div class=\"\">{input
                             $.post("index.php?r=dep/district&id=' . '"+$(this).val(),function( data ){
                                 $("select#familytree-districtofbirth").html( data );
 
-                            if(data == "<option value>-Select District-</option>"){
+                            if(data == "<option value>Select District</option>"){
                                         $("select#familytree-districtofbirth").prop("disabled", true);
                                         $("select#familytree-districtofbirth").val(""); 
                                         $("select#familytree-townshipofbirth").prop("disabled", true); 
@@ -83,6 +83,8 @@ echo $form->field($model, 'stateOfBirth', ['template' => '<div class=\"\">{input
                                         $("select#familytree-townshipofbirth").prop("disabled", true); 
                                         $("select#familytree-townshipofbirth").val("");
                                         $("select#familytree-districtofbirth").prop("disabled", false); 
+                                        $("select#familytree-townshipofbirth").prop("disabled", true); 
+                                        $("select#familytree-townshipofbirth").val(""); 
                                     }
                                     
                         });',
@@ -91,7 +93,7 @@ echo $form->field($model, 'stateOfBirth', ['template' => '<div class=\"\">{input
 
 <?php
 echo $form->field($model, 'districtOfBirth', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
-        ->dropDownList(ArrayHelper::map(District::find()->all(), 'districtId', 'districtNameEN')
+        ->dropDownList(ArrayHelper::map(District::find()->all(), 'districtNameEN', 'districtNameEN')
                 , [
             'prompt' => 'Select District',
             'disabled' => 'disabled',
@@ -99,7 +101,7 @@ echo $form->field($model, 'districtOfBirth', ['template' => '<div class=\"\">{in
                             $.post("index.php?r=dep/township&id=' . '"+$(this).val(),function( data ){
                                 $("select#familytree-townshipofbirth").html( data );
 
-                            if(data == "<option value>-Select Township-</option>"){
+                            if(data == "<option value>Select Township</option>"){
                                         $("select#familytree-townshipofbirth").prop("disabled", true); 
                                         $("select#familytree-townshipofbirth").val(""); 
                                         
@@ -114,7 +116,7 @@ echo $form->field($model, 'districtOfBirth', ['template' => '<div class=\"\">{in
 
 <?php
 echo $form->field($model, 'townshipOfBirth', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
-        ->dropDownList(ArrayHelper::map(Township::find()->all(), 'townshipId', 'townshipNameEN')
+        ->dropDownList(ArrayHelper::map(Township::find()->all(), 'townshipNameEN', 'townshipNameEN')
                 , [
             'prompt' => 'Select Township',
             'disabled' => 'disabled',
@@ -133,7 +135,7 @@ echo $form->field($model, 'townshipOfBirth', ['template' => '<div class=\"\">{in
     <?= $form->field($model, 'address')->textInput(['maxlength' => true])->label(false) ?>
 <?php
 echo $form->field($model, 'stateAddress', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
-        ->dropDownList(ArrayHelper::map(State::find()->all(), 'stateId', 'stateNameEN')
+        ->dropDownList(ArrayHelper::map(State::find()->all(), 'stateNameEN', 'stateNameEN')
                 , [
             'prompt' => 'Select State',
             'onChange' => '
@@ -141,7 +143,7 @@ echo $form->field($model, 'stateAddress', ['template' => '<div class=\"\">{input
                             $.post("index.php?r=dep/district&id=' . '"+$(this).val(),function( data ){
                                 $("select#familytree-districtaddress").html( data );
 
-                            if(data == "<option value>-Select District-</option>"){
+                            if(data == "<option value>Select District</option>"){
                                         $("select#familytree-districtaddress").prop("disabled", true);
                                         $("select#familytree-districtaddress").val(""); 
                                         $("select#familytree-townshipaddress").prop("disabled", true); 
@@ -158,7 +160,7 @@ echo $form->field($model, 'stateAddress', ['template' => '<div class=\"\">{input
 
 <?php
 echo $form->field($model, 'districtAddress', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
-        ->dropDownList(ArrayHelper::map(District::find()->all(), 'districtId', 'districtNameEN')
+        ->dropDownList(ArrayHelper::map(District::find()->all(), 'districtNameEN', 'districtNameEN')
                 , [
             'prompt' => 'Select District',
             'disabled' => 'disabled',
@@ -166,7 +168,7 @@ echo $form->field($model, 'districtAddress', ['template' => '<div class=\"\">{in
                             $.post("index.php?r=dep/township&id=' . '"+$(this).val(),function( data ){
                                 $("select#familytree-townshipaddress").html( data );
 
-                            if(data == "<option value>-Select Township-</option>"){
+                            if(data == "<option value>Select Township</option>"){
                                         $("select#familytree-townshipaddress").prop("disabled", true); 
                                         $("select#familytree-townshipaddress").val(""); 
                                         
@@ -181,7 +183,7 @@ echo $form->field($model, 'districtAddress', ['template' => '<div class=\"\">{in
 
 <?php
 echo $form->field($model, 'townshipAddress', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
-        ->dropDownList(ArrayHelper::map(Township::find()->all(), 'townshipId', 'townshipNameEN')
+        ->dropDownList(ArrayHelper::map(Township::find()->all(), 'townshipNameEN', 'townshipNameEN')
                 , [
             'prompt' => 'Select Township',
             'disabled' => 'disabled',
