@@ -18,6 +18,12 @@ use app\models\Documentfirsttime;
 use app\models\Documenttouristvisa;
 use app\models\Transitvisathailand;
 use app\models\Familytree;
+
+
+use app\models\Regionthai;
+use app\models\Provincethai;
+use app\models\Districtthai;
+use app\models\Subdistrictthai;
 /**
  * VisaController implements the CRUD actions for Visa model.
  */
@@ -144,8 +150,11 @@ class VisaController extends Controller
         $modeldocumenttouristvisa = new Documenttouristvisa();
         $modeltransitvisathailand = new Transitvisathailand();
 
+        $modelregionthai = new Regionthai();
+
         // var_dump($modelbasicducuments->load(Yii::$app->request->post()));
         // exit();
+
         if ($model->load(Yii::$app->request->post()) 
        && $model->save()) {
 
@@ -226,16 +235,20 @@ $model->save();
           
             return $this->redirect(['view', 'id' => $model->idvisa]);
         } else {
+
             return $this->render('create', [
                 'model' => $model,
                 'modelbasicducuments' => $modelbasicducuments,
-              
+                'modelregionthai' => $modelregionthai,
                 
 
 
             ]);
         }
     }
+
+
+
 
     /**
      * Updates an existing Visa model.
@@ -357,6 +370,7 @@ $model->save();
           
             return $this->render('update', [
                 'model' => $model,
+
             ]);
         }
 

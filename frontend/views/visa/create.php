@@ -16,6 +16,7 @@ $this->title = 'Create Visa';
     <?= $this->render('_form', [
         'model' => $model,
         'modelbasicducuments' => $modelbasicducuments,
+          'modelregionthai' => $modelregionthai,
       
     ]) ?>
 

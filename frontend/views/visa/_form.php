@@ -12,7 +12,10 @@ use app\models\Documentfirsttime;
 use app\models\Documenttouristvisa;
 use app\models\Transitvisathailand;
 use kartik\widgets\DatePicker;
-
+use app\models\Regionthai;
+use app\models\Provincethai;
+use app\models\Districtthai;
+use app\models\Subdistrictthai;
 /* @var $this yii\web\View */
 /* @var $model app\models\Visa */
 /* @var $form yii\widgets\ActiveForm */
@@ -199,7 +202,53 @@ if(isset ($_GET["familytree_idfamilytree"])){
 ]); ?>
     <?= $form->field($model, 'countriesForTravel')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'proposedAddressThai')->textInput(['maxlength' => true]) ?>
+  
+
+     <?= $form->field($model, 'proposedAddressThai')->label('proposedAddressThai')->textInput(['maxlength' => true]) ?>
+
+
+
+            <?= $form->field($model, 'regionthai_id')->dropDownList(
+                ArrayHelper::map(Regionthai::find()->all(),'id','name'),
+                ['prompt'=>'select region',
+                    'onchange'=>'
+                    $.post("index.php?r=dep/listregion&id='.'"+$(this).val(), function(data){
+                        $("select#visa-provincethai_id").html(data);
+                        });'
+                ])->label('region'); ?>
+
+    <?= $form->field($model, 'provincethai_id')->dropDownList(
+        ArrayHelper::map(Provincethai::find()->all(), 'id','nameen'),
+        [
+            'prompt'=>'select province',
+            'onchange'=>'
+                    $.post("index.php?r=dep/listprovince&id='.'"+$(this).val(), function(data){
+                        $("select#visa-districtthai_id").html(data);
+                        });'
+        ]
+    )->label('Province Thai'); ?>
+
+
+    <?= $form->field($model, 'districtthai_id')->dropDownList(
+        ArrayHelper::map(districtthai::find()->all(), 'id','nameen'),
+        [
+            'prompt'=>'select district',
+          'onchange'=>'
+                    $.post("index.php?r=dep/listdistrict&id='.'"+$(this).val(), function(data){
+                        $("select#visa-subdistrictthai_id").html(data);
+                        });'
+        ]
+    )->label('District Thai'); ?>
+
+
+        <?= $form->field($model, 'subdistrictthai_id')->dropDownList(
+        ArrayHelper::map(subdistrictthai::find()->all(), 'id','nameen'),
+        [
+            'prompt'=>'select subdistrict',
+        
+        ]
+    )->label('Subdistrict Thai'); ?>
+
 
     <?= $form->field($model, 'nameAddressLocal')->textInput(['maxlength' => true]) ?>
 

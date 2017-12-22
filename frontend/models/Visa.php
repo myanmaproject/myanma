@@ -98,7 +98,12 @@ class Visa extends \yii\db\ActiveRecord
             [['prefix', 'middleName', 'familyName', 'typeOfVisaOfficial', 'categoryOfEntries', 'purposeOfVisit','telGuarantor'], 'string', 'max' => 45],
             [['typeOfVisaRequest', 'firstName', 'nationalityBirth', 'maritalStatus', 'TypeTravelDocument', 'noPerson', 'issuedAt', 'dateIssue', 'expiryDate', 'currentAddress', 'telPerson', 'email', 'permanentAddress', 'telPermanent', 'minorChildren', 'dateOfArrival', 'traveling', 'flightNo', 'durationOfProposedStay', 'dateOfPrevious', 'countriesForTravel', 'proposedAddressThai', 'nameAddressLocal', 'telThai', 'applicationNoOfficial', 'visaNoOfficial', 'numberOfEntriesOfficial', 'dateOfIssueOfficial', 'feeOfficial', 'expOfficial', 'documentsOfficial', 'picture','nameaddressGuarantor'], 'string', 'max' => 255],
             [['familytree_idfamilytree'], 'exist', 'skipOnError' => true, 'targetClass' => Familytree::className(), 'targetAttribute' => ['familytree_idfamilytree' => 'idfamilytree']],
-                        [['visa_img'],'file','skipOnEmpty' => true, 'on' => 'update','extensions'=> 'jpg,png,gif']
+                        [['visa_img'],'file','skipOnEmpty' => true, 'on' => 'update','extensions'=> 'jpg,png,gif'],
+            [['districtthai_id'], 'exist', 'skipOnError' => true, 'targetClass' => Districtthai::className(), 'targetAttribute' => ['districtthai_id' => 'id']],
+ [['provincethai_id'], 'exist', 'skipOnError' => true, 'targetClass' => Provincethai::className(), 'targetAttribute' => ['provincethai_id' => 'id']],
+            [['regionthai_id'], 'exist', 'skipOnError' => true, 'targetClass' => Regionthai::className(), 'targetAttribute' => ['regionthai_id' => 'id']],
+            [['subdistrictthai_id'], 'exist', 'skipOnError' => true, 'targetClass' => Subdistrictthai::className(), 'targetAttribute' => ['subdistrictthai_id' => 'id']],
+       
 
         ];
     }
@@ -156,7 +161,11 @@ class Visa extends \yii\db\ActiveRecord
             'purposeOfVisit' => 'Purpose Of Visit',
              'nameaddressGuarantor' => 'Nameaddress Guarantor', 
            'telGuarantor' => 'Tel Guarantor',
-             'visa_img' => 'img' 
+             'visa_img' => 'img' ,
+                        'regionthai_id' => 'Regionthai ID',
+            'provincethai_id' => 'Provincethai ID',
+            'districtthai_id' => 'Districtthai ID',
+            'subdistrictthai_id' => 'Subdistrictthai ID',
         ];
     }
 
@@ -206,5 +215,31 @@ class Visa extends \yii\db\ActiveRecord
     public function getFamilytreeIdfamilytree()
     {
         return $this->hasOne(Familytree::className(), ['idfamilytree' => 'familytree_idfamilytree']);
+    }
+
+
+      public function getDistrictthai()
+    {
+        return $this->hasOne(Districtthai::className(), ['id' => 'districtthai_id']);
+    }
+     public function getProvincethai()
+    {
+        return $this->hasOne(Provincethai::className(), ['id' => 'provincethai_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getRegionthai()
+    {
+        return $this->hasOne(Regionthai::className(), ['id' => 'regionthai_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSubdistrictthai()
+    {
+        return $this->hasOne(Subdistrictthai::className(), ['id' => 'subdistrictthai_id']);
     }
 }

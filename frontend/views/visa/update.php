@@ -14,6 +14,7 @@ $this->title = 'Update Visa: ' . $model->firstName;
 
     <?= $this->render('_form', [
         'model' => $model,
+         
           ]) ?>
 
 </div>
