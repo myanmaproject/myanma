@@ -124,21 +124,36 @@ class FamilytreeController extends Controller
           $Addressfamilytree = new Addressfamilytree();
           
           if($model->save()){
-          $Placeofbirth->state = $_POST['Familytree']['stateOfBirth'];
-          $Placeofbirth->district = $_POST['Familytree']['districtOfBirth'];
-          $Placeofbirth->township = $_POST['Familytree']['townshipOfBirth'];
+            if(isset($_POST['Familytree']['stateOfBirth'])){
+              $Placeofbirth->state = $_POST['Familytree']['stateOfBirth'];
+            }
+            if(isset($_POST['Familytree']['districtOfBirth'])){
+              $Placeofbirth->district = $_POST['Familytree']['districtOfBirth'];
+            }
+            if(isset($_POST['Familytree']['townshipOfBirth'])){
+              $Placeofbirth->township = $_POST['Familytree']['townshipOfBirth'];
+            }
+          
+          
           $Placeofbirth->familytree_idfamilytree = $model->idfamilytree; 
 
-
-          $Addressfamilytree->state = $_POST['Familytree']['stateAddress'];
+          if(isset($_POST['Familytree']['stateOfBirth'])){
+              $Addressfamilytree->state = $_POST['Familytree']['stateAddress'];
+              
+            }
+            if(isset($_POST['Familytree']['districtOfBirth'])){
           $Addressfamilytree->district = $_POST['Familytree']['districtAddress'];
+
+            }
+            if(isset($_POST['Familytree']['townshipOfBirth'])){
           $Addressfamilytree->township = $_POST['Familytree']['townshipAddress'];
+
+            }
+
           $Addressfamilytree->familytree_idfamilytree = $model->idfamilytree;
           $Placeofbirth->save();
           $Addressfamilytree->save();
-          // var_dump($model->idfamilytree);
-          // var_dump($_POST['Familytree']['stateOfBirth']);
-          // exit;
+          
           }
 
           
@@ -180,11 +195,9 @@ class FamilytreeController extends Controller
           $Addressfamilytree->district = $_POST['Familytree']['districtAddress'];
           $Addressfamilytree->township = $_POST['Familytree']['townshipAddress'];
           $Addressfamilytree->familytree_idfamilytree = $model->idfamilytree;
-          $Placeofbirth->update();
-          $Addressfamilytree->update();
-          // var_dump($model->idfamilytree);
-          // var_dump($_POST['Familytree']['stateOfBirth']);
-          // exit;
+          $Placeofbirth->save();
+          $Addressfamilytree->save();
+          
           }
 
           

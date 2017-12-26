@@ -295,7 +295,7 @@ if (!$Studied->save())print_r($Studied->errors);
                 $Studied->nameSchool = $studied['4'];
                 $Studied->townshipWardVillage = $studied['5'];
            
-                $Studied->update();
+                $Studied->save();
             }
 
             $Criminalcivillaw = Criminalcivillaw::find()->where(['passport_idpassport' => $model->idpassport])->all();
@@ -319,7 +319,7 @@ if (!$Studied->save())print_r($Studied->errors);
                 $Criminalcivillaw->periodTo = $criminalcivillaw['4'];
                 $Criminalcivillaw->prison = $criminalcivillaw['5'];
            
-                $Criminalcivillaw->update();
+                $Criminalcivillaw->save();
             }
 
             $Whetheraboard = Whetheraboard::find()->where(['passport_idpassport' => $model->idpassport])->all();
@@ -341,7 +341,7 @@ if (!$Studied->save())print_r($Studied->errors);
                 $Whetheraboard->country = $whetheraboard['3'];
                 $Whetheraboard->remark = $whetheraboard['4'];
            
-                $Whetheraboard->update();
+                $Whetheraboard->save();
             }
             
             
