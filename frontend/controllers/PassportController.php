@@ -17,6 +17,9 @@ use kartik\mpdf\Pdf;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 
+use app\models\Presentoccupationaddress;
+use app\models\Spouseoccupationaddress;
+
 /**
  * PassportController implements the CRUD actions for Passport model.
  */
@@ -145,7 +148,50 @@ class PassportController extends Controller
         $model = new Passport();
         $Studied = new Studied();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+
+          $Presentoccupationaddress = new Presentoccupationaddress();
+          $Spouseoccupationaddress = new Spouseoccupationaddress();
+          
+          if($model->save()){
+            if(isset($_POST['Passport']['statepresent'])){
+              $Presentoccupationaddress->state = $_POST['Passport']['statepresent'];
+            }
+            if(isset($_POST['Passport']['districtpresent'])){
+              $Presentoccupationaddress->district = $_POST['Passport']['districtpresent'];
+            }
+            if(isset($_POST['Passport']['townshippresent'])){
+              $Presentoccupationaddress->township = $_POST['Passport']['townshippresent'];
+            }
+          
+          
+          $Presentoccupationaddress->passport_idpassport = $model->idpassport; 
+
+
+          if(isset($_POST['Passport']['statespouse'])){
+              $Spouseoccupationaddress->state = $_POST['Passport']['statespouse'];
+              
+            }
+            if(isset($_POST['Passport']['districtspouse'])){
+          $Spouseoccupationaddress->district = $_POST['Passport']['districtspouse'];
+
+            }
+            if(isset($_POST['Passport']['townshipspouse'])){
+          $Spouseoccupationaddress->township = $_POST['Passport']['townshipspouse'];
+
+            }
+
+          $Spouseoccupationaddress->passport_idpassport = $model->idpassport; 
+
+
+          $Presentoccupationaddress->save();
+          $Spouseoccupationaddress->save();
+          
+          }
+
+          
+          
+          $model->save();
 
  // var_dump(!in_array("",$_POST['studied2']) );
  //            exit();
@@ -268,7 +314,54 @@ if (!$Studied->save())print_r($Studied->errors);
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) ) {
+
+            $Presentoccupationaddress = Presentoccupationaddress::find()->where(['passport_idpassport' => $model->idpassport])->one();
+          $Spouseoccupationaddress = Spouseoccupationaddress::find()->where(['passport_idpassport' => $model->idpassport])->one();
+          
+
+          
+          if($model->save()){
+
+            if(isset($_POST['Passport']['statepresent'])){
+              $Presentoccupationaddress->state = $_POST['Passport']['statepresent'];
+            }
+            if(isset($_POST['Passport']['districtpresent'])){
+              $Presentoccupationaddress->district = $_POST['Passport']['districtpresent'];
+            }
+            if(isset($_POST['Passport']['townshippresent'])){
+              $Presentoccupationaddress->township = $_POST['Passport']['townshippresent'];
+            }
+          
+          
+          $Presentoccupationaddress->passport_idpassport = $model->idpassport; 
+
+
+          if(isset($_POST['Passport']['statespouse'])){
+              $Spouseoccupationaddress->state = $_POST['Passport']['statespouse'];
+              
+            }
+            if(isset($_POST['Passport']['districtspouse'])){
+          $Spouseoccupationaddress->district = $_POST['Passport']['districtspouse'];
+
+            }
+            if(isset($_POST['Passport']['townshipspouse'])){
+          $Spouseoccupationaddress->township = $_POST['Passport']['townshipspouse'];
+
+            }
+
+          $Spouseoccupationaddress->passport_idpassport = $model->idpassport; 
+
+
+          $Presentoccupationaddress->save();
+          $Spouseoccupationaddress->save();
+
+                   
+          }
+
+          
+          
+          $model->save();
 
             $Studied = Studied::find()->where(['passport_idpassport' => $model->idpassport])->all();
             $i = 0;

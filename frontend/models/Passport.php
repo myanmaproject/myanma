@@ -53,6 +53,15 @@ class Passport extends \yii\db\ActiveRecord
     public $whetheraboard1;
     public $whetheraboard2;
 
+    public $statepresent;
+    public $districtpresent;
+    public $townshippresent;
+    
+    public $statespouse;
+    public $districtspouse;
+    public $townshipspouse;
+
+
 
     /**
      * @inheritdoc

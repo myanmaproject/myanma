@@ -137,15 +137,15 @@ class FamilytreeController extends Controller
           
           $Placeofbirth->familytree_idfamilytree = $model->idfamilytree; 
 
-          if(isset($_POST['Familytree']['stateOfBirth'])){
+          if(isset($_POST['Familytree']['stateAddress'])){
               $Addressfamilytree->state = $_POST['Familytree']['stateAddress'];
               
             }
-            if(isset($_POST['Familytree']['districtOfBirth'])){
+            if(isset($_POST['Familytree']['districtAddress'])){
           $Addressfamilytree->district = $_POST['Familytree']['districtAddress'];
 
             }
-            if(isset($_POST['Familytree']['townshipOfBirth'])){
+            if(isset($_POST['Familytree']['townshipAddress'])){
           $Addressfamilytree->township = $_POST['Familytree']['townshipAddress'];
 
             }
