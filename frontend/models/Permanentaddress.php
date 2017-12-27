@@ -11,6 +11,9 @@ use Yii;
  * @property integer $state
  * @property integer $district
  * @property integer $township
+ * @property integer $visa_idvisa
+ *
+ * @property Visa $visaIdvisa
  */
 class Permanentaddress extends \yii\db\ActiveRecord
 {
@@ -28,7 +31,9 @@ class Permanentaddress extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['state', 'district', 'township'], 'integer'],
+            [['state', 'district', 'township', 'visa_idvisa'], 'integer'],
+            [['visa_idvisa'], 'required'],
+            [['visa_idvisa'], 'exist', 'skipOnError' => true, 'targetClass' => Visa::className(), 'targetAttribute' => ['visa_idvisa' => 'idvisa']],
         ];
     }
 
@@ -42,6 +47,15 @@ class Permanentaddress extends \yii\db\ActiveRecord
             'state' => 'State',
             'district' => 'District',
             'township' => 'Township',
+            'visa_idvisa' => 'Visa Idvisa',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getVisaIdvisa()
+    {
+        return $this->hasOne(Visa::className(), ['idvisa' => 'visa_idvisa']);
     }
 }

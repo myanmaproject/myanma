@@ -62,9 +62,9 @@ use yii\web\JsExpression;
 
 
 <div class="panel panel-default">
-  <div class="panel-heading">Place Of Birth</div>
+  <!-- <div class="panel-heading">Place Of Birth</div> -->
   <div class="panel-body">
-    <?= $form->field($model, 'placeOfBirth')->textInput(['maxlength' => true,'placeholder' => "Address"])->label(false) ?>
+    <?= $form->field($model, 'placeOfBirth')->textInput(['maxlength' => true,'placeholder' => "Address"]) ?>
 
 
 
@@ -151,9 +151,9 @@ echo $form->field($model, 'townshipOfBirth', ['template' => '<div class=\"\">{in
     <?= $form->field($model, 'raceNationality')->textInput(['maxlength' => true]) ?>
 
 <div class="panel panel-default">
-  <div class="panel-heading">Address</div>
+  <!-- <div class="panel-heading">Address</div> -->
   <div class="panel-body">
-    <?= $form->field($model, 'address')->textInput(['maxlength' => true])->label(false) ?>
+    <?= $form->field($model, 'address')->textInput(['maxlength' => true])?>
 <?php
 if(!$model->isNewRecord){
     $Addressfamilytree = Addressfamilytree::find()->where(['familytree_idfamilytree' => $model->idfamilytree])->one();

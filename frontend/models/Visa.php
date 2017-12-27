@@ -72,8 +72,17 @@ class Visa extends \yii\db\ActiveRecord
     public $firsttime;
     public $touristvisa;
     public $transitvisa;
-
- public $visa_img;
+    
+    public $statecurrent;
+    public $districtcurrent;
+    public $townshipcurrent;
+    public $statepermanent;
+    public $districtpermanent;
+    public $townshippermanent;
+    
+    
+    
+    public $visa_img;
 
  public function behaviors(){
       return [
