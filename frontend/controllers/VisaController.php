@@ -164,6 +164,8 @@ class VisaController extends Controller
         if ($model->load(Yii::$app->request->post()) 
        && $model->save()) {
 
+        
+
 
             $file = UploadedFile::getInstance($model,'visa_img');
             if(isset($file->size) && $file->size!=0){
