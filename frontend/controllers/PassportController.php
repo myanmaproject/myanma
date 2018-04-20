@@ -368,7 +368,7 @@ if (!$Studied->save())print_r($Studied->errors);
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['find']);
     }
 
     /**
