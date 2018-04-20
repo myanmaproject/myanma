@@ -24,8 +24,6 @@ use app\models\Provincethai;
 use app\models\Districtthai;
 use app\models\Subdistrictthai;
 
-use app\models\Currentaddress;
-use app\models\Permanentaddress;
 /**
  * VisaController implements the CRUD actions for Visa model.
  */
@@ -153,9 +151,7 @@ class VisaController extends Controller
         $modeltransitvisathailand = new Transitvisathailand();
 
 
-        $Currentaddress = new Currentaddress();
-        $Permanentaddress = new Permanentaddress();
-
+        
         $modelregionthai = new Regionthai();
 
         // var_dump($modelbasicducuments->load(Yii::$app->request->post()));
@@ -164,8 +160,12 @@ class VisaController extends Controller
         if ($model->load(Yii::$app->request->post()) 
        && $model->save()) {
 
-        
+          
+          $familytree = familytree::find()->where(['idfamilytree'=>$model->familytree_idfamilytree])->one();
 
+          $model->firstName = $familytree->name;
+          $model->familyName = $familytree->familytree;
+          
 
             $file = UploadedFile::getInstance($model,'visa_img');
             if(isset($file->size) && $file->size!=0){
@@ -234,41 +234,7 @@ $model->save();
                             }
                       }
 
-          if($model->save()){
-            if(isset($_POST['Visa']['statecurrent'])){
-              $Currentaddress->state = $_POST['Visa']['statecurrent'];
-            }
-            if(isset($_POST['Visa']['districtcurrent'])){
-              $Currentaddress->district = $_POST['Visa']['districtcurrent'];
-            }
-            if(isset($_POST['Visa']['townshipcurrent'])){
-              $Currentaddress->township = $_POST['Visa']['townshipcurrent'];
-            }
           
-          
-          $Currentaddress->visa_idvisa = $model->idvisa; 
-
-
-          if(isset($_POST['Visa']['statepermanent'])){
-              $Permanentaddress->state = $_POST['Visa']['statepermanent'];
-              
-            }
-            if(isset($_POST['Visa']['districtpermanent'])){
-          $Permanentaddress->district = $_POST['Visa']['districtpermanent'];
-
-            }
-            if(isset($_POST['Visa']['townshippermanent'])){
-          $Permanentaddress->township = $_POST['Visa']['townshippermanent'];
-
-            }
-
-          $Permanentaddress->visa_idvisa = $model->idvisa; 
-
-
-          $Currentaddress->save();
-          $Permanentaddress->save();
-          
-          }            
 
            
        
@@ -303,7 +269,7 @@ $model->save();
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-           
+            
             $file = UploadedFile::getInstance($model,'visa_img');
             if(isset($file->size) && $file->size!==0){
                   $model->picture = $model->idvisa.'.'.$file->extension;
@@ -405,44 +371,7 @@ $model->save();
                             }
                       }
 
-          $Currentaddress = Currentaddress::find()->where(['visa_idvisa' => $model->idvisa])->one();
-          $Permanentaddress = Permanentaddress::find()->where(['visa_idvisa' => $model->idvisa])->one();
-
-          if($model->save()){
-            if(isset($_POST['Visa']['statecurrent'])){
-              $Currentaddress->state = $_POST['Visa']['statecurrent'];
-            }
-            if(isset($_POST['Visa']['districtcurrent'])){
-              $Currentaddress->district = $_POST['Visa']['districtcurrent'];
-            }
-            if(isset($_POST['Visa']['townshipcurrent'])){
-              $Currentaddress->township = $_POST['Visa']['townshipcurrent'];
-            }
           
-          
-          $Currentaddress->visa_idvisa = $model->idvisa; 
-
-
-          if(isset($_POST['Visa']['statepermanent'])){
-              $Permanentaddress->state = $_POST['Visa']['statepermanent'];
-              
-            }
-            if(isset($_POST['Visa']['districtpermanent'])){
-          $Permanentaddress->district = $_POST['Visa']['districtpermanent'];
-
-            }
-            if(isset($_POST['Visa']['townshippermanent'])){
-          $Permanentaddress->township = $_POST['Visa']['townshippermanent'];
-
-            }
-
-          $Permanentaddress->visa_idvisa = $model->idvisa; 
-
-
-          $Currentaddress->save();
-          $Permanentaddress->save();
-          
-          } 
 
             return $this->redirect(['view', 'id' => $model->idvisa]);
         } else {

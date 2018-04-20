@@ -100,9 +100,20 @@ $transitvisathailand = Transitvisathailand::find()->where(['visa_idvisa'=>$findv
     <div class="col-xs-5"><p align="left"><b>Date of Birth</b> <?php echo $findfamily->dateOfBirth; ?></p></div>
     <div class="col-xs-6"><p>__________________________________________________________________________________</p></div>  
 </div>
-<?php $father = Familytree::find()->where(['idfamilytree'=>$findfamily->father])->one(); ?>
+
+<?php 
+$father_name = '-';
+
+if($findfamily->father!=null){
+
+$father = Familytree::find()->where(['idfamilytree'=>$findfamily->father])->one(); 
+
+$father_name=$father->name;
+}
+
+?>
 <div class="row">
-    <div class="col-xs-5"><p align="left"><b>Father's name</b> <?php echo $father->name; ?></p></div>
+    <div class="col-xs-5"><p align="left"><b>Father's name</b> <?php echo $father_name; ?></p></div>
     <div class="col-xs-6"><p><b>Name and Address of Local Guarantor</b></p></div>  
 </div>
 

@@ -23,9 +23,15 @@ use yii\behaviors\TimestampBehavior;
  * @property string $dateIssue
  * @property string $expiryDate
  * @property string $currentAddress
+ * @property integer $stateCA
+ * @property integer $districtCA
+ * @property integer $townshipCA
  * @property string $telPerson
  * @property string $email
  * @property string $permanentAddress
+ * @property integer $statePA
+ * @property integer $districtPA
+ * @property integer $townshipPA
  * @property string $telPermanent
  * @property string $minorChildren
  * @property string $dateOfArrival
@@ -53,13 +59,23 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $updated_by
  * @property integer $familytree_idfamilytree
  * @property string $purposeOfVisit
+ * @property string $nameaddressGuarantor
+ * @property string $telGuarantor
+ * @property integer $regionthai_id
+ * @property integer $provincethai_id
+ * @property integer $districtthai_id
+ * @property integer $subdistrictthai_id
  *
  * @property Basicdocuments[] $basicdocuments
  * @property Documentapplicant[] $documentapplicants
  * @property Documentfirsttime[] $documentfirsttimes
  * @property Documenttouristvisa[] $documenttouristvisas
  * @property Transitvisathailand[] $transitvisathailands
+ * @property Districtthai $districtthai
  * @property Familytree $familytreeIdfamilytree
+ * @property Provincethai $provincethai
+ * @property Regionthai $regionthai
+ * @property Subdistrictthai $subdistrictthai
  */
 class Visa extends \yii\db\ActiveRecord
 {
@@ -72,15 +88,6 @@ class Visa extends \yii\db\ActiveRecord
     public $firsttime;
     public $touristvisa;
     public $transitvisa;
-    
-    public $statecurrent;
-    public $districtcurrent;
-    public $townshipcurrent;
-    public $statepermanent;
-    public $districtpermanent;
-    public $townshippermanent;
-    
-    
     
     public $visa_img;
 
@@ -102,17 +109,19 @@ class Visa extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['numberRequested', 'created_at', 'created_by', 'updated_at', 'updated_by', 'familytree_idfamilytree'], 'integer'],
-            [['familytree_idfamilytree'], 'required'],
-            [['prefix', 'middleName', 'familyName', 'typeOfVisaOfficial', 'categoryOfEntries', 'purposeOfVisit','telGuarantor'], 'string', 'max' => 45],
-            [['typeOfVisaRequest', 'firstName', 'nationalityBirth', 'maritalStatus', 'TypeTravelDocument', 'noPerson', 'issuedAt', 'dateIssue', 'expiryDate', 'currentAddress', 'telPerson', 'email', 'permanentAddress', 'telPermanent', 'minorChildren', 'dateOfArrival', 'traveling', 'flightNo', 'durationOfProposedStay', 'dateOfPrevious', 'countriesForTravel', 'proposedAddressThai', 'nameAddressLocal', 'telThai', 'applicationNoOfficial', 'visaNoOfficial', 'numberOfEntriesOfficial', 'dateOfIssueOfficial', 'feeOfficial', 'expOfficial', 'documentsOfficial', 'picture','nameaddressGuarantor'], 'string', 'max' => 255],
-            [['familytree_idfamilytree'], 'exist', 'skipOnError' => true, 'targetClass' => Familytree::className(), 'targetAttribute' => ['familytree_idfamilytree' => 'idfamilytree']],
-                        [['visa_img'],'file','skipOnEmpty' => true, 'on' => 'update','extensions'=> 'jpg,png,gif'],
+           [['numberRequested', 'stateCA', 'districtCA', 'townshipCA', 'statePA', 'districtPA', 'townshipPA','created_at', 'updated_at', 'created_by', 'updated_by', 'familytree_idfamilytree', 'regionthai_id', 'provincethai_id', 'districtthai_id', 'subdistrictthai_id'], 'integer'],
+            
+            [['familytree_idfamilytree', 'regionthai_id', 'provincethai_id', 'districtthai_id', 'subdistrictthai_id'], 'required'],
+            [['prefix', 'middleName', 'familyName', 'typeOfVisaOfficial', 'categoryOfEntries', 'purposeOfVisit', 'telGuarantor'], 'string', 'max' => 45],
+            [['typeOfVisaRequest', 'firstName', 'nationalityBirth', 'maritalStatus', 'TypeTravelDocument', 'noPerson', 'issuedAt', 'dateIssue', 'expiryDate', 'currentAddress', 'telPerson', 'email', 'permanentAddress', 'telPermanent', 'minorChildren', 'dateOfArrival', 'traveling', 'flightNo', 'durationOfProposedStay', 'dateOfPrevious', 'countriesForTravel', 'proposedAddressThai', 'nameAddressLocal', 'telThai', 'applicationNoOfficial', 'visaNoOfficial', 'numberOfEntriesOfficial', 'dateOfIssueOfficial', 'feeOfficial', 'expOfficial', 'documentsOfficial', 'picture', 'nameaddressGuarantor'], 'string', 'max' => 255],
+            
             [['districtthai_id'], 'exist', 'skipOnError' => true, 'targetClass' => Districtthai::className(), 'targetAttribute' => ['districtthai_id' => 'id']],
- [['provincethai_id'], 'exist', 'skipOnError' => true, 'targetClass' => Provincethai::className(), 'targetAttribute' => ['provincethai_id' => 'id']],
+            [['familytree_idfamilytree'], 'exist', 'skipOnError' => true, 'targetClass' => Familytree::className(), 'targetAttribute' => ['familytree_idfamilytree' => 'idfamilytree']],
+            [['provincethai_id'], 'exist', 'skipOnError' => true, 'targetClass' => Provincethai::className(), 'targetAttribute' => ['provincethai_id' => 'id']],
             [['regionthai_id'], 'exist', 'skipOnError' => true, 'targetClass' => Regionthai::className(), 'targetAttribute' => ['regionthai_id' => 'id']],
             [['subdistrictthai_id'], 'exist', 'skipOnError' => true, 'targetClass' => Subdistrictthai::className(), 'targetAttribute' => ['subdistrictthai_id' => 'id']],
-       
+            [['visa_img'],'file','skipOnEmpty' => true, 'on' => 'update','extensions'=> 'jpg,png,gif'],
+            
 
         ];
     }
@@ -138,9 +147,15 @@ class Visa extends \yii\db\ActiveRecord
             'dateIssue' => 'Date Issue',
             'expiryDate' => 'Expiry Date',
             'currentAddress' => 'Current Address',
+            'stateCA' => 'State Ca',
+            'districtCA' => 'District Ca',
+            'townshipCA' => 'Township Ca',
             'telPerson' => 'Tel Person',
             'email' => 'Email',
             'permanentAddress' => 'Permanent Address',
+            'statePA' => 'State Pa',
+            'districtPA' => 'District Pa',
+            'townshipPA' => 'Township Pa',
             'telPermanent' => 'Tel Permanent',
             'minorChildren' => 'Minor Children',
             'dateOfArrival' => 'Date Of Arrival',

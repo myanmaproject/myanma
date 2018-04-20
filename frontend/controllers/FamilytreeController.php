@@ -119,43 +119,7 @@ class FamilytreeController extends Controller
         $model = new Familytree();
 
         if ($model->load(Yii::$app->request->post()) ) {
-
-          $Placeofbirth = new Placeofbirth();
-          $Addressfamilytree = new Addressfamilytree();
-          
-          if($model->save()){
-            if(isset($_POST['Familytree']['stateOfBirth'])){
-              $Placeofbirth->state = $_POST['Familytree']['stateOfBirth'];
-            }
-            if(isset($_POST['Familytree']['districtOfBirth'])){
-              $Placeofbirth->district = $_POST['Familytree']['districtOfBirth'];
-            }
-            if(isset($_POST['Familytree']['townshipOfBirth'])){
-              $Placeofbirth->township = $_POST['Familytree']['townshipOfBirth'];
-            }
-          
-          
-          $Placeofbirth->familytree_idfamilytree = $model->idfamilytree; 
-
-          if(isset($_POST['Familytree']['stateAddress'])){
-              $Addressfamilytree->state = $_POST['Familytree']['stateAddress'];
-              
-            }
-            if(isset($_POST['Familytree']['districtAddress'])){
-          $Addressfamilytree->district = $_POST['Familytree']['districtAddress'];
-
-            }
-            if(isset($_POST['Familytree']['townshipAddress'])){
-          $Addressfamilytree->township = $_POST['Familytree']['townshipAddress'];
-
-            }
-
-          $Addressfamilytree->familytree_idfamilytree = $model->idfamilytree;
-          $Placeofbirth->save();
-          $Addressfamilytree->save();
-          
-          }
-
+    
           
           
           $model->save();
@@ -179,30 +143,9 @@ class FamilytreeController extends Controller
 
         if ($model->load(Yii::$app->request->post()) ) {
           
-          $Placeofbirth = Placeofbirth::find()->where(['familytree_idfamilytree' => $model->idfamilytree])->one();
-          $Addressfamilytree = Addressfamilytree::find()->where(['familytree_idfamilytree' => $model->idfamilytree])->one();
-          
-
-          
-          if($model->save()){
-          $Placeofbirth->state = $_POST['Familytree']['stateOfBirth'];
-          $Placeofbirth->district = $_POST['Familytree']['districtOfBirth'];
-          $Placeofbirth->township = $_POST['Familytree']['townshipOfBirth'];
-          $Placeofbirth->familytree_idfamilytree = $model->idfamilytree; 
-
-
-          $Addressfamilytree->state = $_POST['Familytree']['stateAddress'];
-          $Addressfamilytree->district = $_POST['Familytree']['districtAddress'];
-          $Addressfamilytree->township = $_POST['Familytree']['townshipAddress'];
-          $Addressfamilytree->familytree_idfamilytree = $model->idfamilytree;
-          $Placeofbirth->save();
-          $Addressfamilytree->save();
-          
-          }
-
-          
-          
           $model->save();
+
+          
             return $this->redirect(['view', 'id' => $model->idfamilytree]);
         } else {
             return $this->render('update', [

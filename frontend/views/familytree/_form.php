@@ -9,8 +9,7 @@ use kartik\widgets\DatePicker;
 use app\models\state;
 use app\models\district;
 use app\models\township;
-use app\models\Placeofbirth;
-use app\models\Addressfamilytree;
+
 use yii\jui\AutoComplete;   
 use yii\web\JsExpression;
 /* @var $this yii\web\View */
@@ -71,40 +70,34 @@ use yii\web\JsExpression;
 <?php
 
 if(!$model->isNewRecord){
-    $Placeofbirth = Placeofbirth::find()->where(['familytree_idfamilytree' => $model->idfamilytree])->one();
-
-   
-    $model->stateOfBirth = $Placeofbirth->state;
-    $model->districtOfBirth = $Placeofbirth->district;
-    $model->townshipOfBirth = $Placeofbirth->township;
 
     $script = <<< JS
 $(document).ready(function(){
-    $("select#familytree-districtofbirth").prop("disabled", false); 
-    $("select#familytree-townshipofbirth").prop("disabled", false);
+    $("select#familytree-districtpob").prop("disabled", false); 
+    $("select#familytree-townshippob").prop("disabled", false);
 }); 
 JS;
 $this->registerJs($script, View::POS_END);
 }
 
-echo $form->field($model, 'stateOfBirth', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
+echo $form->field($model, 'statePOB', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
         ->dropDownList(ArrayHelper::map(State::find()->all(), 'stateId', 'stateNameEN')
                 , [
             'prompt' => 'Select State',
             'onChange' => '
                             
                             $.post("index.php?r=dep/district&id=' . '"+$(this).val(),function( data ){
-                                $("select#familytree-districtofbirth").html( data );
+                                $("select#familytree-districtpob").html( data );
 
                             if(data == "<option value>Select District</option>"){
-                                        $("select#familytree-districtofbirth").prop("disabled", true);
-                                        $("select#familytree-districtofbirth").val(""); 
-                                        $("select#familytree-townshipofbirth").prop("disabled", true); 
-                                        $("select#familytree-townshipofbirth").val(""); 
+                                        $("select#familytree-districtpob").prop("disabled", true);
+                                        $("select#familytree-districtpob").val(""); 
+                                        $("select#familytree-townshippob").prop("disabled", true); 
+                                        $("select#familytree-townshippob").val(""); 
                                     }else{
-                                        $("select#familytree-townshipofbirth").prop("disabled", true); 
-                                        $("select#familytree-townshipofbirth").val("");
-                                        $("select#familytree-districtofbirth").prop("disabled", false); 
+                                        $("select#familytree-townshippob").prop("disabled", true); 
+                                        $("select#familytree-townshippob").val("");
+                                        $("select#familytree-districtpob").prop("disabled", false); 
                                         
                                     }
                                     
@@ -113,21 +106,21 @@ echo $form->field($model, 'stateOfBirth', ['template' => '<div class=\"\">{input
 ?>
 
 <?php
-echo $form->field($model, 'districtOfBirth', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
+echo $form->field($model, 'districtPOB', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
         ->dropDownList(ArrayHelper::map(District::find()->all(), 'districtId', 'districtNameEN')
                 , [
             'prompt' => 'Select District',
             'disabled' => 'disabled',
             'onChange' => '
                             $.post("index.php?r=dep/township&id=' . '"+$(this).val(),function( data ){
-                                $("select#familytree-townshipofbirth").html( data );
+                                $("select#familytree-townshippob").html( data );
 
                             if(data == "<option value>Select Township</option>"){
-                                        $("select#familytree-townshipofbirth").prop("disabled", true); 
-                                        $("select#familytree-townshipofbirth").val(""); 
+                                        $("select#familytree-townshippob").prop("disabled", true); 
+                                        $("select#familytree-townshippob").val(""); 
                                         
                                     }else{
-                                        $("select#familytree-townshipofbirth").prop("disabled", false); 
+                                        $("select#familytree-townshippob").prop("disabled", false); 
                                     }
                                     
                         });',
@@ -136,7 +129,7 @@ echo $form->field($model, 'districtOfBirth', ['template' => '<div class=\"\">{in
 
 
 <?php
-echo $form->field($model, 'townshipOfBirth', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
+echo $form->field($model, 'townshipPOB', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
         ->dropDownList(ArrayHelper::map(Township::find()->all(), 'townshipId', 'townshipNameEN')
                 , [
             'prompt' => 'Select Township',
@@ -156,40 +149,34 @@ echo $form->field($model, 'townshipOfBirth', ['template' => '<div class=\"\">{in
     <?= $form->field($model, 'address')->textInput(['maxlength' => true])?>
 <?php
 if(!$model->isNewRecord){
-    $Addressfamilytree = Addressfamilytree::find()->where(['familytree_idfamilytree' => $model->idfamilytree])->one();
-
-   
-    $model->stateAddress = $Addressfamilytree->state;
-    $model->districtAddress = $Addressfamilytree->district;
-    $model->townshipAddress = $Addressfamilytree->township;
 
     $script = <<< JS
 $(document).ready(function(){
-    $("select#familytree-districtaddress").prop("disabled", false); 
-    $("select#familytree-townshipaddress").prop("disabled", false);
+    $("select#familytree-districtaf").prop("disabled", false); 
+    $("select#familytree-townshipaf").prop("disabled", false);
 }); 
 JS;
 $this->registerJs($script, View::POS_END);
 
 }
-echo $form->field($model, 'stateAddress', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
+echo $form->field($model, 'stateAF', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
         ->dropDownList(ArrayHelper::map(State::find()->all(), 'stateId', 'stateNameEN')
                 , [
             'prompt' => 'Select State',
             'onChange' => '
                             
                             $.post("index.php?r=dep/district&id=' . '"+$(this).val(),function( data ){
-                                $("select#familytree-districtaddress").html( data );
+                                $("select#familytree-districtaf").html( data );
 
                             if(data == "<option value>Select District</option>"){
-                                        $("select#familytree-districtaddress").prop("disabled", true);
-                                        $("select#familytree-districtaddress").val(""); 
-                                        $("select#familytree-townshipaddress").prop("disabled", true); 
-                                        $("select#familytree-townshipaddress").val(""); 
+                                        $("select#familytree-districtaf").prop("disabled", true);
+                                        $("select#familytree-districtaf").val(""); 
+                                        $("select#familytree-townshipaf").prop("disabled", true); 
+                                        $("select#familytree-townshipaf").val(""); 
                                     }else{
-                                        $("select#familytree-townshipaddress").prop("disabled", true); 
-                                        $("select#familytree-townshipaddress").val(""); 
-                                        $("select#familytree-districtaddress").prop("disabled", false); 
+                                        $("select#familytree-townshipaf").prop("disabled", true); 
+                                        $("select#familytree-townshipaf").val(""); 
+                                        $("select#familytree-districtaf").prop("disabled", false); 
                                     }
                                     
                         });',
@@ -197,21 +184,21 @@ echo $form->field($model, 'stateAddress', ['template' => '<div class=\"\">{input
 ?>
 
 <?php
-echo $form->field($model, 'districtAddress', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
+echo $form->field($model, 'districtAF', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
         ->dropDownList(ArrayHelper::map(District::find()->all(), 'districtId', 'districtNameEN')
                 , [
             'prompt' => 'Select District',
             'disabled' => 'disabled',
             'onChange' => '
                             $.post("index.php?r=dep/township&id=' . '"+$(this).val(),function( data ){
-                                $("select#familytree-townshipaddress").html( data );
+                                $("select#familytree-townshipaf").html( data );
 
                             if(data == "<option value>Select Township</option>"){
-                                        $("select#familytree-townshipaddress").prop("disabled", true); 
-                                        $("select#familytree-townshipaddress").val(""); 
+                                        $("select#familytree-townshipaf").prop("disabled", true); 
+                                        $("select#familytree-townshipaf").val(""); 
                                         
                                     }else{
-                                        $("select#familytree-townshipaddress").prop("disabled", false); 
+                                        $("select#familytree-townshipaf").prop("disabled", false); 
                                     }
                                     
                         });',
@@ -220,7 +207,7 @@ echo $form->field($model, 'districtAddress', ['template' => '<div class=\"\">{in
 
 
 <?php
-echo $form->field($model, 'townshipAddress', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
+echo $form->field($model, 'townshipAF', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
         ->dropDownList(ArrayHelper::map(Township::find()->all(), 'townshipId', 'townshipNameEN')
                 , [
             'prompt' => 'Select Township',
@@ -257,10 +244,17 @@ echo $form->field($model, 'townshipAddress', ['template' => '<div class=\"\">{in
     <?= $form->field($model, 'region')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'occupation')->textInput(['maxlength' => true]) ?>
+<?php
 
-    <?= $form->field($model, 'aliveOrDeath')->dropDownList(['Alive' => 'Alive'
+if($model->isNewRecord){
+
+    $model->aliveOrDeath='Alive';
+    
+}
+?>
+    <?= $form->field($model, 'aliveOrDeath')->radioList(['Alive' => 'Alive'
             , 'Death' => 'Death']
-            ); ?>
+            )->label("Status"); ?>
 
  <div class="clearfix"></div>
             <hr>

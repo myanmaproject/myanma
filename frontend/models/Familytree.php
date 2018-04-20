@@ -10,33 +10,38 @@ use yii\behaviors\TimestampBehavior;
  * This is the model class for table "familytree".
  *
  * @property integer $idfamilytree
+ * @property string $familytree
  * @property string $name
  * @property string $dateOfBirth
  * @property string $placeOfBirth
+ * @property integer $statePOB
+ * @property integer $districtPOB
+ * @property integer $townshipPOB
  * @property string $raceNationality
  * @property string $nrc
  * @property string $region
  * @property string $occupation
  * @property string $aliveOrDeath
  * @property string $address
+ * @property integer $stateAF
+ * @property integer $districtAF
+ * @property integer $townshipAF
  * @property string $father
  * @property string $mother
+ * @property integer $created_at
+ * @property integer $created_by
+ * @property integer $updated_at
+ * @property integer $updated_by
  *
  * @property Passport[] $passports
  * @property Visa[] $visas
  */
 class Familytree extends \yii\db\ActiveRecord
-{   
-    public $stateOfBirth;
-    public $districtOfBirth;
-    public $townshipOfBirth;
-    public $stateAddress;
-    public $districtAddress;
-    public $townshipAddress;
-
+{
     /**
      * @inheritdoc
      */
+
      public function behaviors(){
       return [
         BlameableBehavior::className(),
@@ -54,9 +59,10 @@ class Familytree extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-              [['created_at', 'created_by', 'updated_at', 'updated_by'], 'integer'],
-            [['name', 'dateOfBirth', 'placeOfBirth', 'raceNationality', 'nrc', 'region', 'occupation', 'aliveOrDeath', 'address', 'father', 'mother'], 'string', 'max' => 45],
-               [['familytree'], 'string', 'max' => 255],
+            [['dateOfBirth'], 'safe'],
+            [['statePOB', 'districtPOB', 'townshipPOB', 'stateAF', 'districtAF', 'townshipAF', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
+            [['familytree'], 'string', 'max' => 255],
+            [['name', 'placeOfBirth', 'raceNationality', 'nrc', 'region', 'occupation', 'aliveOrDeath', 'address', 'father', 'mother'], 'string', 'max' => 45],
         ];
     }
 
@@ -67,19 +73,25 @@ class Familytree extends \yii\db\ActiveRecord
     {
         return [
             'idfamilytree' => 'Idfamilytree',
-             'familytree' => 'Familytree', 
+            'familytree' => 'Familytree',
             'name' => 'Name',
             'dateOfBirth' => 'Date Of Birth',
             'placeOfBirth' => 'Place Of Birth',
+            'statePOB' => 'State Pob',
+            'districtPOB' => 'District Pob',
+            'townshipPOB' => 'Township Pob',
             'raceNationality' => 'Race Nationality',
             'nrc' => 'Nrc',
             'region' => 'Region',
             'occupation' => 'Occupation',
             'aliveOrDeath' => 'Alive Or Death',
             'address' => 'Address',
+            'stateAF' => 'State Af',
+            'districtAF' => 'District Af',
+            'townshipAF' => 'Township Af',
             'father' => 'Father',
             'mother' => 'Mother',
-               'created_at' => 'Created At',
+            'created_at' => 'Created At',
             'created_by' => 'Created By',
             'updated_at' => 'Updated At',
             'updated_by' => 'Updated By',
@@ -101,13 +113,4 @@ class Familytree extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Visa::className(), ['familytree_idfamilytree' => 'idfamilytree']);
     }
-
-
-
-   
-
-
-       
-
-
 }

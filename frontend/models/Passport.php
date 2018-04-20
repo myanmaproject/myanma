@@ -15,6 +15,9 @@ use yii\behaviors\TimestampBehavior;
  * @property string $sex
  * @property string $presentOccupation
  * @property string $presentOccupationAddress
+ * @property integer $statePOA
+ * @property integer $districtPOA
+ * @property integer $townshipPOA
  * @property string $educationalQual
  * @property string $citizenshipSecCardNo
  * @property string $height
@@ -23,20 +26,27 @@ use yii\behaviors\TimestampBehavior;
  * @property string $spouseName
  * @property string $spouseOccupation
  * @property string $spouseOccupationAddress
+ * @property integer $stateSOA
+ * @property integer $districtSOA
+ * @property integer $townshipSOA
  * @property string $subjectTravelled
  * @property string $countryApplied
  * @property string $departmentTransferred
  * @property string $departmentTransferredCurrent
  * @property string $detailOfSiblingsApplicant
  * @property string $detailOfSpouseApplicant
- * @property string $detailOfChildrenApplicant
  * @property string $detailOfSiblingsFather
  * @property string $detailOfSiblingsMother
+ * @property string $detailOfChildrenApplicant
  * @property string $detailOfSiblingsSpouse
  * @property string $passportNo
  * @property string $passportIssueDate
  * @property string $placeDeliveredPassport
  * @property string $dateDeliveredPassport
+ * @property integer $created_at
+ * @property integer $created_by
+ * @property integer $updated_at
+ * @property integer $updated_by
  *
  * @property Criminalcivillaw[] $criminalcivillaws
  * @property Familytree $familytreeIdfamilytree
@@ -52,14 +62,6 @@ class Passport extends \yii\db\ActiveRecord
     public $criminalcivillaw2;
     public $whetheraboard1;
     public $whetheraboard2;
-
-    public $statepresent;
-    public $districtpresent;
-    public $townshippresent;
-    
-    public $statespouse;
-    public $districtspouse;
-    public $townshipspouse;
 
 
 
@@ -83,10 +85,10 @@ class Passport extends \yii\db\ActiveRecord
     {
         return [
             [['familytree_idfamilytree'], 'required'],
-            [['familytree_idfamilytree','created_at', 'created_by', 'updated_at', 'updated_by'], 'integer'],
+            [['familytree_idfamilytree', 'statePOA', 'districtPOA', 'townshipPOA', 'stateSOA', 'districtSOA', 'townshipSOA', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['passportIssueDate', 'dateDeliveredPassport'], 'safe'],
-            [['otherName', 'identificationMark'], 'string', 'max' => 255],
-            [['sex', 'presentOccupation', 'presentOccupationAddress', 'educationalQual', 'citizenshipSecCardNo', 'height', 'eye', 'hair', 'spouseName', 'spouseOccupation', 'spouseOccupationAddress', 'subjectTravelled', 'countryApplied', 'departmentTransferred', 'departmentTransferredCurrent', 'detailOfSiblingsApplicant', 'detailOfSpouseApplicant', 'detailOfChildrenApplicant', 'detailOfSiblingsFather', 'detailOfSiblingsMother', 'detailOfSiblingsSpouse', 'passportNo', 'placeDeliveredPassport'], 'string', 'max' => 45],
+            [['otherName', 'identificationMark', 'presentOccupationAddress', 'spouseOccupation', 'spouseOccupationAddress', 'subjectTravelled', 'countryApplied', 'departmentTransferred', 'departmentTransferredCurrent', 'detailOfSiblingsApplicant', 'detailOfSpouseApplicant', 'detailOfSiblingsFather', 'detailOfSiblingsMother', 'detailOfChildrenApplicant', 'detailOfSiblingsSpouse', 'placeDeliveredPassport'], 'string', 'max' => 255],
+            [['sex', 'presentOccupation', 'educationalQual', 'citizenshipSecCardNo', 'height', 'eye', 'hair', 'spouseName', 'passportNo'], 'string', 'max' => 45],
             [['familytree_idfamilytree'], 'exist', 'skipOnError' => true, 'targetClass' => Familytree::className(), 'targetAttribute' => ['familytree_idfamilytree' => 'idfamilytree']],
         ];
     }
@@ -104,6 +106,9 @@ class Passport extends \yii\db\ActiveRecord
             'sex' => 'Genger',
             'presentOccupation' => 'Present Occupation',
             'presentOccupationAddress' => 'Present Occupation Address',
+            'statePOA' => 'State Poa',
+            'districtPOA' => 'District Poa',
+            'townshipPOA' => 'Township Poa',
             'educationalQual' => 'Educational Qual',
             'citizenshipSecCardNo' => 'Citizenship Sec Card No',
             'height' => 'Height',
@@ -112,6 +117,9 @@ class Passport extends \yii\db\ActiveRecord
             'spouseName' => 'Spouse Name',
             'spouseOccupation' => 'Spouse Occupation',
             'spouseOccupationAddress' => 'Spouse Occupation Address',
+            'stateSOA' => 'State Soa',
+            'districtSOA' => 'District Soa',
+            'townshipSOA' => 'Township Soa',
             'subjectTravelled' => 'Subject Travelled',
             'countryApplied' => 'Country Applied',
             'departmentTransferred' => 'Department Transferred',

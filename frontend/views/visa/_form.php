@@ -23,8 +23,6 @@ use app\models\state;
 use app\models\district;
 use app\models\township;
 
-use app\models\Currentaddress;
-use app\models\Permanentaddress;
 /* @var $this yii\web\View */
 /* @var $model app\models\Visa */
 /* @var $form yii\widgets\ActiveForm */
@@ -180,40 +178,34 @@ if(isset ($_GET["familytree_idfamilytree"])){
 <?php
 
 if(!$model->isNewRecord){
-    $Currentaddress = Currentaddress::find()->where(['visa_idvisa' => $model->idvisa])->one();
-
-   
-    $model->statecurrent = $Currentaddress->state;
-    $model->districtcurrent = $Currentaddress->district;
-    $model->townshipcurrent = $Currentaddress->township;
-
+    
     $script = <<< JS
 $(document).ready(function(){
-    $("select#visa-districtcurrent").prop("disabled", false); 
-    $("select#visa-townshipcurrent").prop("disabled", false);
+    $("select#visa-districtca").prop("disabled", false); 
+    $("select#visa-townshipca").prop("disabled", false);
 }); 
 JS;
 $this->registerJs($script, View::POS_END);
 }
 
-echo $form->field($model, 'statecurrent', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
+echo $form->field($model, 'stateCA', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
         ->dropDownList(ArrayHelper::map(State::find()->all(), 'stateId', 'stateNameEN')
                 , [
             'prompt' => 'Select State',
             'onChange' => '
                             
                             $.post("index.php?r=dep/district&id=' . '"+$(this).val(),function( data ){
-                                $("select#visa-districtcurrent").html( data );
+                                $("select#visa-districtca").html( data );
 
                             if(data == "<option value>Select District</option>"){
-                                        $("select#visa-districtcurrent").prop("disabled", true);
-                                        $("select#visa-districtcurrent").val(""); 
-                                        $("select#visa-townshipcurrent").prop("disabled", true); 
-                                        $("select#visa-townshipcurrent").val(""); 
+                                        $("select#visa-districtca").prop("disabled", true);
+                                        $("select#visa-districtca").val(""); 
+                                        $("select#visa-townshipca").prop("disabled", true); 
+                                        $("select#visa-townshipca").val(""); 
                                     }else{
-                                        $("select#visa-townshipcurrent").prop("disabled", true); 
-                                        $("select#visa-townshipcurrent").val("");
-                                        $("select#visa-districtcurrent").prop("disabled", false); 
+                                        $("select#visa-townshipca").prop("disabled", true); 
+                                        $("select#visa-townshipca").val("");
+                                        $("select#visa-districtca").prop("disabled", false); 
                                         
                                     }
                                     
@@ -222,21 +214,21 @@ echo $form->field($model, 'statecurrent', ['template' => '<div class=\"\">{input
 ?>
 
 <?php
-echo $form->field($model, 'districtcurrent', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
+echo $form->field($model, 'districtCA', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
         ->dropDownList(ArrayHelper::map(District::find()->all(), 'districtId', 'districtNameEN')
                 , [
             'prompt' => 'Select District',
             'disabled' => 'disabled',
             'onChange' => '
                             $.post("index.php?r=dep/township&id=' . '"+$(this).val(),function( data ){
-                                $("select#visa-townshipcurrent").html( data );
+                                $("select#visa-townshipca").html( data );
 
                             if(data == "<option value>Select Township</option>"){
-                                        $("select#visa-townshipcurrent").prop("disabled", true); 
-                                        $("select#visa-townshipcurrent").val(""); 
+                                        $("select#visa-townshipca").prop("disabled", true); 
+                                        $("select#visa-townshipca").val(""); 
                                         
                                     }else{
-                                        $("select#visa-townshipcurrent").prop("disabled", false); 
+                                        $("select#visa-townshipca").prop("disabled", false); 
                                     }
                                     
                         });',
@@ -245,7 +237,7 @@ echo $form->field($model, 'districtcurrent', ['template' => '<div class=\"\">{in
 
 
 <?php
-echo $form->field($model, 'townshipcurrent', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
+echo $form->field($model, 'townshipCA', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
         ->dropDownList(ArrayHelper::map(Township::find()->all(), 'townshipId', 'townshipNameEN')
                 , [
             'prompt' => 'Select Township',
@@ -268,39 +260,34 @@ echo $form->field($model, 'townshipcurrent', ['template' => '<div class=\"\">{in
 <?php
 
 if(!$model->isNewRecord){
-    $Permanentaddress = Permanentaddress::find()->where(['visa_idvisa' => $model->idvisa])->one();
-   
-    $model->statepermanent = $Permanentaddress->state;
-    $model->districtpermanent = $Permanentaddress->district;
-    $model->townshippermanent = $Permanentaddress->township;
 
     $script = <<< JS
 $(document).ready(function(){
-    $("select#visa-districtpermanent").prop("disabled", false); 
-    $("select#visa-townshippermanent").prop("disabled", false);
+    $("select#visa-districtpa").prop("disabled", false); 
+    $("select#visa-townshippa").prop("disabled", false);
 }); 
 JS;
 $this->registerJs($script, View::POS_END);
 }
 
-echo $form->field($model, 'statepermanent', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
+echo $form->field($model, 'statePA', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
         ->dropDownList(ArrayHelper::map(State::find()->all(), 'stateId', 'stateNameEN')
                 , [
             'prompt' => 'Select State',
             'onChange' => '
                             
                             $.post("index.php?r=dep/district&id=' . '"+$(this).val(),function( data ){
-                                $("select#visa-districtpermanent").html( data );
+                                $("select#visa-districtpa").html( data );
 
                             if(data == "<option value>Select District</option>"){
-                                        $("select#visa-districtpermanent").prop("disabled", true);
-                                        $("select#visa-districtpermanent").val(""); 
-                                        $("select#visa-townshippermanent").prop("disabled", true); 
-                                        $("select#visa-townshippermanent").val(""); 
+                                        $("select#visa-districtpa").prop("disabled", true);
+                                        $("select#visa-districtpa").val(""); 
+                                        $("select#visa-townshippa").prop("disabled", true); 
+                                        $("select#visa-townshippa").val(""); 
                                     }else{
-                                        $("select#visa-townshippermanent").prop("disabled", true); 
-                                        $("select#visa-townshippermanent").val("");
-                                        $("select#visa-districtpermanent").prop("disabled", false); 
+                                        $("select#visa-townshippa").prop("disabled", true); 
+                                        $("select#visa-townshippa").val("");
+                                        $("select#visa-districtpa").prop("disabled", false); 
                                         
                                     }
                                     
@@ -309,21 +296,21 @@ echo $form->field($model, 'statepermanent', ['template' => '<div class=\"\">{inp
 ?>
 
 <?php
-echo $form->field($model, 'districtpermanent', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
+echo $form->field($model, 'districtPA', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
         ->dropDownList(ArrayHelper::map(District::find()->all(), 'districtId', 'districtNameEN')
                 , [
             'prompt' => 'Select District',
             'disabled' => 'disabled',
             'onChange' => '
                             $.post("index.php?r=dep/township&id=' . '"+$(this).val(),function( data ){
-                                $("select#visa-townshippermanent").html( data );
+                                $("select#visa-townshippa").html( data );
 
                             if(data == "<option value>Select Township</option>"){
-                                        $("select#visa-townshippermanent").prop("disabled", true); 
-                                        $("select#visa-townshippermanent").val(""); 
+                                        $("select#visa-townshippa").prop("disabled", true); 
+                                        $("select#visa-townshippa").val(""); 
                                         
                                     }else{
-                                        $("select#visa-townshippermanent").prop("disabled", false); 
+                                        $("select#visa-townshippa").prop("disabled", false); 
                                     }
                                     
                         });',
@@ -332,7 +319,7 @@ echo $form->field($model, 'districtpermanent', ['template' => '<div class=\"\">{
 
 
 <?php
-echo $form->field($model, 'townshippermanent', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
+echo $form->field($model, 'townshipPA', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
         ->dropDownList(ArrayHelper::map(Township::find()->all(), 'townshipId', 'townshipNameEN')
                 , [
             'prompt' => 'Select Township',

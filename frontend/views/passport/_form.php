@@ -15,8 +15,7 @@ use app\models\state;
 use app\models\district;
 use app\models\township;
 
-use app\models\Spouseoccupationaddress;
-use app\models\Presentoccupationaddress;
+
 /* @var $this yii\web\View */
 /* @var $model app\models\Passport */
 /* @var $form yii\widgets\ActiveForm */
@@ -78,40 +77,35 @@ if(isset ($_GET["familytree_idfamilytree"])){
 <?php
 
 if(!$model->isNewRecord){
-    $Presentoccupationaddress = Presentoccupationaddress::find()->where(['passport_idpassport' => $model->idpassport])->one();
-
-   
-    $model->statepresent = $Presentoccupationaddress->state;
-    $model->districtpresent = $Presentoccupationaddress->district;
-    $model->townshippresent = $Presentoccupationaddress->township;
+  
 
     $script = <<< JS
 $(document).ready(function(){
-    $("select#passport-districtpresent").prop("disabled", false); 
-    $("select#passport-townshippresent").prop("disabled", false);
+    $("select#passport-districtpoa").prop("disabled", false); 
+    $("select#passport-townshippoa").prop("disabled", false);
 }); 
 JS;
 $this->registerJs($script, View::POS_END);
 }
 
-echo $form->field($model, 'statepresent', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
+echo $form->field($model, 'statePOA', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
         ->dropDownList(ArrayHelper::map(State::find()->all(), 'stateId', 'stateNameEN')
                 , [
             'prompt' => 'Select State',
             'onChange' => '
                             
                             $.post("index.php?r=dep/district&id=' . '"+$(this).val(),function( data ){
-                                $("select#passport-districtpresent").html( data );
+                                $("select#passport-districtpoa").html( data );
 
                             if(data == "<option value>Select District</option>"){
-                                        $("select#passport-districtpresent").prop("disabled", true);
-                                        $("select#passport-districtpresent").val(""); 
-                                        $("select#passport-townshippresent").prop("disabled", true); 
-                                        $("select#passport-townshippresent").val(""); 
+                                        $("select#passport-districtpoa").prop("disabled", true);
+                                        $("select#passport-districtpoa").val(""); 
+                                        $("select#passport-townshippoa").prop("disabled", true); 
+                                        $("select#passport-townshippoa").val(""); 
                                     }else{
-                                        $("select#passport-townshippresent").prop("disabled", true); 
-                                        $("select#passport-townshippresent").val("");
-                                        $("select#passport-districtpresent").prop("disabled", false); 
+                                        $("select#passport-townshippoa").prop("disabled", true); 
+                                        $("select#passport-townshippoa").val("");
+                                        $("select#passport-districtpoa").prop("disabled", false); 
                                         
                                     }
                                     
@@ -120,21 +114,21 @@ echo $form->field($model, 'statepresent', ['template' => '<div class=\"\">{input
 ?>
 
 <?php
-echo $form->field($model, 'districtpresent', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
+echo $form->field($model, 'districtPOA', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
         ->dropDownList(ArrayHelper::map(District::find()->all(), 'districtId', 'districtNameEN')
                 , [
             'prompt' => 'Select District',
             'disabled' => 'disabled',
             'onChange' => '
                             $.post("index.php?r=dep/township&id=' . '"+$(this).val(),function( data ){
-                                $("select#passport-townshippresent").html( data );
+                                $("select#passport-townshippoa").html( data );
 
                             if(data == "<option value>Select Township</option>"){
-                                        $("select#passport-townshippresent").prop("disabled", true); 
-                                        $("select#passport-townshippresent").val(""); 
+                                        $("select#passport-townshippoa").prop("disabled", true); 
+                                        $("select#passport-townshippoa").val(""); 
                                         
                                     }else{
-                                        $("select#passport-townshippresent").prop("disabled", false); 
+                                        $("select#passport-townshippoa").prop("disabled", false); 
                                     }
                                     
                         });',
@@ -143,7 +137,7 @@ echo $form->field($model, 'districtpresent', ['template' => '<div class=\"\">{in
 
 
 <?php
-echo $form->field($model, 'townshippresent', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
+echo $form->field($model, 'townshipPOA', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
         ->dropDownList(ArrayHelper::map(Township::find()->all(), 'townshipId', 'townshipNameEN')
                 , [
             'prompt' => 'Select Township',
@@ -180,40 +174,34 @@ echo $form->field($model, 'townshippresent', ['template' => '<div class=\"\">{in
 <?php
 
 if(!$model->isNewRecord){
-    $Spouseoccupationaddress = Spouseoccupationaddress::find()->where(['passport_idpassport' => $model->idpassport])->one();
-
-   
-    $model->statespouse = $Spouseoccupationaddress->state;
-    $model->districtspouse = $Spouseoccupationaddress->district;
-    $model->townshipspouse = $Spouseoccupationaddress->township;
-
+    
     $script = <<< JS
 $(document).ready(function(){
-    $("select#passport-districtspouse").prop("disabled", false); 
-    $("select#passport-townshipspouse").prop("disabled", false);
+    $("select#passport-districtsoa").prop("disabled", false); 
+    $("select#passport-townshipsoa").prop("disabled", false);
 }); 
 JS;
 $this->registerJs($script, View::POS_END);
 }
 
-echo $form->field($model, 'statespouse', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
+echo $form->field($model, 'stateSOA', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
         ->dropDownList(ArrayHelper::map(State::find()->all(), 'stateId', 'stateNameEN')
                 , [
             'prompt' => 'Select State',
             'onChange' => '
                             
                             $.post("index.php?r=dep/district&id=' . '"+$(this).val(),function( data ){
-                                $("select#passport-districtspouse").html( data );
+                                $("select#passport-districtsoa").html( data );
 
                             if(data == "<option value>Select District</option>"){
-                                        $("select#passport-districtspouse").prop("disabled", true);
-                                        $("select#passport-districtspouse").val(""); 
-                                        $("select#passport-townshipspouse").prop("disabled", true); 
-                                        $("select#passport-townshipspouse").val(""); 
+                                        $("select#passport-districtsoa").prop("disabled", true);
+                                        $("select#passport-districtsoa").val(""); 
+                                        $("select#passport-townshipsoa").prop("disabled", true); 
+                                        $("select#passport-townshipsoa").val(""); 
                                     }else{
-                                        $("select#passport-townshipspouse").prop("disabled", true); 
-                                        $("select#passport-townshipspouse").val("");
-                                        $("select#passport-districtspouse").prop("disabled", false); 
+                                        $("select#passport-townshipsoa").prop("disabled", true); 
+                                        $("select#passport-townshipsoa").val("");
+                                        $("select#passport-districtsoa").prop("disabled", false); 
                                         
                                     }
                                     
@@ -222,21 +210,21 @@ echo $form->field($model, 'statespouse', ['template' => '<div class=\"\">{input}
 ?>
 
 <?php
-echo $form->field($model, 'districtspouse', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
+echo $form->field($model, 'districtSOA', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
         ->dropDownList(ArrayHelper::map(District::find()->all(), 'districtId', 'districtNameEN')
                 , [
             'prompt' => 'Select District',
             'disabled' => 'disabled',
             'onChange' => '
                             $.post("index.php?r=dep/township&id=' . '"+$(this).val(),function( data ){
-                                $("select#passport-townshipspouse").html( data );
+                                $("select#passport-townshipsoa").html( data );
 
                             if(data == "<option value>Select Township</option>"){
-                                        $("select#passport-townshipspouse").prop("disabled", true); 
-                                        $("select#passport-townshipspouse").val(""); 
+                                        $("select#passport-townshipsoa").prop("disabled", true); 
+                                        $("select#passport-townshipsoa").val(""); 
                                         
                                     }else{
-                                        $("select#passport-townshipspouse").prop("disabled", false); 
+                                        $("select#passport-townshipsoa").prop("disabled", false); 
                                     }
                                     
                         });',
@@ -245,7 +233,7 @@ echo $form->field($model, 'districtspouse', ['template' => '<div class=\"\">{inp
 
 
 <?php
-echo $form->field($model, 'townshipspouse', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
+echo $form->field($model, 'townshipSOA', ['template' => '<div class=\"\">{input}</div><div class=\"\">{error}</div>'])
         ->dropDownList(ArrayHelper::map(Township::find()->all(), 'townshipId', 'townshipNameEN')
                 , [
             'prompt' => 'Select Township',
